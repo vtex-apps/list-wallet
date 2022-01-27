@@ -1,0 +1,5 @@
+{
+  "store-wallet-list": {
+    "component": "WalletList"
+  }
+}
