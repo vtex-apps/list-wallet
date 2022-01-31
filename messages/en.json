@@ -1,4 +1,13 @@
 {
-  "admin/test": "test",
-  "store/test": "test"
+  "titles.value.gift.card": "Saldo: ",
+  "titles.money": "R$ ",
+  "titles.redemption": "Gerar Resgate:",
+  "input.value.placeholder": "Valor (R$)",
+  "input.value.label": "Digite o valor",
+  "input.value.button": "Resgatar",
+  "input.tooltip": "Este código é único. Utilize em todas as suas compras na loja",
+  "input.code.label": "Código",
+  "input.code.placeholder": "Código",
+  "input.code.button": "Copiar Código",
+  "wallet.title": "Minhas carteira"
 }
