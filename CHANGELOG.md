@@ -6,3 +6,6 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 - Initial setup
+
+### Added
+- Initial store draft
