@@ -14,6 +14,12 @@ const TitlesArea: FC = () => {
     <div className="mt5 mb6">
       <div className="text-align-center">
         <div className="mb5 t-heading-4">
+          {intl.formatMessage(titles.credit)}
+          <b>
+            {intl.formatMessage(titles.money)} {provider.credit}
+          </b>
+        </div>
+        <div className="mb5 t-heading-4">
           {intl.formatMessage(titles.valueGiftCard)}
           <b>
             {intl.formatMessage(titles.money)} {provider.valueGiftCard}
