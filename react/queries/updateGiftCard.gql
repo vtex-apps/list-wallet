@@ -1,0 +1,3 @@
+mutation updateGiftCard($value: Float){
+  updateGiftCard(value: $value) @context(provider: "vtexbr.gift-card-list@0.x")
+}
