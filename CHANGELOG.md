@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 ### Added
-- Initial setup
+- Initial store draft
 
 ### Added
-- Initial store draft
+- Initial store setup

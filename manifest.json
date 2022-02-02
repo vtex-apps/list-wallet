@@ -2,8 +2,8 @@
   "vendor": "vtexbr",
   "name": "list-wallet",
   "version": "0.0.1",
-  "title": "Wallet App",
-  "description": "App to manage portfolio values from the app list",
+  "title": "List Wallet",
+  "description": "App to manage portfolio values from the list app",
   "builders": {
     "react": "3.x",
     "messages": "1.x",
