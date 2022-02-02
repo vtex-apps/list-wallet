@@ -12,6 +12,7 @@ export const input = defineMessages({
 
 export const titles = defineMessages({
   valueGiftCard: { id: 'titles.value.gift.card' },
+  valueLists: { id: 'titles.value.lists' },
   money: { id: 'titles.money' },
   redemption: { id: 'titles.redemption' },
 })

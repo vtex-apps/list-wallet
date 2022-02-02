@@ -1,5 +1,6 @@
 {
-  "titles.value.gift.card": "Saldo: ",
+  "titles.value.gift.card": "Saldo Vale Presente: ",
+  "titles.value.lists": "Crédito: ",
   "titles.money": "R$ ",
   "titles.redemption": "Gerar Resgate:",
   "input.value.placeholder": "Valor (R$)",
