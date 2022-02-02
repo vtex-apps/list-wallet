@@ -2,10 +2,10 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { PageHeader } from 'vtex.styleguide'
 
-import CollapsibleArea from './components/collapsibleArea'
 import './styles.global.css'
 import { wallet } from './utils/definedMessages'
 import ProviderStore from './provider/providerStore'
+import CollapsibleArea from './components/collapsibleArea'
 
 const WalletList: StorefrontFunctionComponent = () => {
   const intl = useIntl()
