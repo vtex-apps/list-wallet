@@ -3,6 +3,7 @@ import { Collapsible } from 'vtex.styleguide'
 
 import ContextStore from '../Context/context'
 import '../styles.global.css'
+import AlertArea from './alertArea'
 import InputButtonArea from './inputButtonArea'
 import TitlesArea from './titlesArea'
 
@@ -21,24 +22,10 @@ const CollapsibleArea: FC = () => {
           <TitlesArea />
           <InputButtonArea />
         </Collapsible>
+        <AlertArea />
       </div>
     </div>
   )
 }
 
 export default CollapsibleArea
-
-/* </div><Collapsible
-      onClick={() => provider.setButton(!provider.button)}
-      isOpen={provider.button}
-      caretColor="primary"
-    >
-        <div className="mt4">
-          <div className="mb3">
-            <Input label="Surname" />
-          </div>
-          <div className="mb3">
-            <Input label="Nickname" />
-          </div>
-        </div>
-      </Collapsible></> */
