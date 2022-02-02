@@ -1,14 +1,15 @@
-import React, { FC, useContext } from 'react'
+import React, { FC } from 'react'
 import { useIntl } from 'react-intl'
 import { InputButton, Tooltip, IconInfo } from 'vtex.styleguide'
 
-import ContextStore from '../Context/context'
+import { useStore } from '../hooks/useStore'
 import '../styles.global.css'
 import { input } from '../utils/definedMessages'
 
 const InputButtonArea: FC = () => {
   const intl = useIntl()
-  const provider = useContext(ContextStore)
+
+  const { code } = useStore()
 
   return (
     <>
@@ -33,7 +34,7 @@ const InputButtonArea: FC = () => {
           placeholder={intl.formatMessage(input.codePlaceholder)}
           size="regular"
           button={intl.formatMessage(input.codeButton)}
-          value={provider.code}
+          value={code}
         />
       </div>
     </>

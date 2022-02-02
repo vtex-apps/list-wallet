@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 interface ContextStoreType {
   button: boolean
@@ -6,11 +6,14 @@ interface ContextStoreType {
   valueGiftCard: number
   code: string
 }
-const ContextStore = React.createContext<ContextStoreType>({
+
+export const ContextStore = React.createContext<ContextStoreType>({
   button: false,
   setButton: () => {},
   valueGiftCard: 0,
   code: '',
 })
 
-export default ContextStore
+export function useStore() {
+  return useContext(ContextStore)
+}

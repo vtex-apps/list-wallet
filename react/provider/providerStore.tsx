@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import React, { useState } from 'react'
 
-import ContextStore from '../Context/context'
+import { ContextStore } from '../hooks/useStore'
 
 const ProviderStore: FC = (props) => {
   const [button, setButton] = useState(true)
