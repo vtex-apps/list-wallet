@@ -2,7 +2,6 @@ import React, { FC, useEffect, useState } from 'react'
 import { useMutation, useQuery } from 'react-apollo'
 import { useIntl } from 'react-intl'
 
-import ContextStore from '../Context/context'
 import updateGiftCard from '../queries/updateGiftCard.gql'
 import getValueTotalList from '../queries/getValueTotalList.gql'
 import getRouteRedemptionCode from '../queries/getRouteRedemptionCode.gql'
@@ -10,6 +9,7 @@ import getValueGiftCard from '../queries/getValueGiftCard.gql'
 import getValueAlreadyInGiftCard from '../queries/getValueAlreadyInGiftCard.gql'
 import { ShowAlertOptions } from '../utils/showAlertOptions'
 import { provider } from '../utils/definedMessages'
+import { ContextStore } from '../hooks/useStore'
 
 const ProviderStore: FC = (props) => {
   const intl = useIntl()

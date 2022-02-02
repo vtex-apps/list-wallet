@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { ShowAlertOptions } from '../utils/showAlertOptions'
 
@@ -17,7 +17,8 @@ interface ContextStoreType {
   setShowAlert: (showAlert: ShowAlertOptions) => void
   credit: number
 }
-const ContextStore = React.createContext<ContextStoreType>({
+
+export const ContextStore = React.createContext<ContextStoreType>({
   button: false,
   setButton: () => {},
   valueGiftCard: 0,
@@ -33,4 +34,6 @@ const ContextStore = React.createContext<ContextStoreType>({
   credit: 0,
 })
 
-export default ContextStore
+export function useStore() {
+  return useContext(ContextStore)
+}

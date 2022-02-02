@@ -1,25 +1,31 @@
-import React, { FC, useContext } from 'react'
+import React, { FC } from 'react'
 import { useIntl } from 'react-intl'
 import { InputButton, Tooltip, IconInfo } from 'vtex.styleguide'
 import copy from 'clipboard-copy'
 
-import ContextStore from '../Context/context'
+import { useStore } from '../hooks/useStore'
 import '../styles.global.css'
 import { input } from '../utils/definedMessages'
 import ValidationArea from './validationsArea'
 
 const InputButtonArea: FC = () => {
   const intl = useIntl()
-  const provider = useContext(ContextStore)
+
+  const {
+    code,
+    updateGiftCardFunction,
+    setAddValueGiftCard,
+    addValueGiftCard,
+  } = useStore()
 
   function submitFunctionValueButton(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    provider.updateGiftCardFunction()
+    updateGiftCardFunction()
   }
 
   function submitFunctionCodeButton(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    copy(provider.code)
+    copy(code)
   }
 
   return (
@@ -32,9 +38,9 @@ const InputButtonArea: FC = () => {
             size="regular"
             button={intl.formatMessage(input.valueButton)}
             onChange={(e: { target: { value: string } }) =>
-              provider.setAddValueGiftCard(e.target.value)
+              setAddValueGiftCard(e.target.value)
             }
-            value={provider.addValueGiftCard}
+            value={addValueGiftCard}
           />
           <ValidationArea />
         </form>
@@ -48,13 +54,12 @@ const InputButtonArea: FC = () => {
             </span>
           </Tooltip>
         </div>
-
         <form onSubmit={(e) => submitFunctionCodeButton(e)}>
           <InputButton
             placeholder={intl.formatMessage(input.codePlaceholder)}
             size="regular"
             button={intl.formatMessage(input.codeButton)}
-            value={provider.code}
+            value={code}
             readOnly
           />
         </form>
