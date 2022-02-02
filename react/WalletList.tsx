@@ -5,7 +5,7 @@ import { PageHeader } from 'vtex.styleguide'
 import './styles.global.css'
 import { wallet } from './utils/definedMessages'
 import ProviderStore from './provider/providerStore'
-import CollapsibleArea from './components/collapsibleArea'
+import CollapsibleArea from './Components/collapsibleArea'
 
 const WalletList: StorefrontFunctionComponent = () => {
   const intl = useIntl()
