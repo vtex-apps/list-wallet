@@ -5,4 +5,4 @@ All notable changes to this project will be documented in this file.
 ## [Unreleased]
 
 ### Added
-- Initial setup
+- Initial store setup
