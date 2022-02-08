@@ -1,5 +1,3 @@
-import exp from 'constants'
-
 import { fireEvent, render, waitFor } from '@vtex/test-tools/react'
 import React from 'react'
 import { MockedProvider, wait } from '@apollo/react-testing'
@@ -60,9 +58,8 @@ describe('Provider', () => {
 
   it('should test function validateIfAllFieldsIsComplete failed if I dont send a addValueGiftCard', async () => {
     const TestComponent = () => {
-      const { validation, updateGiftCardFunction } = React.useContext(
-        ContextStore
-      )
+      const { validation, updateGiftCardFunction } =
+        React.useContext(ContextStore)
 
       return (
         <>
@@ -92,11 +89,8 @@ describe('Provider', () => {
 
   it('should test function validateIfAllFieldsIsComplete failed if I send a addValueGiftCard <= 0', async () => {
     const TestComponent = () => {
-      const {
-        validation,
-        updateGiftCardFunction,
-        setAddValueGiftCard,
-      } = React.useContext(ContextStore)
+      const { validation, updateGiftCardFunction, setAddValueGiftCard } =
+        React.useContext(ContextStore)
 
       return (
         <>
@@ -133,11 +127,8 @@ describe('Provider', () => {
 
   it('should test function validateIfAllFieldsIsComplete failed if I send a addValueGiftCard > credit', async () => {
     const TestComponent = () => {
-      const {
-        validation,
-        updateGiftCardFunction,
-        setAddValueGiftCard,
-      } = React.useContext(ContextStore)
+      const { validation, updateGiftCardFunction, setAddValueGiftCard } =
+        React.useContext(ContextStore)
 
       return (
         <>
@@ -174,11 +165,8 @@ describe('Provider', () => {
 
   it('should test function validateIfAllFieldsIsComplete sucess if I send a addValueGiftCard valid', async () => {
     const TestComponent = () => {
-      const {
-        updateGiftCardFunction,
-        setAddValueGiftCard,
-        validation,
-      } = React.useContext(ContextStore)
+      const { updateGiftCardFunction, setAddValueGiftCard, validation } =
+        React.useContext(ContextStore)
 
       return (
         <>
@@ -217,11 +205,8 @@ describe('Provider', () => {
 
   it('should test function update if I send a addValueGiftCard valid and the return of mutation is a sucess', async () => {
     const TestComponent = () => {
-      const {
-        showAlert,
-        updateGiftCardFunction,
-        setAddValueGiftCard,
-      } = React.useContext(ContextStore)
+      const { showAlert, updateGiftCardFunction, setAddValueGiftCard } =
+        React.useContext(ContextStore)
 
       return (
         <>
@@ -262,11 +247,8 @@ describe('Provider', () => {
 
   it('should test function update if I send a addValueGiftCard valid and the return of mutation is a failed', async () => {
     const TestComponent = () => {
-      const {
-        showAlert,
-        updateGiftCardFunction,
-        setAddValueGiftCard,
-      } = React.useContext(ContextStore)
+      const { showAlert, updateGiftCardFunction, setAddValueGiftCard } =
+        React.useContext(ContextStore)
 
       return (
         <>
