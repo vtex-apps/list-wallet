@@ -1,0 +1,22 @@
+p,
+.padding-pageheader {
+  text-align: center
+}
+
+.display{
+  display: inline;
+}
+
+
+.width-input{
+  width: 15%;
+}
+
+.text-align-center{
+  text-align: center
+}
+
+.inputs{
+  margin-left: auto;
+  margin-right: auto;
+}
