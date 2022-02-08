@@ -127,7 +127,7 @@ export const mocksUpdate = [
     },
     result: {
       data: {
-        updateGiftCard: 'sucess',
+        updateGiftCard: 'success',
       },
     },
   },

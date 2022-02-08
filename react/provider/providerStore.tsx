@@ -1,4 +1,5 @@
-import React, { FC, useEffect, useState } from 'react'
+import type { FC } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useMutation, useQuery } from 'react-apollo'
 import { useIntl } from 'react-intl'
 
@@ -25,10 +26,8 @@ const ProviderStore: FC = (props) => {
   const [updateGiftCardMutation] = useMutation(updateGiftCard)
   const { data: dataValueTotalList } = useQuery(getValueTotalList)
   const { data: dataRedemptionCode } = useQuery(getRouteRedemptionCode)
-  const {
-    data: dataGetValueGiftCard,
-    refetch: refetchGetValueGiftCard,
-  } = useQuery(getValueGiftCard)
+  const { data: dataGetValueGiftCard, refetch: refetchGetValueGiftCard } =
+    useQuery(getValueGiftCard)
 
   const {
     data: dataGetValueAlreadyInGiftCard,
@@ -107,7 +106,7 @@ const ProviderStore: FC = (props) => {
         },
       })
 
-      if (data.updateGiftCard === 'sucess') {
+      if (data.updateGiftCard === 'success') {
         setShowAlert(ShowAlertOptions.alertSave)
         refetchGetValueGiftCard()
         refetchValueAlreadyInGiftCard()

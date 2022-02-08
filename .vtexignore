@@ -15,3 +15,6 @@ react/**/*.test.tsx
 node/**/*.test.js
 node/**/*.test.ts
 node/**/*.test.tsx
+react/**/__tests__/**
+react/**/__mocks__/**
+react/**/__snapshots__/**
