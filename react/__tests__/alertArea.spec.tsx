@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@vtex/test-tools/react'
+import { render } from '@vtex/test-tools/react'
 import React from 'react'
 
 import AlertArea from '../Components/alertArea'
