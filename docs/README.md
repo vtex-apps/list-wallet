@@ -1,4 +1,4 @@
-=â Use this project, [contribute](https://github.com/{OrganizationName}/{AppName}) to it or open issues to help evolve it using [Store Discussion](https://github.com/vtex-apps/store-discussion).
+=Ã¢ Use this project, [contribute](https://github.com/{OrganizationName}/{AppName}) to it or open issues to help evolve it using [Store Discussion](https://github.com/vtex-apps/store-discussion).
 
 # APP NAME
 
@@ -114,6 +114,3 @@ Check out some documentation models that are already live:
 - [Store Form](https://vtex.io/docs/components/all/vtex.store-form@0.3.4/)
 
 
-**Upcoming documentation:**
-
- - [Feature/esboço inicial](https://github.com/vtex-apps/list-wallet/pull/2)
