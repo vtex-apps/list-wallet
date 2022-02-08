@@ -1,7 +1,7 @@
 import { render } from '@vtex/test-tools/react'
 import React from 'react'
 
-import TitlesArea from '../components/titlesArea'
+import TitlesArea from '../Components/titlesArea'
 import { ContextStore } from '../hooks/useStore'
 // eslint-disable-next-line jest/no-mocks-import
 import { values } from '../__mocks__/values'

@@ -2,7 +2,7 @@
 import { fireEvent, render } from '@vtex/test-tools/react'
 import React from 'react'
 
-import InputButtonArea from '../components/inputButtonArea'
+import InputButtonArea from '../Components/inputButtonArea'
 import { ContextStore } from '../hooks/useStore'
 import { values } from '../__mocks__/values'
 
