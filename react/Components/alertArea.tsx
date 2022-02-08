@@ -10,11 +10,7 @@ import { useStore } from '../hooks/useStore'
 const AlertArea: FC = () => {
   const intl = useIntl()
 
-  const { setShowAlert, showAlert } = useStore()
-
-  const handleCloseAlert = () => {
-    setShowAlert(ShowAlertOptions.notShow)
-  }
+  const { showAlert, handleCloseAlert } = useStore()
 
   if (showAlert === ShowAlertOptions.alertSave) {
     return (
