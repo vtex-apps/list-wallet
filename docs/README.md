@@ -117,3 +117,4 @@ Check out some documentation models that are already live:
 **Upcoming documentation:**
 
  - [Feature/esboço inicial](https://github.com/vtex-apps/list-wallet/pull/2)
+ - [Feature/funcoes](https://github.com/vtex-apps/list-wallet/pull/3)
