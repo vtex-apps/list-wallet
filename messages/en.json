@@ -10,7 +10,7 @@
   "input.code.label": "Código",
   "input.code.placeholder": "Código",
   "input.code.button": "Copiar Código",
-  "wallet.title": "Minhas carteira",
+  "collapsible.title": "Minha carteira",
   "provider.without.code": "Código inexistente",
   "provider.missing.value": "Insira um valor para resgatar",
   "provider.value.negative": "Adicione um valor maior que 0",

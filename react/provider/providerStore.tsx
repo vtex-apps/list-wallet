@@ -13,7 +13,7 @@ import { ContextStore } from '../hooks/useStore'
 
 const ProviderStore: FC = (props) => {
   const intl = useIntl()
-  const [button, setButton] = useState(true)
+  const [button, setButton] = useState(false)
   const [addValueGiftCard, setAddValueGiftCard] = useState<string>()
   const [validation, setValidation] = useState('')
   const [valueGiftCard, setValueGiftCard] = useState(0)

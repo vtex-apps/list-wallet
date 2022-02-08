@@ -17,8 +17,8 @@ export const titles = defineMessages({
   credit: { id: 'titles.credit' },
 })
 
-export const wallet = defineMessages({
-  title: { id: 'wallet.title' },
+export const collapsible = defineMessages({
+  title: { id: 'collapsible.title' },
 })
 
 export const provider = defineMessages({

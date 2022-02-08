@@ -16,3 +16,6 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 - Functions to screen
+
+### Changed
+- Change the style of store app
