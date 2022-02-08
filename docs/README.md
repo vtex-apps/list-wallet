@@ -27,3 +27,4 @@ Once the app is installed, you can add the app to your store theme using the lin
 
 In the store it will be possible to check the credit that is still available to be added to the gift card (this amount is calculated from the difference between the balance of the lists and the amount of this balance that has already been added to the gift card) and the current balance of the list owner's gift card.
 In addition, it will be possible to make redemptions in the "Generate Redemption" field, where the redemption value must be within the range of credit available for this redemption. Finally, the gift card code will also be present, where it can be copied by clicking on the "Copy Code" button.
+
