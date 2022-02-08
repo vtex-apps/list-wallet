@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import { useIntl } from 'react-intl'
 import { InputButton, Tooltip, IconInfo } from 'vtex.styleguide'
-import copy from 'clipboard-copy'
 
 import { useStore } from '../hooks/useStore'
 import '../styles.global.css'
@@ -25,7 +24,8 @@ const InputButtonArea: FC = () => {
 
   function submitFunctionCodeButton(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    copy(code)
+    if (!navigator.clipboard) return
+    navigator.clipboard.writeText(code)
   }
 
   return (
@@ -41,6 +41,7 @@ const InputButtonArea: FC = () => {
               setAddValueGiftCard(e.target.value)
             }
             value={addValueGiftCard}
+            testId="input-button-test"
           />
           <ValidationArea />
         </form>
@@ -61,6 +62,7 @@ const InputButtonArea: FC = () => {
             button={intl.formatMessage(input.codeButton)}
             value={code}
             readOnly
+            testId="input-button-test-readOnly"
           />
         </form>
       </div>
