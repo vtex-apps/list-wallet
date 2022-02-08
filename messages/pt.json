@@ -1,5 +1,6 @@
 {
-  "titles.value.gift.card": "Saldo: ",
+  "titles.value.gift.card": "Saldo Vale Presente: ",
+  "titles.credit": "Crédito: ",
   "titles.money": "R$ ",
   "titles.redemption": "Gerar Resgate:",
   "input.value.placeholder": "Valor (R$)",
@@ -9,5 +10,11 @@
   "input.code.label": "Código",
   "input.code.placeholder": "Código",
   "input.code.button": "Copiar Código",
-  "wallet.title": "Minhas carteira"
+  "wallet.title": "Minhas carteira",
+  "provider.without.code": "Código inexistente",
+  "provider.missing.value": "Insira um valor para resgatar",
+  "provider.value.negative": "Adicione um valor maior que 0",
+  "provider.value.bigger.than.could.be": "Insira um valor menor ou igual a ",
+  "alert.sucess": "Valor adicionado ao vale presente",
+  "alert.error": "Erro ao adicionar valor ao vale presente"
 }

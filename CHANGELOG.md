@@ -11,3 +11,6 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 - Initial store setup
+
+### Added
+- Functions to screen

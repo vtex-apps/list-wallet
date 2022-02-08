@@ -9,11 +9,17 @@ import { titles } from '../utils/definedMessages'
 const TitlesArea: FC = () => {
   const intl = useIntl()
 
-  const { valueGiftCard } = useStore()
+  const { valueGiftCard, credit } = useStore()
 
   return (
     <div className="mt5 mb6">
       <div className="text-align-center">
+        <div className="mb5 t-heading-4">
+          {intl.formatMessage(titles.credit)}
+          <b>
+            {intl.formatMessage(titles.money)} {credit}
+          </b>
+        </div>
         <div className="mb5 t-heading-4">
           {intl.formatMessage(titles.valueGiftCard)}
           <b>

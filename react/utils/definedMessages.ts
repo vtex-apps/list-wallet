@@ -14,8 +14,21 @@ export const titles = defineMessages({
   valueGiftCard: { id: 'titles.value.gift.card' },
   money: { id: 'titles.money' },
   redemption: { id: 'titles.redemption' },
+  credit: { id: 'titles.credit' },
 })
 
 export const wallet = defineMessages({
   title: { id: 'wallet.title' },
+})
+
+export const provider = defineMessages({
+  withoutCode: { id: 'provider.without.code' },
+  negativeValue: { id: 'provider.value.negative' },
+  biggerThanCouldBe: { id: 'provider.value.bigger.than.could.be' },
+  missingValue: { id: 'provider.missing.value' },
+})
+
+export const alert = defineMessages({
+  sucess: { id: 'alert.sucess' },
+  error: { id: 'alert.error' },
 })
