@@ -95,20 +95,4 @@ describe('Input Button Area', () => {
 
     expect(values.updateGiftCardFunction).toHaveBeenCalled()
   })
-
-  // it('should click on second submit', async () => {
-  //   const { container } = render(
-  //     <ContextStore.Provider value={values}>
-  //       <InputButtonArea />
-  //     </ContextStore.Provider>
-  //   )
-
-  //   const buttonPointer = container.getElementsByClassName(
-  //     'pointer'
-  //   )[2] as HTMLButtonElement
-
-  //   fireEvent.click(buttonPointer as HTMLButtonElement)
-
-  //   //expect(copy).toHaveBeenCalled()
-  // })
 })
