@@ -1,4 +1,4 @@
-import { fireEvent, render, waitFor } from '@vtex/test-tools/react'
+import { act, fireEvent, render, waitFor } from '@vtex/test-tools/react'
 import React from 'react'
 import { MockedProvider, wait } from '@apollo/react-testing'
 
@@ -20,7 +20,9 @@ describe('Provider', () => {
       </MockedProvider>
     )
 
-    await wait(0)
+    await act(async () => {
+      await wait(0)
+    })
 
     expect(container).not.toBeNull()
   })
@@ -47,11 +49,12 @@ describe('Provider', () => {
       </MockedProvider>
     )
 
-    await wait(0)
+    await act(async () => {
+      await wait(0)
+      getByTestId('buttonShowAlert').click()
+    })
 
     const showAlertValue = getByTestId('showAlert').textContent
-
-    getByTestId('buttonShowAlert').click()
 
     expect(showAlertValue).toBe('0')
   })
@@ -79,9 +82,11 @@ describe('Provider', () => {
       </MockedProvider>
     )
 
-    await wait(0)
+    await act(async () => {
+      await wait(0)
+      fireEvent.click(getByTestId('buttonUpdate'))
+    })
 
-    fireEvent.click(getByTestId('buttonUpdate'))
     const validateText = getByTestId('validateText').textContent
 
     expect(validateText).not.toBeNull()
@@ -116,10 +121,12 @@ describe('Provider', () => {
       </MockedProvider>
     )
 
-    await wait(0)
+    await act(async () => {
+      await wait(0)
+      fireEvent.click(getByTestId('addValue'))
+      fireEvent.click(getByTestId('buttonUpdate'))
+    })
 
-    fireEvent.click(getByTestId('addValue'))
-    fireEvent.click(getByTestId('buttonUpdate'))
     const validateText = getByTestId('validateText').textContent
 
     expect(validateText).not.toBeNull()
@@ -154,10 +161,12 @@ describe('Provider', () => {
       </MockedProvider>
     )
 
-    await wait(0)
+    await act(async () => {
+      await wait(0)
+      fireEvent.click(getByTestId('addValue'))
+      fireEvent.click(getByTestId('buttonUpdate'))
+    })
 
-    fireEvent.click(getByTestId('addValue'))
-    fireEvent.click(getByTestId('buttonUpdate'))
     const validateText = getByTestId('validateText').textContent
 
     expect(validateText).not.toBeNull()
@@ -192,13 +201,17 @@ describe('Provider', () => {
       </MockedProvider>
     )
 
-    await wait(0)
+    await act(async () => {
+      await wait(0)
+      fireEvent.click(getByTestId('addValue'))
+      fireEvent.click(getByTestId('buttonUpdate'))
+    })
 
-    fireEvent.click(getByTestId('addValue'))
-    fireEvent.click(getByTestId('buttonUpdate'))
     const validationValue = getByTestId('validation').textContent
 
-    await wait(0)
+    await act(async () => {
+      await wait(0)
+    })
 
     expect(validationValue).toStrictEqual('')
   })
@@ -232,10 +245,12 @@ describe('Provider', () => {
       </MockedProvider>
     )
 
-    await wait(0)
+    await act(async () => {
+      await wait(0)
+      fireEvent.click(getByTestId('addValue'))
+      fireEvent.click(getByTestId('buttonUpdate'))
+    })
 
-    fireEvent.click(getByTestId('addValue'))
-    fireEvent.click(getByTestId('buttonUpdate'))
     const alertValue = getByTestId('alert')
 
     waitFor(() => {
@@ -274,10 +289,12 @@ describe('Provider', () => {
       </MockedProvider>
     )
 
-    await wait(0)
+    await act(async () => {
+      await wait(0)
+      fireEvent.click(getByTestId('addValue'))
+      fireEvent.click(getByTestId('buttonUpdate'))
+    })
 
-    fireEvent.click(getByTestId('addValue'))
-    fireEvent.click(getByTestId('buttonUpdate'))
     const alertValue = getByTestId('alert')
 
     waitFor(() => {
