@@ -37,6 +37,7 @@ const InputButtonArea: FC = () => {
           <InputButton
             placeholder={intl.formatMessage(input.valuePlaceholder)}
             size="regular"
+            type="number"
             button={intl.formatMessage(input.valueButton)}
             onChange={(e: { target: { value: string } }) =>
               setAddValueGiftCard(e.target.value)
