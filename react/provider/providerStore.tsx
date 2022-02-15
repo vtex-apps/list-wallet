@@ -1,4 +1,5 @@
-import React, { FC, useEffect, useState } from 'react'
+import type { FC } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useMutation, useQuery } from 'react-apollo'
 import { useIntl } from 'react-intl'
 
@@ -25,16 +26,19 @@ const ProviderStore: FC = (props) => {
   const [updateGiftCardMutation] = useMutation(updateGiftCard)
   const { data: dataValueTotalList } = useQuery(getValueTotalList)
   const { data: dataRedemptionCode } = useQuery(getRouteRedemptionCode)
-  const { data: dataGetValueGiftCard, refetch } = useQuery(getValueGiftCard)
-  const { data: dataGetValueAlreadyInGiftCard } = useQuery(
-    getValueAlreadyInGiftCard
-  )
+  const { data: dataGetValueGiftCard, refetch: refetchGetValueGiftCard } =
+    useQuery(getValueGiftCard)
+
+  const {
+    data: dataGetValueAlreadyInGiftCard,
+    refetch: refetchValueAlreadyInGiftCard,
+  } = useQuery(getValueAlreadyInGiftCard)
 
   useEffect(() => {
-    const giftCard = dataGetValueGiftCard?.getValueAlreadyInGiftCard
+    const giftCard = dataGetValueAlreadyInGiftCard?.getValueAlreadyInGiftCard
     const list = dataValueTotalList?.getValueTotalList
 
-    if (giftCard && list) {
+    if (giftCard !== undefined && list !== undefined) {
       setCredit(list - giftCard)
     }
   }, [dataGetValueAlreadyInGiftCard, dataGetValueGiftCard, dataValueTotalList])
@@ -42,7 +46,7 @@ const ProviderStore: FC = (props) => {
   useEffect(() => {
     const value = dataValueTotalList?.getValueTotalList
 
-    if (value) {
+    if (value !== undefined) {
       setValueLists(value)
     }
   }, [dataValueTotalList])
@@ -58,10 +62,14 @@ const ProviderStore: FC = (props) => {
   useEffect(() => {
     const value = dataGetValueGiftCard?.getValueGiftCard
 
-    if (value) {
+    if (value !== undefined) {
       setValueGiftCard(value)
     }
   }, [dataGetValueGiftCard])
+
+  const handleCloseAlert = () => {
+    setShowAlert(ShowAlertOptions.notShow)
+  }
 
   function validationValue() {
     if (addValueGiftCard === undefined) {
@@ -98,9 +106,10 @@ const ProviderStore: FC = (props) => {
         },
       })
 
-      if (data) {
+      if (data.updateGiftCard === 'success') {
         setShowAlert(ShowAlertOptions.alertSave)
-        refetch()
+        refetchGetValueGiftCard()
+        refetchValueAlreadyInGiftCard()
       } else {
         setShowAlert(ShowAlertOptions.alertError)
       }
@@ -121,7 +130,7 @@ const ProviderStore: FC = (props) => {
         setValidation,
         valueLists,
         showAlert,
-        setShowAlert,
+        handleCloseAlert,
         credit,
       }}
     >

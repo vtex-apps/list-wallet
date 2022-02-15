@@ -19,3 +19,6 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 - Change the style of store app
+
+### Added
+- Tests

@@ -7,7 +7,7 @@
     "lint": "eslint --ext js,jsx,ts,tsx .",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json}\"",
     "lint:locales": "intl-equalizer",
-    "test": "cd ./react && yarn test"
+    "test": "vtex-test-tools test"
   },
   "intl-equalizer": {
     "referenceLocale": "en",
@@ -41,6 +41,7 @@
     "prettier": "^2.2.0",
     "typescript": "^3.9.6",
     "@vtex/danger": "^0.2.7",
-    "graphql": "^14.6.0"
+    "graphql": "^14.6.0",
+    "@vtex/test-tools": "^3.4.3"
   }
 }

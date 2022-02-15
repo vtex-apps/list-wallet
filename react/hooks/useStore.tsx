@@ -14,7 +14,7 @@ interface ContextStoreType {
   setValidation: (validation: string) => void
   valueLists: number
   showAlert: ShowAlertOptions
-  setShowAlert: (showAlert: ShowAlertOptions) => void
+  handleCloseAlert: () => void
   credit: number
 }
 
@@ -30,7 +30,7 @@ export const ContextStore = React.createContext<ContextStoreType>({
   setValidation: () => {},
   valueLists: 0,
   showAlert: ShowAlertOptions.notShow,
-  setShowAlert: () => {},
+  handleCloseAlert: () => {},
   credit: 0,
 })
 
