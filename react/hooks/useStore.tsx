@@ -12,7 +12,6 @@ interface ContextStoreType {
   updateGiftCardFunction: () => void
   validation: string
   setValidation: (validation: string) => void
-  valueLists: number
   showAlert: ShowAlertOptions
   handleCloseAlert: () => void
   credit: number
@@ -28,7 +27,6 @@ export const ContextStore = React.createContext<ContextStoreType>({
   updateGiftCardFunction: () => {},
   validation: '',
   setValidation: () => {},
-  valueLists: 0,
   showAlert: ShowAlertOptions.notShow,
   handleCloseAlert: () => {},
   credit: 0,

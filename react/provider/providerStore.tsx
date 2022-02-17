@@ -18,7 +18,6 @@ const ProviderStore: FC = (props) => {
   const [addValueGiftCard, setAddValueGiftCard] = useState<string>()
   const [validation, setValidation] = useState('')
   const [valueGiftCard, setValueGiftCard] = useState(0)
-  const [valueLists, setValueLists] = useState(0)
   const [code, setCode] = useState(intl.formatMessage(provider.withoutCode))
   const [showAlert, setShowAlert] = useState(ShowAlertOptions.notShow)
   const [credit, setCredit] = useState(0)
@@ -43,14 +42,6 @@ const ProviderStore: FC = (props) => {
       setCredit(list - giftCard)
     }
   }, [dataGetValueAlreadyInGiftCard, dataGetValueGiftCard, dataValueTotalList])
-
-  useEffect(() => {
-    const value = dataValueTotalList?.getValueTotalList
-
-    if (value !== undefined) {
-      setValueLists(value)
-    }
-  }, [dataValueTotalList])
 
   useEffect(() => {
     const redemptionCode = dataRedemptionCode?.getRouteRedemptionCode
@@ -129,7 +120,6 @@ const ProviderStore: FC = (props) => {
         updateGiftCardFunction,
         validation,
         setValidation,
-        valueLists,
         showAlert,
         handleCloseAlert,
         credit,
