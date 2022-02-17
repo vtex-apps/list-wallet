@@ -36,9 +36,10 @@ const ProviderStore: FC = (props) => {
 
   useEffect(() => {
     const giftCard = dataGetValueAlreadyInGiftCard?.getValueAlreadyInGiftCard
-    const list = dataValueTotalList?.getValueTotalList
+    let list = dataValueTotalList?.getValueTotalList
 
     if (giftCard !== undefined && list !== undefined) {
+      list /= 100
       setCredit(list - giftCard)
     }
   }, [dataGetValueAlreadyInGiftCard, dataGetValueGiftCard, dataValueTotalList])

@@ -5,7 +5,7 @@ import { ShowAlertOptions } from '../utils/showAlertOptions'
 interface ContextStoreType {
   button: boolean
   setButton: (button: boolean) => void
-  valueGiftCard: number | undefined
+  valueGiftCard: number
   code: string
   addValueGiftCard: string | undefined
   setAddValueGiftCard: (addValueGiftCard: string) => void
