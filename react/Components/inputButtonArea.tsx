@@ -31,12 +31,12 @@ const InputButtonArea: FC = () => {
 
   return (
     <>
-      <div className="mb3 width-input mt5 inputs t-body mw9">
+      <div className="mb3 width-input mt5 inputs t-body mw9 rescue">
         {intl.formatMessage(input.valueLabel)}
         <form onSubmit={(e) => submitFunctionValueButton(e)}>
           <InputButton
             placeholder={intl.formatMessage(input.valuePlaceholder)}
-            size="regular"
+            size="large"
             type="number"
             button={intl.formatMessage(input.valueButton)}
             onChange={(e: { target: { value: string } }) =>
@@ -48,7 +48,7 @@ const InputButtonArea: FC = () => {
           <ValidationArea />
         </form>
       </div>
-      <div className="mb3 mt7 width-input inputs t-body mw9">
+      <div className="mb3 mt7 width-input inputs t-body mw9 rescue">
         <div>
           {intl.formatMessage(input.codeLabel)}
           <Tooltip label={intl.formatMessage(input.tooltip)}>
@@ -60,7 +60,7 @@ const InputButtonArea: FC = () => {
         <form onSubmit={(e) => submitFunctionCodeButton(e)}>
           <InputButton
             placeholder={intl.formatMessage(input.codePlaceholder)}
-            size="regular"
+            size="large"
             button={intl.formatMessage(input.codeButton)}
             value={code}
             readOnly
