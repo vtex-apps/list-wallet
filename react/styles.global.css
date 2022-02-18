@@ -37,7 +37,7 @@ p,
   color: white;
 }
 
-.bg-action-secondary:active{
+.bg-action-secondary:visited{
   background-color: #134cd8;
   border-radius: 4px;
   border: 1px solid #134cd8;
