@@ -18,3 +18,17 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 - Tests
+
+### Changed 
+- Correction of repost bugs by ACCT
+  - Change style of wallet to mobile
+  - Change the input "Enter the value" to only accept numbers
+  - Change the format orf money change the formatting of the money to follow the standard (R$ 1.000,00)
+  - Change the style of Input Buttons
+  - Change the width of divider
+  - Add success or error mensages when click to button "Copy Code"
+  - Change message of tooltip
+  - Add line break for mobiles in the balance data area 
+
+### Added
+- Update tests
