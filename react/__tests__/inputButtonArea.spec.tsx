@@ -6,12 +6,6 @@ import InputButtonArea from '../Components/inputButtonArea'
 import { ContextStore } from '../hooks/useStore'
 import { values } from '../__mocks__/values'
 
-Object.defineProperty(navigator, 'clipboard', {
-  value: {
-    writeText: () => {},
-  },
-})
-
 describe('Input Button Area', () => {
   it('should render the first InputButtonArea', async () => {
     const { getByTestId } = render(
