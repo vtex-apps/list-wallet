@@ -110,8 +110,11 @@ const ProviderStore: FC = (props) => {
 
   function copyCode() {
     setShowAlert(ShowAlertOptions.notShow)
+
     if (!navigator.clipboard) {
       setShowAlert(ShowAlertOptions.alertCopyError)
+
+      return
     }
 
     navigator.clipboard.writeText(code)
