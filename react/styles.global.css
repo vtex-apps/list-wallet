@@ -16,6 +16,10 @@ p,
   width: 30%;
 }
 
+.width-divider{
+  width: 30%;
+}
+
 .text-align-center{
   text-align: center
 }
@@ -55,6 +59,9 @@ p,
   .width-input{
     width: 50%;
   }
+  .width-divider{
+    width: 50%;
+  }
 }
 
 
@@ -62,4 +69,8 @@ p,
   .width-input{
     width: 100%;
   }
+  .width-divider{
+    width: 100%;
+  }
 }
+

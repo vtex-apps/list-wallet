@@ -31,7 +31,7 @@ const TitlesArea: FC = () => {
             })}
           </b>
         </div>
-        <div className="w-40 center">
+        <div className="width-divider center">
           <Divider />
         </div>
         <div className="mt5 t-heading-4">
