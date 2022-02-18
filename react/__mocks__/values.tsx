@@ -14,4 +14,5 @@ export const values = {
   showAlert: ShowAlertOptions.notShow,
   handleCloseAlert: jest.fn(),
   credit: 2,
+  copyCode: jest.fn(),
 }

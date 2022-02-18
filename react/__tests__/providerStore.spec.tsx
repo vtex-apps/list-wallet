@@ -303,4 +303,82 @@ describe('Provider', () => {
       )
     })
   })
+
+  it('should test function copyCode return error if a send a invalid navigator', async () => {
+    const TestComponent = () => {
+      const { showAlert, copyCode } = React.useContext(ContextStore)
+
+      return (
+        <>
+          <button data-testid="copy" onClick={() => copyCode()}>
+            copy
+          </button>
+          <div data-testid="alert">{showAlert}</div>
+        </>
+      )
+    }
+
+    const { getByTestId } = render(
+      <MockedProvider mocks={mocksUpdateReturnError} addTypename={false}>
+        <ProviderStore>
+          <TestComponent />
+        </ProviderStore>
+      </MockedProvider>
+    )
+
+    await act(async () => {
+      await wait(0)
+      fireEvent.click(getByTestId('copy'))
+    })
+
+    const alertValue = getByTestId('alert')
+
+    waitFor(() => {
+      expect(alertValue).toHaveTextContent(
+        ShowAlertOptions.alertCopyError.toString()
+      )
+    })
+  })
+
+  it('should test function copyCode return success if a send a valid navigator', async () => {
+    Object.defineProperty(navigator, 'clipboard', {
+      value: {
+        writeText: () => {},
+      },
+    })
+
+    const TestComponent = () => {
+      const { showAlert, copyCode } = React.useContext(ContextStore)
+
+      return (
+        <>
+          <button data-testid="copy" onClick={() => copyCode()}>
+            copy
+          </button>
+          <div data-testid="alert">{showAlert}</div>
+        </>
+      )
+    }
+
+    const { getByTestId } = render(
+      <MockedProvider mocks={mocksUpdateReturnError} addTypename={false}>
+        <ProviderStore>
+          <TestComponent />
+        </ProviderStore>
+      </MockedProvider>
+    )
+
+    await act(async () => {
+      await wait(0)
+      fireEvent.click(getByTestId('copy'))
+    })
+
+    const alertValue = getByTestId('alert')
+
+    waitFor(() => {
+      expect(alertValue).toHaveTextContent(
+        ShowAlertOptions.alertCopySuccess.toString()
+      )
+    })
+  })
 })
