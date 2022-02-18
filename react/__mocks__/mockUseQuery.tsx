@@ -57,7 +57,7 @@ export const mocks = [
     },
     result: {
       data: {
-        getValueTotalList: 10,
+        getValueTotalList: 1000,
       },
     },
   },
@@ -137,7 +137,7 @@ export const mocksUpdate = [
     },
     result: {
       data: {
-        getValueTotalList: 10,
+        getValueTotalList: 1000,
       },
     },
   },
@@ -193,7 +193,7 @@ export const mocksUpdateReturnError = [
     },
     result: {
       data: {
-        getValueTotalList: 10,
+        getValueTotalList: 1000,
       },
     },
   },
