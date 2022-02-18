@@ -80,5 +80,9 @@ p,
   .width-divider{
     width: 100%;
   }
+  .money{
+    display: block;
+    margin-top: 4px;
+  }
 }
 
