@@ -16,6 +16,7 @@ const InputButtonArea: FC = () => {
     updateGiftCardFunction,
     setAddValueGiftCard,
     addValueGiftCard,
+    copyCode,
   } = useStore()
 
   function submitFunctionValueButton(e: React.FormEvent<HTMLFormElement>) {
@@ -25,8 +26,7 @@ const InputButtonArea: FC = () => {
 
   function submitFunctionCodeButton(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    if (!navigator.clipboard) return
-    navigator.clipboard.writeText(code)
+    copyCode()
   }
 
   return (

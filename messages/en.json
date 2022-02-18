@@ -3,7 +3,7 @@
   "titles.credit": "Crédito: ",
   "titles.money": "R$ ",
   "titles.redemption": "Gerar Resgate:",
-  "input.value.placeholder": "Valor (R$)",
+  "input.value.placeholder": "R$ 0,00",
   "input.value.label": "Digite o valor",
   "input.value.button": "RESGATAR",
   "input.tooltip": "Este código é único. Utilize em todas as suas compras na loja",
@@ -16,5 +16,7 @@
   "provider.value.negative": "Adicione um valor maior que 0",
   "provider.value.bigger.than.could.be": "Insira um valor menor ou igual a ",
   "alert.sucess": "Valor adicionado ao vale presente",
-  "alert.error": "Erro ao adicionar valor ao vale presente"
+  "alert.error": "Erro ao adicionar valor ao vale presente",
+  "alert.copy": "Código copiado com sucesso",
+  "alert.copye.error": "Erro ao copiar código"
 }

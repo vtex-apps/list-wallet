@@ -31,4 +31,6 @@ export const provider = defineMessages({
 export const alert = defineMessages({
   sucess: { id: 'alert.sucess' },
   error: { id: 'alert.error' },
+  copy: { id: 'alert.copy' },
+  copyError: { id: 'alert.copy.error' },
 })

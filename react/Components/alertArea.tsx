@@ -20,10 +20,26 @@ const AlertArea: FC = () => {
     )
   }
 
+  if (showAlert === ShowAlertOptions.alertCopySuccess) {
+    return (
+      <Alert type="success" onClose={handleCloseAlert}>
+        {intl.formatMessage(alert.copy)}
+      </Alert>
+    )
+  }
+
   if (showAlert === ShowAlertOptions.alertError) {
     return (
       <Alert type="error" onClose={handleCloseAlert}>
         {intl.formatMessage(alert.error)}
+      </Alert>
+    )
+  }
+
+  if (showAlert === ShowAlertOptions.alertCopyError) {
+    return (
+      <Alert type="error" onClose={handleCloseAlert}>
+        {intl.formatMessage(alert.copyError)}
       </Alert>
     )
   }

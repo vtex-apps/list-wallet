@@ -108,6 +108,16 @@ const ProviderStore: FC = (props) => {
     }
   }
 
+  function copyCode() {
+    setShowAlert(ShowAlertOptions.notShow)
+    if (!navigator.clipboard) {
+      setShowAlert(ShowAlertOptions.alertCopyError)
+    }
+
+    navigator.clipboard.writeText(code)
+    setShowAlert(ShowAlertOptions.alertCopySuccess)
+  }
+
   return (
     <ContextStore.Provider
       value={{
@@ -123,6 +133,7 @@ const ProviderStore: FC = (props) => {
         showAlert,
         handleCloseAlert,
         credit,
+        copyCode,
       }}
     >
       {props.children}
