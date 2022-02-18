@@ -43,4 +43,28 @@ describe('Alert Area', () => {
 
     expect(container?.firstChild).toHaveClass('bg-danger--faded')
   })
+
+  it('should render success Alert if showAlert = 3', async () => {
+    const showAlert = { showAlert: ShowAlertOptions.alertCopySuccess }
+
+    const { container } = render(
+      <ContextStore.Provider value={{ ...values, ...showAlert }}>
+        <AlertArea />
+      </ContextStore.Provider>
+    )
+
+    expect(container?.firstChild).toHaveClass('bg-success--faded')
+  })
+
+  it('should render error Alert if showAlert = 4', async () => {
+    const showAlert = { showAlert: ShowAlertOptions.alertCopyError }
+
+    const { container } = render(
+      <ContextStore.Provider value={{ ...values, ...showAlert }}>
+        <AlertArea />
+      </ContextStore.Provider>
+    )
+
+    expect(container?.firstChild).toHaveClass('bg-danger--faded')
+  })
 })
