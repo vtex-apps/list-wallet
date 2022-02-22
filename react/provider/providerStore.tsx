@@ -106,6 +106,7 @@ const ProviderStore: FC = (props) => {
         setShowAlert(ShowAlertOptions.alertSave)
         refetchGetValueGiftCard()
         refetchValueAlreadyInGiftCard()
+        setAddValueGiftCard('')
       } else {
         setShowAlert(ShowAlertOptions.alertError)
       }
