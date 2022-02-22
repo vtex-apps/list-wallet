@@ -12,9 +12,15 @@ const AlertArea: FC = () => {
 
   const { showAlert, handleCloseAlert } = useStore()
 
+  const DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS = 5000
+
   if (showAlert === ShowAlertOptions.alertSave) {
     return (
-      <Alert type="success" onClose={handleCloseAlert}>
+      <Alert
+        type="success"
+        onClose={handleCloseAlert}
+        autoClose={DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS}
+      >
         {intl.formatMessage(alert.sucess)}
       </Alert>
     )
@@ -22,7 +28,11 @@ const AlertArea: FC = () => {
 
   if (showAlert === ShowAlertOptions.alertCopySuccess) {
     return (
-      <Alert type="success" onClose={handleCloseAlert}>
+      <Alert
+        type="success"
+        onClose={handleCloseAlert}
+        autoClose={DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS}
+      >
         {intl.formatMessage(alert.copy)}
       </Alert>
     )
@@ -30,7 +40,11 @@ const AlertArea: FC = () => {
 
   if (showAlert === ShowAlertOptions.alertError) {
     return (
-      <Alert type="error" onClose={handleCloseAlert}>
+      <Alert
+        type="error"
+        onClose={handleCloseAlert}
+        autoClose={DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS}
+      >
         {intl.formatMessage(alert.error)}
       </Alert>
     )
@@ -38,7 +52,11 @@ const AlertArea: FC = () => {
 
   if (showAlert === ShowAlertOptions.alertCopyError) {
     return (
-      <Alert type="error" onClose={handleCloseAlert}>
+      <Alert
+        type="error"
+        onClose={handleCloseAlert}
+        autoClose={DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS}
+      >
         {intl.formatMessage(alert.copyError)}
       </Alert>
     )
