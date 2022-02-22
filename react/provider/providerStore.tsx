@@ -21,6 +21,8 @@ const ProviderStore: FC = (props) => {
   const [code, setCode] = useState(intl.formatMessage(provider.withoutCode))
   const [showAlert, setShowAlert] = useState(ShowAlertOptions.notShow)
   const [credit, setCredit] = useState(0)
+  const [loading, setLoading] = useState(false)
+  const [loadingCode, setLoadingCode] = useState(false)
 
   const [updateGiftCardMutation] = useMutation(updateGiftCard)
   const { data: dataValueTotalList } = useQuery(getValueTotalList)
@@ -39,7 +41,7 @@ const ProviderStore: FC = (props) => {
 
     if (giftCard !== undefined && list !== undefined) {
       list /= 100
-      setCredit(list - giftCard)
+      setCredit(Number((list - giftCard).toFixed(2)))
     }
   }, [dataGetValueAlreadyInGiftCard, dataGetValueGiftCard, dataValueTotalList])
 
@@ -78,7 +80,8 @@ const ProviderStore: FC = (props) => {
 
     if (parseFloat(addValueGiftCard) > credit) {
       setValidation(
-        intl.formatMessage(provider.biggerThanCouldBe) + credit.toString()
+        intl.formatMessage(provider.biggerThanCouldBe) +
+          credit.toLocaleString('pt-br', { minimumFractionDigits: 2 })
       )
 
       return false
@@ -88,6 +91,7 @@ const ProviderStore: FC = (props) => {
   }
 
   async function updateGiftCardFunction() {
+    setLoading(true)
     setShowAlert(ShowAlertOptions.notShow)
     const valid = validationValue()
 
@@ -105,20 +109,27 @@ const ProviderStore: FC = (props) => {
       } else {
         setShowAlert(ShowAlertOptions.alertError)
       }
+
+      setLoading(false)
     }
+
+    setLoading(false)
   }
 
   function copyCode() {
+    setLoadingCode(true)
     setShowAlert(ShowAlertOptions.notShow)
 
     if (!navigator.clipboard) {
       setShowAlert(ShowAlertOptions.alertCopyError)
+      setLoadingCode(false)
 
       return
     }
 
     navigator.clipboard.writeText(code)
     setShowAlert(ShowAlertOptions.alertCopySuccess)
+    setLoadingCode(false)
   }
 
   return (
@@ -137,6 +148,8 @@ const ProviderStore: FC = (props) => {
         handleCloseAlert,
         credit,
         copyCode,
+        loading,
+        loadingCode,
       }}
     >
       {props.children}

@@ -1,7 +1,14 @@
 import type { FC } from 'react'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { InputButton, Tooltip, IconInfo } from 'vtex.styleguide'
+import {
+  InputButton,
+  Tooltip,
+  IconInfo,
+  InputCurrency,
+  Button,
+  Input,
+} from 'vtex.styleguide'
 
 import { useStore } from '../hooks/useStore'
 import '../styles.global.css'
@@ -15,11 +22,14 @@ const InputButtonArea: FC = () => {
     code,
     updateGiftCardFunction,
     setAddValueGiftCard,
-    addValueGiftCard,
     copyCode,
+    addValueGiftCard,
+    setValidation,
+    loading,
+    loadingCode,
   } = useStore()
 
-  function submitFunctionValueButton(e: React.FormEvent<HTMLFormElement>) {
+  function submitFunctionValueButton(e: { preventDefault: () => void }) {
     e.preventDefault()
     updateGiftCardFunction()
   }
@@ -33,20 +43,38 @@ const InputButtonArea: FC = () => {
     <>
       <div className="mb3 width-input mt5 inputs t-body mw9 rescue">
         {intl.formatMessage(input.valueLabel)}
-        <form onSubmit={(e) => submitFunctionValueButton(e)}>
-          <InputButton
-            placeholder={intl.formatMessage(input.valuePlaceholder)}
-            size="large"
-            type="number"
-            button={intl.formatMessage(input.valueButton)}
-            onChange={(e: { target: { value: string } }) =>
-              setAddValueGiftCard(e.target.value)
-            }
-            value={addValueGiftCard}
-            testId="input-button-test"
-          />
+        <div className="c-on-base w-100">
+          <div className="flex justify-between rescue">
+            <div className="lh-copy w-100">
+              <InputCurrency
+                value={addValueGiftCard}
+                size="large"
+                placeholder={intl.formatMessage(input.valuePlaceholder)}
+                locale="pt-BR"
+                currencyCode="BRL"
+                onChange={(e: { target: { value: string } }) => {
+                  setAddValueGiftCard(e.target.value)
+                }}
+                onFocus={(e: { preventDefault: () => void }) => {
+                  e.preventDefault()
+                  setValidation('')
+                }}
+                readOnly={loading}
+              />
+            </div>
+            <div className="ml2 mt2">
+              <Button
+                onClick={(e: { preventDefault: () => void }) =>
+                  submitFunctionValueButton(e)
+                }
+                isLoading={loading}
+              >
+                {intl.formatMessage(input.valueButton)}
+              </Button>
+            </div>
+          </div>
           <ValidationArea />
-        </form>
+        </div>
       </div>
       <div className="mb3 mt7 width-input inputs t-body mw9 rescue">
         <div>
@@ -57,16 +85,28 @@ const InputButtonArea: FC = () => {
             </span>
           </Tooltip>
         </div>
-        <form onSubmit={(e) => submitFunctionCodeButton(e)}>
-          <InputButton
-            placeholder={intl.formatMessage(input.codePlaceholder)}
-            size="large"
-            button={intl.formatMessage(input.codeButton)}
-            value={code}
-            readOnly
-            testId="input-button-test-readOnly"
-          />
-        </form>
+        <div className="c-on-base w-100">
+          <div className="flex justify-between rescue">
+            <div className="lh-copy w-100">
+              <Input
+                value={code}
+                placeholder={intl.formatMessage(input.codePlaceholder)}
+                readOnly={true}
+                size="large"
+              />
+            </div>
+            <div className="ml2 mt2">
+              <Button
+                onClick={(e: React.FormEvent<HTMLFormElement>) =>
+                  submitFunctionCodeButton(e)
+                }
+                isLoading={loadingCode}
+              >
+                {intl.formatMessage(input.codeButton)}
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   )

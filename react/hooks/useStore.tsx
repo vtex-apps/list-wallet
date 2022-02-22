@@ -16,6 +16,8 @@ interface ContextStoreType {
   handleCloseAlert: () => void
   credit: number
   copyCode: () => void
+  loading: boolean
+  loadingCode: boolean
 }
 
 export const ContextStore = React.createContext<ContextStoreType>({
@@ -32,6 +34,8 @@ export const ContextStore = React.createContext<ContextStoreType>({
   handleCloseAlert: () => {},
   credit: 0,
   copyCode: () => {},
+  loading: false,
+  loadingCode: false,
 })
 
 export function useStore() {
