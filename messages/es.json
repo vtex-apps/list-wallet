@@ -15,8 +15,10 @@
   "provider.missing.value": "Insira um valor para resgatar",
   "provider.value.negative": "Adicione um valor maior que 0",
   "provider.value.bigger.than.could.be": "Insira um valor menor ou igual a ",
-  "alert.sucess": "Valor adicionado ao vale presente",
-  "alert.error": "Erro ao adicionar valor ao vale presente",
-  "alert.copy": "Código copiado com sucesso",
-  "alert.copy.error": "Erro ao copiar código"
+  "toast.rescue.value": "Valor de R$",
+  "toast.rescue.sucess": "Resgatado com sucesso!",
+  "toast.rescue.error": "Erro ao adicionar valor ao vale presente",
+  "toast.code": "Código ",
+  "toast.copy": "Copiado com sucesso",
+  "toast.copy.error": "Erro ao copiar código"
 }

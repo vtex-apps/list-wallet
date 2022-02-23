@@ -28,9 +28,11 @@ export const provider = defineMessages({
   missingValue: { id: 'provider.missing.value' },
 })
 
-export const alert = defineMessages({
-  sucess: { id: 'alert.sucess' },
-  error: { id: 'alert.error' },
-  copy: { id: 'alert.copy' },
-  copyError: { id: 'alert.copy.error' },
+export const toast = defineMessages({
+  rescueValue: { id: 'toast.rescue.value' },
+  rescueSucess: { id: 'toast.rescue.sucess' },
+  rescueError: { id: 'toast.rescue.error' },
+  code: { id: 'toast.code' },
+  copy: { id: 'toast.copy' },
+  copyError: { id: 'toast.copy.error' },
 })

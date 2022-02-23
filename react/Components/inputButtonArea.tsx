@@ -2,7 +2,6 @@ import type { FC } from 'react'
 import React from 'react'
 import { useIntl } from 'react-intl'
 import {
-  InputButton,
   Tooltip,
   IconInfo,
   InputCurrency,

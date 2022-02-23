@@ -3,17 +3,18 @@ import React, { useEffect, useState } from 'react'
 import { useMutation, useQuery } from 'react-apollo'
 import { useIntl } from 'react-intl'
 
+import { provider } from '../utils/definedMessages'
 import updateGiftCard from '../queries/updateGiftCard.gql'
 import getValueTotalList from '../queries/getValueTotalList.gql'
 import getRouteRedemptionCode from '../queries/getRouteRedemptionCode.gql'
 import getValueGiftCard from '../queries/getValueGiftCard.gql'
 import getValueAlreadyInGiftCard from '../queries/getValueAlreadyInGiftCard.gql'
 import { ShowAlertOptions } from '../utils/showAlertOptions'
-import { provider } from '../utils/definedMessages'
 import { ContextStore } from '../hooks/useStore'
 
 const ProviderStore: FC = (props) => {
   const intl = useIntl()
+  const [rescue, setRescue] = useState(0)
   const [button, setButton] = useState(false)
   const [addValueGiftCard, setAddValueGiftCard] = useState<string>()
   const [validation, setValidation] = useState('')
@@ -103,7 +104,8 @@ const ProviderStore: FC = (props) => {
       })
 
       if (data.updateGiftCard === 'success') {
-        setShowAlert(ShowAlertOptions.alertSave)
+        setRescue(parseFloat(addValueGiftCard as string))
+        setShowAlert(ShowAlertOptions.alertError)
         refetchGetValueGiftCard()
         refetchValueAlreadyInGiftCard()
         setAddValueGiftCard('')
@@ -129,7 +131,7 @@ const ProviderStore: FC = (props) => {
     }
 
     navigator.clipboard.writeText(code)
-    setShowAlert(ShowAlertOptions.alertCopySuccess)
+    setShowAlert(ShowAlertOptions.alertCopyError)
     setLoadingCode(false)
   }
 
@@ -146,11 +148,13 @@ const ProviderStore: FC = (props) => {
         validation,
         setValidation,
         showAlert,
+        setShowAlert,
         handleCloseAlert,
         credit,
         copyCode,
         loading,
         loadingCode,
+        rescue,
       }}
     >
       {props.children}
