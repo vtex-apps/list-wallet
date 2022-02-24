@@ -127,6 +127,12 @@ p,
 	padding: 20px 15px 20px 10px;
 }
 
+.desktop-or-mobile{
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  display: flex;
+}
+
 @keyframes toast-in-left {
 	from {
 		transform: translateX(-100%);
@@ -164,6 +170,13 @@ p,
     min-width: 300px;
     color: #fff;
     padding: 20px 15px 20px 10px;
+  }
+  .desktop-or-mobile{
+    display: block
+  }
+
+  .b--action-primary{
+    width: 100%
   }
 
 }

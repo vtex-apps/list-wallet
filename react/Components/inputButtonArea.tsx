@@ -42,8 +42,8 @@ const InputButtonArea: FC = () => {
     <>
       <div className="mb3 width-input mt5 inputs t-body mw9 rescue">
         {intl.formatMessage(input.valueLabel)}
-        <div className="c-on-base w-100">
-          <div className="flex justify-between rescue">
+        <div className="w-100">
+          <div className="desktop-or-mobile rescue">
             <div className="lh-copy w-100">
               <InputCurrency
                 value={addValueGiftCard}
@@ -84,8 +84,8 @@ const InputButtonArea: FC = () => {
             </span>
           </Tooltip>
         </div>
-        <div className="c-on-base w-100">
-          <div className="flex justify-between rescue">
+        <div className="w-100">
+          <div className="desktop-or-mobile rescue">
             <div className="lh-copy w-100">
               <Input
                 value={code}
