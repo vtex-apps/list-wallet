@@ -1,4 +1,17 @@
-p,
+p
+
+:disabled {
+  background: transparent;
+}
+
+.border-red {
+  border-color: red;
+}
+
+input:read-only {
+  background-color: transparent;
+}
+
 .padding-pageheader {
   text-align: center
 }

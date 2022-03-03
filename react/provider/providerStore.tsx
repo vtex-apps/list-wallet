@@ -67,6 +67,8 @@ const ProviderStore: FC = (props) => {
   }
 
   function validationValue() {
+    document.getElementById('div-border-color')?.classList.add('border-red')
+
     if (addValueGiftCard === undefined) {
       setValidation(intl.formatMessage(provider.missingValue))
 
@@ -87,6 +89,8 @@ const ProviderStore: FC = (props) => {
 
       return false
     }
+
+    document.getElementById('div-border-color')?.classList.remove('border-red')
 
     return true
   }
