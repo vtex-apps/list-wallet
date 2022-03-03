@@ -9,7 +9,7 @@ import { ShowAlertOptions } from '../utils/showAlertOptions'
 import { toast } from '../utils/definedMessages'
 
 const ToastArea = () => {
-  const DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS = 1000000
+  const DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS = 3000
 
   const intl = useIntl()
 

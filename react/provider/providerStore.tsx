@@ -105,7 +105,7 @@ const ProviderStore: FC = (props) => {
 
       if (data.updateGiftCard === 'success') {
         setRescue(parseFloat(addValueGiftCard as string))
-        setShowAlert(ShowAlertOptions.alertError)
+        setShowAlert(ShowAlertOptions.alertSave)
         refetchGetValueGiftCard()
         refetchValueAlreadyInGiftCard()
         setAddValueGiftCard('0')
@@ -131,7 +131,7 @@ const ProviderStore: FC = (props) => {
     }
 
     navigator.clipboard.writeText(code)
-    setShowAlert(ShowAlertOptions.alertCopyError)
+    setShowAlert(ShowAlertOptions.alertCopySuccess)
     setLoadingCode(false)
   }
 
