@@ -29,5 +29,10 @@ All notable changes to this project will be documented in this file.
   - Add success or error mensages when click to button "Copy Code"
   - Change message of tooltip
   - Add line break for mobiles in the balance data area 
-
+  - Change InputButton to InputCurrency and Button
+  - Cleaning field after success in generating redemption value
+  - Change Alert to Toast
+  - Add timer on Toast
+  - Change InputCurrency to IntlCurrencyInput
+  - Add red border to sinalize a error
 
