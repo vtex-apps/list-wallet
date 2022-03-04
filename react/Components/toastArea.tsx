@@ -32,76 +32,79 @@ const ToastArea = () => {
     }
   }, [showAlert])
 
-  if (showAlert === ShowAlertOptions.alertSave) {
+  function decideClassName() {
+    if (
+      showAlert === ShowAlertOptions.alertSave ||
+      showAlert === ShowAlertOptions.alertCopySuccess
+    ) {
+      return 'notification bg-color-sucess toast bottom-left'
+    }
+
+    return 'notification bg-color-error toast bottom-left'
+  }
+
+  function decideSrc() {
+    if (
+      showAlert === ShowAlertOptions.alertSave ||
+      showAlert === ShowAlertOptions.alertCopySuccess
+    ) {
+      return success
+    }
+
+    return error
+  }
+
+  function decideMessage() {
+    if (showAlert === ShowAlertOptions.alertSave) {
+      return (
+        <>
+          <p className="notification-title">
+            {intl.formatMessage(toast.rescueValue) +
+              rescue.toLocaleString('pt-br', { minimumFractionDigits: 2 })}
+          </p>
+          <p className="notification-message">
+            {intl.formatMessage(toast.rescueSucess)}
+          </p>
+        </>
+      )
+    }
+
+    if (showAlert === ShowAlertOptions.alertCopySuccess) {
+      return (
+        <>
+          <p className="notification-title">
+            {intl.formatMessage(toast.code) + code}
+          </p>
+          <p className="notification-message">
+            {intl.formatMessage(toast.copy)}
+          </p>
+        </>
+      )
+    }
+
+    if (showAlert === ShowAlertOptions.alertError) {
+      return (
+        <p className="notification-middle">
+          {intl.formatMessage(toast.rescueError)}
+        </p>
+      )
+    }
+
     return (
-      <div className={`notification-container bottom-left`}>
-        <div className={`notification bg-color-sucess toast bottom-left`}>
-          <div className="notification-image">
-            <img src={success} alt="" />
-          </div>
-          <div>
-            <p className="notification-title">
-              {intl.formatMessage(toast.rescueValue) +
-                rescue.toLocaleString('pt-br', { minimumFractionDigits: 2 })}
-            </p>
-            <p className="notification-message">
-              {intl.formatMessage(toast.rescueSucess)}
-            </p>
-          </div>
-        </div>
-      </div>
+      <p className="notification-middle">
+        {intl.formatMessage(toast.copyError)}
+      </p>
     )
   }
 
-  if (showAlert === ShowAlertOptions.alertCopySuccess) {
+  if (showAlert !== ShowAlertOptions.notShow) {
     return (
       <div className={`notification-container bottom-left`}>
-        <div className={`notification bg-color-sucess toast bottom-left`}>
+        <div className={decideClassName()}>
           <div className="notification-image">
-            <img src={success} alt="" />
+            <img src={decideSrc()} alt="" />
           </div>
-          <div>
-            <p className="notification-title">
-              {intl.formatMessage(toast.code) + code}
-            </p>
-            <p className="notification-message">
-              {intl.formatMessage(toast.copy)}
-            </p>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  if (showAlert === ShowAlertOptions.alertError) {
-    return (
-      <div className={`notification-container bottom-left`}>
-        <div className={`notification bg-color-error toast bottom-left`}>
-          <div className="notification-image">
-            <img src={error} alt="" />
-          </div>
-          <div>
-            <p className="notification-middle">
-              {intl.formatMessage(toast.rescueError)}
-            </p>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  if (showAlert === ShowAlertOptions.alertCopyError) {
-    return (
-      <div className={`notification-container bottom-left`}>
-        <div className={`notification bg-color-error toast bottom-left`}>
-          <div className="notification-image">
-            <img src={error} alt="" />
-          </div>
-          <div>
-            <p className="notification-middle">
-              {intl.formatMessage(toast.copyError)}
-            </p>
-          </div>
+          <div>{decideMessage()}</div>
         </div>
       </div>
     )
