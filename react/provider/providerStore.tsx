@@ -3,17 +3,18 @@ import React, { useEffect, useState } from 'react'
 import { useMutation, useQuery } from 'react-apollo'
 import { useIntl } from 'react-intl'
 
+import { provider } from '../utils/definedMessages'
 import updateGiftCard from '../queries/updateGiftCard.gql'
 import getValueTotalList from '../queries/getValueTotalList.gql'
 import getRouteRedemptionCode from '../queries/getRouteRedemptionCode.gql'
 import getValueGiftCard from '../queries/getValueGiftCard.gql'
 import getValueAlreadyInGiftCard from '../queries/getValueAlreadyInGiftCard.gql'
 import { ShowAlertOptions } from '../utils/showAlertOptions'
-import { provider } from '../utils/definedMessages'
 import { ContextStore } from '../hooks/useStore'
 
 const ProviderStore: FC = (props) => {
   const intl = useIntl()
+  const [rescue, setRescue] = useState(0)
   const [button, setButton] = useState(false)
   const [addValueGiftCard, setAddValueGiftCard] = useState<string>()
   const [validation, setValidation] = useState('')
@@ -21,6 +22,9 @@ const ProviderStore: FC = (props) => {
   const [code, setCode] = useState(intl.formatMessage(provider.withoutCode))
   const [showAlert, setShowAlert] = useState(ShowAlertOptions.notShow)
   const [credit, setCredit] = useState(0)
+  const [loading, setLoading] = useState(false)
+  const [loadingCode, setLoadingCode] = useState(false)
+  const [isGiftCardFieldInvalid, setIsGiftCardFieldInvalid] = useState(false)
 
   const [updateGiftCardMutation] = useMutation(updateGiftCard)
   const { data: dataValueTotalList } = useQuery(getValueTotalList)
@@ -39,7 +43,7 @@ const ProviderStore: FC = (props) => {
 
     if (giftCard !== undefined && list !== undefined) {
       list /= 100
-      setCredit(list - giftCard)
+      setCredit(Number((list - giftCard).toFixed(2)))
     }
   }, [dataGetValueAlreadyInGiftCard, dataGetValueGiftCard, dataValueTotalList])
 
@@ -66,28 +70,35 @@ const ProviderStore: FC = (props) => {
   function validationValue() {
     if (addValueGiftCard === undefined) {
       setValidation(intl.formatMessage(provider.missingValue))
+      setIsGiftCardFieldInvalid(true)
 
       return false
     }
 
     if (parseFloat(addValueGiftCard) <= 0) {
       setValidation(intl.formatMessage(provider.negativeValue))
+      setIsGiftCardFieldInvalid(true)
 
       return false
     }
 
     if (parseFloat(addValueGiftCard) > credit) {
       setValidation(
-        intl.formatMessage(provider.biggerThanCouldBe) + credit.toString()
+        intl.formatMessage(provider.biggerThanCouldBe) +
+          credit.toLocaleString('pt-br', { minimumFractionDigits: 2 })
       )
+      setIsGiftCardFieldInvalid(true)
 
       return false
     }
+
+    setIsGiftCardFieldInvalid(false)
 
     return true
   }
 
   async function updateGiftCardFunction() {
+    setLoading(true)
     setShowAlert(ShowAlertOptions.notShow)
     const valid = validationValue()
 
@@ -99,26 +110,35 @@ const ProviderStore: FC = (props) => {
       })
 
       if (data.updateGiftCard === 'success') {
+        setRescue(parseFloat(addValueGiftCard as string))
         setShowAlert(ShowAlertOptions.alertSave)
         refetchGetValueGiftCard()
         refetchValueAlreadyInGiftCard()
+        setAddValueGiftCard('0')
       } else {
         setShowAlert(ShowAlertOptions.alertError)
       }
+
+      setLoading(false)
     }
+
+    setLoading(false)
   }
 
   function copyCode() {
+    setLoadingCode(true)
     setShowAlert(ShowAlertOptions.notShow)
 
     if (!navigator.clipboard) {
       setShowAlert(ShowAlertOptions.alertCopyError)
+      setLoadingCode(false)
 
       return
     }
 
     navigator.clipboard.writeText(code)
     setShowAlert(ShowAlertOptions.alertCopySuccess)
+    setLoadingCode(false)
   }
 
   return (
@@ -134,9 +154,15 @@ const ProviderStore: FC = (props) => {
         validation,
         setValidation,
         showAlert,
+        setShowAlert,
         handleCloseAlert,
         credit,
         copyCode,
+        loading,
+        loadingCode,
+        rescue,
+        isGiftCardFieldInvalid,
+        setIsGiftCardFieldInvalid,
       }}
     >
       {props.children}

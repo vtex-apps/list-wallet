@@ -13,9 +13,15 @@ interface ContextStoreType {
   validation: string
   setValidation: (validation: string) => void
   showAlert: ShowAlertOptions
+  setShowAlert: (showAlert: ShowAlertOptions) => void
   handleCloseAlert: () => void
   credit: number
   copyCode: () => void
+  loading: boolean
+  loadingCode: boolean
+  rescue: number
+  isGiftCardFieldInvalid: boolean
+  setIsGiftCardFieldInvalid: (isGiftCardFieldInvalid: boolean) => void
 }
 
 export const ContextStore = React.createContext<ContextStoreType>({
@@ -29,9 +35,15 @@ export const ContextStore = React.createContext<ContextStoreType>({
   validation: '',
   setValidation: () => {},
   showAlert: ShowAlertOptions.notShow,
+  setShowAlert: () => {},
   handleCloseAlert: () => {},
   credit: 0,
   copyCode: () => {},
+  loading: false,
+  loadingCode: false,
+  rescue: 0,
+  isGiftCardFieldInvalid: false,
+  setIsGiftCardFieldInvalid: () => {},
 })
 
 export function useStore() {

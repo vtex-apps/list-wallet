@@ -6,9 +6,9 @@ import { Collapsible } from 'vtex.styleguide'
 import { useStore } from '../hooks/useStore'
 import '../styles.global.css'
 import { collapsible } from '../utils/definedMessages'
-import AlertArea from './alertArea'
 import InputButtonArea from './inputButtonArea'
 import TitlesArea from './titlesArea'
+import ToastArea from './toastArea'
 
 const CollapsibleArea: FC = () => {
   const { setButton, button } = useStore()
@@ -32,7 +32,7 @@ const CollapsibleArea: FC = () => {
           <TitlesArea />
           <InputButtonArea />
         </Collapsible>
-        <AlertArea />
+        <ToastArea />
       </div>
     </div>
   )

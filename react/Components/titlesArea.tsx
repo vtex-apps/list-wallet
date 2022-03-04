@@ -25,7 +25,7 @@ const TitlesArea: FC = () => {
         <div className="mb5 t-heading-4">
           {intl.formatMessage(titles.valueGiftCard)}
           <b className="money">
-            {intl.formatMessage(titles.money)}{' '}
+            {intl.formatMessage(titles.money)}
             {valueGiftCard.toLocaleString('pt-br', {
               minimumFractionDigits: 2,
             })}
