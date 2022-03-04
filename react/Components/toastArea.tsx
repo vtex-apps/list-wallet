@@ -15,6 +15,64 @@ const ToastArea = () => {
 
   const { showAlert, setShowAlert, rescue, code } = useStore()
 
+  interface AlertInfo {
+    className: string
+    imageSrc: string
+    message: React.ReactFragment
+  }
+
+  const dictionary: { [key: number]: AlertInfo } = {
+    1: {
+      className: 'notification bg-color-sucess toast bottom-left',
+      imageSrc: success,
+      message: (
+        <>
+          <p className="notification-title">
+            {intl.formatMessage(toast.rescueValue) +
+              rescue.toLocaleString('pt-br', { minimumFractionDigits: 2 })}
+          </p>
+          <p className="notification-message">
+            {intl.formatMessage(toast.rescueSucess)}
+          </p>
+        </>
+      ),
+    },
+    2: {
+      className: 'notification bg-color-error toast bottom-left',
+      imageSrc: error,
+      message: (
+        <p className="notification-middle">
+          {intl.formatMessage(toast.rescueError)}
+        </p>
+      ),
+    },
+    3: {
+      className: 'notification bg-color-sucess toast bottom-left',
+      imageSrc: success,
+      message: (
+        <>
+          <p className="notification-title">
+            {intl.formatMessage(toast.code) + code}
+          </p>
+          <p className="notification-message">
+            {intl.formatMessage(toast.copy)}
+          </p>
+        </>
+      ),
+    },
+    4: {
+      className: 'notification bg-color-error toast bottom-left',
+      imageSrc: error,
+      message: (
+        <p className="notification-middle">
+          {intl.formatMessage(toast.copyError)}
+        </p>
+      ),
+    },
+  }
+
+  const alertInfo = dictionary[showAlert]
+
   function changeValueShowAlert() {
     if (showAlert !== ShowAlertOptions.notShow) {
       setShowAlert(ShowAlertOptions.notShow)
@@ -32,79 +90,14 @@ const ToastArea = () => {
     }
   }, [showAlert])
 
-  function decideClassName() {
-    if (
-      showAlert === ShowAlertOptions.alertSave ||
-      showAlert === ShowAlertOptions.alertCopySuccess
-    ) {
-      return 'notification bg-color-sucess toast bottom-left'
-    }
-
-    return 'notification bg-color-error toast bottom-left'
-  }
-
-  function decideSrc() {
-    if (
-      showAlert === ShowAlertOptions.alertSave ||
-      showAlert === ShowAlertOptions.alertCopySuccess
-    ) {
-      return success
-    }
-
-    return error
-  }
-
-  function decideMessage() {
-    if (showAlert === ShowAlertOptions.alertSave) {
-      return (
-        <>
-          <p className="notification-title">
-            {intl.formatMessage(toast.rescueValue) +
-              rescue.toLocaleString('pt-br', { minimumFractionDigits: 2 })}
-          </p>
-          <p className="notification-message">
-            {intl.formatMessage(toast.rescueSucess)}
-          </p>
-        </>
-      )
-    }
-
-    if (showAlert === ShowAlertOptions.alertCopySuccess) {
-      return (
-        <>
-          <p className="notification-title">
-            {intl.formatMessage(toast.code) + code}
-          </p>
-          <p className="notification-message">
-            {intl.formatMessage(toast.copy)}
-          </p>
-        </>
-      )
-    }
-
-    if (showAlert === ShowAlertOptions.alertError) {
-      return (
-        <p className="notification-middle">
-          {intl.formatMessage(toast.rescueError)}
-        </p>
-      )
-    }
-
-    return (
-      <p className="notification-middle">
-        {intl.formatMessage(toast.copyError)}
-      </p>
-    )
-  }
-
   if (showAlert !== ShowAlertOptions.notShow) {
     return (
       <div className={`notification-container bottom-left`}>
-        <div className={decideClassName()}>
+        <div className={alertInfo.className}>
           <div className="notification-image">
-            <img src={decideSrc()} alt="" />
+            <img src={alertInfo.imageSrc} alt="" />
           </div>
-          <div>{decideMessage()}</div>
+          <div>{alertInfo.message}</div>
         </div>
       </div>
     )

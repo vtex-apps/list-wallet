@@ -24,6 +24,7 @@ const ProviderStore: FC = (props) => {
   const [credit, setCredit] = useState(0)
   const [loading, setLoading] = useState(false)
   const [loadingCode, setLoadingCode] = useState(false)
+  const [borderRed, setBorderRed] = useState(false)
 
   const [updateGiftCardMutation] = useMutation(updateGiftCard)
   const { data: dataValueTotalList } = useQuery(getValueTotalList)
@@ -67,16 +68,16 @@ const ProviderStore: FC = (props) => {
   }
 
   function validationValue() {
-    document.getElementById('div-border-color')?.classList.add('border-red')
-
     if (addValueGiftCard === undefined) {
       setValidation(intl.formatMessage(provider.missingValue))
+      setBorderRed(true)
 
       return false
     }
 
     if (parseFloat(addValueGiftCard) <= 0) {
       setValidation(intl.formatMessage(provider.negativeValue))
+      setBorderRed(true)
 
       return false
     }
@@ -86,11 +87,12 @@ const ProviderStore: FC = (props) => {
         intl.formatMessage(provider.biggerThanCouldBe) +
           credit.toLocaleString('pt-br', { minimumFractionDigits: 2 })
       )
+      setBorderRed(true)
 
       return false
     }
 
-    document.getElementById('div-border-color')?.classList.remove('border-red')
+    setBorderRed(false)
 
     return true
   }
@@ -159,6 +161,8 @@ const ProviderStore: FC = (props) => {
         loading,
         loadingCode,
         rescue,
+        borderRed,
+        setBorderRed,
       }}
     >
       {props.children}

@@ -21,9 +21,11 @@ const InputButtonArea: FC = () => {
     loading,
     loadingCode,
     addValueGiftCard,
+    borderRed,
+    setBorderRed,
   } = useStore()
 
-  function submitFunctionValueButton(e: { preventDefault: () => void }) {
+  function submitFunctionValueButton(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault()
     updateGiftCardFunction()
   }
@@ -47,12 +49,18 @@ const InputButtonArea: FC = () => {
     },
   }
 
-  const handleChange = (
-    event: { preventDefault: () => void },
+  const handleBlur = (
+    event: React.FormEvent<HTMLFormElement>,
     value: string
   ) => {
     event.preventDefault()
     setAddValueGiftCard(value)
+  }
+
+  const handleFocus = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setValidation('')
+    if (borderRed) setBorderRed(false)
   }
 
   return (
@@ -64,21 +72,16 @@ const InputButtonArea: FC = () => {
             <div className="lh-copy w-100">
               <label className="vtex-input w-100">
                 <div
-                  className="vtex-input-prefix__group flex flex-row items-stretch overflow-hidden br2 bw1 b--solid b--muted-4 hover-b--muted-3 h-large "
-                  id="div-border-color"
+                  className={`vtex-input-prefix__group flex flex-row items-stretch overflow-hidden br2 bw1 b--solid b--muted-4 hover-b--muted-3 h-large ${
+                    borderRed ? 'border-red' : ''
+                  }`}
                 >
                   <IntlCurrencyInput
                     defaultValue={addValueGiftCard}
                     currency="BRL"
                     config={currencyConfig}
-                    onFocus={(e: { preventDefault: () => void }) => {
-                      e.preventDefault()
-                      setValidation('')
-                      document
-                        .getElementById('div-border-color')
-                        ?.classList.remove('border-red')
-                    }}
-                    onBlur={handleChange}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
                     class="vtex-styleguide-9-x-input ma0 border-box vtex-styleguide-9-x-hideDecorators vtex-styleguide-9-x-noAppearance br2 bl-0 br--right   w-100 bn outline-0 bg-base c-on-base b--muted-4 hover-b--muted-3 t-body pr5 "
                     disabled={loading}
                   />
@@ -86,12 +89,7 @@ const InputButtonArea: FC = () => {
               </label>
             </div>
             <div className="ml2 mt2">
-              <Button
-                onClick={(e: { preventDefault: () => void }) =>
-                  submitFunctionValueButton(e)
-                }
-                isLoading={loading}
-              >
+              <Button onClick={submitFunctionValueButton} isLoading={loading}>
                 {intl.formatMessage(input.valueButton)}
               </Button>
             </div>
@@ -120,9 +118,7 @@ const InputButtonArea: FC = () => {
             </div>
             <div className="ml2 mt2">
               <Button
-                onClick={(e: React.FormEvent<HTMLFormElement>) =>
-                  submitFunctionCodeButton(e)
-                }
+                onClick={submitFunctionCodeButton}
                 isLoading={loadingCode}
               >
                 {intl.formatMessage(input.codeButton)}
