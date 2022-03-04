@@ -17,17 +17,21 @@ const TitlesArea: FC = () => {
       <div className="text-align-center">
         <div className="mb5 t-heading-4">
           {intl.formatMessage(titles.credit)}
-          <b>
-            {intl.formatMessage(titles.money)} {credit}
+          <b className="money">
+            {intl.formatMessage(titles.money)}
+            {credit.toLocaleString('pt-br', { minimumFractionDigits: 2 })}
           </b>
         </div>
         <div className="mb5 t-heading-4">
           {intl.formatMessage(titles.valueGiftCard)}
-          <b>
-            {intl.formatMessage(titles.money)} {valueGiftCard}
+          <b className="money">
+            {intl.formatMessage(titles.money)}
+            {valueGiftCard.toLocaleString('pt-br', {
+              minimumFractionDigits: 2,
+            })}
           </b>
         </div>
-        <div className="w-40 center">
+        <div className="width-divider center">
           <Divider />
         </div>
         <div className="mt5 t-heading-4">

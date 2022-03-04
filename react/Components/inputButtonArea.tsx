@@ -1,7 +1,8 @@
 import type { FC } from 'react'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { InputButton, Tooltip, IconInfo } from 'vtex.styleguide'
+import IntlCurrencyInput from 'react-intl-currency-input'
+import { Tooltip, IconInfo, Button, Input } from 'vtex.styleguide'
 
 import { useStore } from '../hooks/useStore'
 import '../styles.global.css'
@@ -15,39 +16,88 @@ const InputButtonArea: FC = () => {
     code,
     updateGiftCardFunction,
     setAddValueGiftCard,
+    copyCode,
+    setValidation,
+    loading,
+    loadingCode,
     addValueGiftCard,
+    isGiftCardFieldInvalid,
+    setIsGiftCardFieldInvalid,
   } = useStore()
 
-  function submitFunctionValueButton(e: React.FormEvent<HTMLFormElement>) {
+  function submitFunctionValueButton(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault()
     updateGiftCardFunction()
   }
 
   function submitFunctionCodeButton(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
-    if (!navigator.clipboard) return
-    navigator.clipboard.writeText(code)
+    copyCode()
+  }
+
+  const currencyConfig = {
+    locale: 'pt-BR',
+    formats: {
+      number: {
+        BRL: {
+          style: 'currency',
+          currency: 'BRL',
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2,
+        },
+      },
+    },
+  }
+
+  const handleBlur = (
+    event: React.FormEvent<HTMLFormElement>,
+    value: string
+  ) => {
+    event.preventDefault()
+    setAddValueGiftCard(value)
+  }
+
+  const handleFocus = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setValidation('')
+    if (isGiftCardFieldInvalid) setIsGiftCardFieldInvalid(false)
   }
 
   return (
     <>
-      <div className="mb3 width-input mt5 inputs t-body mw9">
+      <div className="mb3 width-input mt5 inputs t-body mw9 rescue">
         {intl.formatMessage(input.valueLabel)}
-        <form onSubmit={(e) => submitFunctionValueButton(e)}>
-          <InputButton
-            placeholder={intl.formatMessage(input.valuePlaceholder)}
-            size="regular"
-            button={intl.formatMessage(input.valueButton)}
-            onChange={(e: { target: { value: string } }) =>
-              setAddValueGiftCard(e.target.value)
-            }
-            value={addValueGiftCard}
-            testId="input-button-test"
-          />
+        <div className="w-100">
+          <div className="desktop-or-mobile rescue">
+            <div className="lh-copy w-100">
+              <label className="vtex-input w-100">
+                <div
+                  className={`vtex-input-prefix__group flex flex-row items-stretch overflow-hidden br2 bw1 b--solid b--muted-4 hover-b--muted-3 h-large ${
+                    isGiftCardFieldInvalid ? 'border-red' : ''
+                  }`}
+                >
+                  <IntlCurrencyInput
+                    defaultValue={addValueGiftCard}
+                    currency="BRL"
+                    config={currencyConfig}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
+                    class="vtex-styleguide-9-x-input ma0 border-box vtex-styleguide-9-x-hideDecorators vtex-styleguide-9-x-noAppearance br2 bl-0 br--right   w-100 bn outline-0 bg-base c-on-base b--muted-4 hover-b--muted-3 t-body pr5 "
+                    disabled={loading}
+                  />
+                </div>
+              </label>
+            </div>
+            <div className="ml2 mt2">
+              <Button onClick={submitFunctionValueButton} isLoading={loading}>
+                {intl.formatMessage(input.valueButton)}
+              </Button>
+            </div>
+          </div>
           <ValidationArea />
-        </form>
+        </div>
       </div>
-      <div className="mb3 mt7 width-input inputs t-body mw9">
+      <div className="mb3 mt7 width-input inputs t-body mw9 rescue">
         <div>
           {intl.formatMessage(input.codeLabel)}
           <Tooltip label={intl.formatMessage(input.tooltip)}>
@@ -56,16 +106,26 @@ const InputButtonArea: FC = () => {
             </span>
           </Tooltip>
         </div>
-        <form onSubmit={(e) => submitFunctionCodeButton(e)}>
-          <InputButton
-            placeholder={intl.formatMessage(input.codePlaceholder)}
-            size="regular"
-            button={intl.formatMessage(input.codeButton)}
-            value={code}
-            readOnly
-            testId="input-button-test-readOnly"
-          />
-        </form>
+        <div className="w-100">
+          <div className="desktop-or-mobile rescue">
+            <div className="lh-copy w-100">
+              <Input
+                value={code}
+                placeholder={intl.formatMessage(input.codePlaceholder)}
+                readOnly={true}
+                size="large"
+              />
+            </div>
+            <div className="ml2 mt2">
+              <Button
+                onClick={submitFunctionCodeButton}
+                isLoading={loadingCode}
+              >
+                {intl.formatMessage(input.codeButton)}
+              </Button>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   )
