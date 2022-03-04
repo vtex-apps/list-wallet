@@ -21,8 +21,8 @@ const InputButtonArea: FC = () => {
     loading,
     loadingCode,
     addValueGiftCard,
-    borderRed,
-    setBorderRed,
+    isGiftCardFieldInvalid,
+    setIsGiftCardFieldInvalid,
   } = useStore()
 
   function submitFunctionValueButton(e: React.MouseEvent<HTMLButtonElement>) {
@@ -60,7 +60,7 @@ const InputButtonArea: FC = () => {
   const handleFocus = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setValidation('')
-    if (borderRed) setBorderRed(false)
+    if (isGiftCardFieldInvalid) setIsGiftCardFieldInvalid(false)
   }
 
   return (
@@ -73,7 +73,7 @@ const InputButtonArea: FC = () => {
               <label className="vtex-input w-100">
                 <div
                   className={`vtex-input-prefix__group flex flex-row items-stretch overflow-hidden br2 bw1 b--solid b--muted-4 hover-b--muted-3 h-large ${
-                    borderRed ? 'border-red' : ''
+                    isGiftCardFieldInvalid ? 'border-red' : ''
                   }`}
                 >
                   <IntlCurrencyInput

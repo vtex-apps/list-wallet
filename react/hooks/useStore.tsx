@@ -20,8 +20,8 @@ interface ContextStoreType {
   loading: boolean
   loadingCode: boolean
   rescue: number
-  borderRed: boolean
-  setBorderRed: (borderRed: boolean) => void
+  isGiftCardFieldInvalid: boolean
+  setIsGiftCardFieldInvalid: (isGiftCardFieldInvalid: boolean) => void
 }
 
 export const ContextStore = React.createContext<ContextStoreType>({
@@ -42,8 +42,8 @@ export const ContextStore = React.createContext<ContextStoreType>({
   loading: false,
   loadingCode: false,
   rescue: 0,
-  borderRed: false,
-  setBorderRed: () => {},
+  isGiftCardFieldInvalid: false,
+  setIsGiftCardFieldInvalid: () => {},
 })
 
 export function useStore() {

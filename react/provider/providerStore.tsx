@@ -24,7 +24,7 @@ const ProviderStore: FC = (props) => {
   const [credit, setCredit] = useState(0)
   const [loading, setLoading] = useState(false)
   const [loadingCode, setLoadingCode] = useState(false)
-  const [borderRed, setBorderRed] = useState(false)
+  const [isGiftCardFieldInvalid, setIsGiftCardFieldInvalid] = useState(false)
 
   const [updateGiftCardMutation] = useMutation(updateGiftCard)
   const { data: dataValueTotalList } = useQuery(getValueTotalList)
@@ -70,14 +70,14 @@ const ProviderStore: FC = (props) => {
   function validationValue() {
     if (addValueGiftCard === undefined) {
       setValidation(intl.formatMessage(provider.missingValue))
-      setBorderRed(true)
+      setIsGiftCardFieldInvalid(true)
 
       return false
     }
 
     if (parseFloat(addValueGiftCard) <= 0) {
       setValidation(intl.formatMessage(provider.negativeValue))
-      setBorderRed(true)
+      setIsGiftCardFieldInvalid(true)
 
       return false
     }
@@ -87,12 +87,12 @@ const ProviderStore: FC = (props) => {
         intl.formatMessage(provider.biggerThanCouldBe) +
           credit.toLocaleString('pt-br', { minimumFractionDigits: 2 })
       )
-      setBorderRed(true)
+      setIsGiftCardFieldInvalid(true)
 
       return false
     }
 
-    setBorderRed(false)
+    setIsGiftCardFieldInvalid(false)
 
     return true
   }
@@ -161,8 +161,8 @@ const ProviderStore: FC = (props) => {
         loading,
         loadingCode,
         rescue,
-        borderRed,
-        setBorderRed,
+        isGiftCardFieldInvalid,
+        setIsGiftCardFieldInvalid,
       }}
     >
       {props.children}
