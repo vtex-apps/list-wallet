@@ -7,7 +7,7 @@
   "input.value.label": "Digite o valor",
   "input.value.button": "RESGATAR",
   "input.tooltip": "Código para resgatar o vale-presente. Este código é único. Utilize em todas as suas compras na loja",
-  "input.code.label": "Código",
+  "input.code.label": "Código do vale presente",
   "input.code.placeholder": "Código",
   "input.code.button": "COPIAR CÓDIGO",
   "collapsible.title": "Minha carteira",
@@ -20,5 +20,6 @@
   "toast.rescue.error": "Erro ao adicionar valor ao vale presente",
   "toast.code": "Código ",
   "toast.copy": "Copiado com sucesso",
-  "toast.copy.error": "Erro ao copiar código"
+  "toast.copy.error": "Erro ao copiar código",
+  "toast.without.code": "Código inexistente"
 }

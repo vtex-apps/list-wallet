@@ -35,4 +35,5 @@ export const toast = defineMessages({
   code: { id: 'toast.code' },
   copy: { id: 'toast.copy' },
   copyError: { id: 'toast.copy.error' },
+  withoutCode: { id: 'toast.without.code' },
 })

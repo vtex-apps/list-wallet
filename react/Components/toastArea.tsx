@@ -10,7 +10,7 @@ import { ShowAlertOptions } from '../utils/showAlertOptions'
 import { toast } from '../utils/definedMessages'
 
 const ToastArea: FC = () => {
-  const DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS = 1
+  const DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS = 3000
 
   const intl = useIntl()
 
@@ -67,6 +67,15 @@ const ToastArea: FC = () => {
       message: (
         <p className="notification-middle">
           {intl.formatMessage(toast.copyError)}
+        </p>
+      ),
+    },
+    5: {
+      className: 'notification bg-color-error toast bottom-left',
+      imageSrc: error,
+      message: (
+        <p className="notification-middle">
+          {intl.formatMessage(toast.withoutCode)}
         </p>
       ),
     },
