@@ -69,24 +69,31 @@ describe('Toast Area', () => {
     expect(container?.firstChild?.firstChild).toHaveClass('bg-color-error')
   })
 
+  it('should render error Alert if showAlert = 5', async () => {
+    const showAlert = { showAlert: ShowAlertOptions.alertWithoutCode }
+
+    const { container } = render(
+      <ContextStore.Provider value={{ ...values, ...showAlert }}>
+        <ToastArea />
+      </ContextStore.Provider>
+    )
+
+    expect(container?.firstChild?.firstChild).toHaveClass('bg-color-error')
+  })
+
   it('should set ShowAlertOptions to notShow when finalize the timer', async () => {
-    setTimeout(async () => {
-      jest.useFakeTimers()
+    const showAlert = { showAlert: ShowAlertOptions.alertCopyError }
 
-      const showAlert = { showAlert: ShowAlertOptions.alertCopyError }
+    const { container } = render(
+      <ContextStore.Provider value={{ ...values, ...showAlert }}>
+        <ToastArea />
+      </ContextStore.Provider>
+    )
 
-      const { container } = render(
-        <ContextStore.Provider value={{ ...values, ...showAlert }}>
-          <ToastArea />
-        </ContextStore.Provider>
-      )
+    expect(container?.firstChild?.firstChild).toHaveClass('bg-color-error')
 
-      expect(container?.firstChild?.firstChild).toHaveClass('bg-color-error')
+    await wait(3000)
 
-      jest.advanceTimersByTime(1)
-
-      await wait(0)
-      expect(container.firstChild).toBeNull()
-    }, 5000)
+    expect(values.setShowAlert).toHaveBeenCalled()
   })
 })

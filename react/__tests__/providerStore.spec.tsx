@@ -7,6 +7,7 @@ import {
   mocks,
   mocksUpdateReturnError,
   mocksUpdate,
+  mocksErrorCode,
 } from '../__mocks__/mockUseQuery'
 import ProviderStore from '../provider/providerStore'
 import { ContextStore } from '../hooks/useStore'
@@ -383,6 +384,40 @@ describe('Provider', () => {
         ShowAlertOptions.alertCopyError.toString()
       )
     })
+  })
+
+  it('should test function copyCode return error if dont have a valid code', async () => {
+    const TestComponent = () => {
+      const { showAlert, copyCode } = React.useContext(ContextStore)
+
+      return (
+        <>
+          <button data-testid="copy" onClick={() => copyCode()}>
+            copy
+          </button>
+          <div data-testid="alert">{showAlert}</div>
+        </>
+      )
+    }
+
+    const { getByTestId } = render(
+      <MockedProvider mocks={mocksErrorCode} addTypename={false}>
+        <ProviderStore>
+          <TestComponent />
+        </ProviderStore>
+      </MockedProvider>
+    )
+
+    const alertValue = getByTestId('alert')
+
+    await act(async () => {
+      await wait(0)
+      fireEvent.click(getByTestId('copy'))
+    })
+
+    expect(alertValue).toHaveTextContent(
+      ShowAlertOptions.alertWithoutCode.toString()
+    )
   })
 
   it('should test function copyCode return success if a send a valid navigator', async () => {
