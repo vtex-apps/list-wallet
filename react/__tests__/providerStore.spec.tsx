@@ -61,12 +61,15 @@ describe('Provider', () => {
 
   it('should test function validateIfAllFieldsIsComplete failed if I dont send a addValueGiftCard', async () => {
     const TestComponent = () => {
-      const { validation, updateGiftCardFunction } =
+      const { validation, updateGiftCardFunction, isGiftCardFieldInvalid } =
         React.useContext(ContextStore)
 
       return (
         <>
           <div data-testid="validateText">{validation}</div>
+          <div data-testid="fieldInvalid">
+            {isGiftCardFieldInvalid.toString()}
+          </div>
           <button data-testid="buttonUpdate" onClick={updateGiftCardFunction}>
             update
           </button>
@@ -87,15 +90,23 @@ describe('Provider', () => {
       fireEvent.click(getByTestId('buttonUpdate'))
     })
 
+    await wait(0)
+
     const validateText = getByTestId('validateText').textContent
+    const invalidField = getByTestId('fieldInvalid').textContent
 
     expect(validateText).not.toBeNull()
+    expect(invalidField).toBe('true')
   })
 
   it('should test function validateIfAllFieldsIsComplete failed if I send a addValueGiftCard <= 0', async () => {
     const TestComponent = () => {
-      const { validation, updateGiftCardFunction, setAddValueGiftCard } =
-        React.useContext(ContextStore)
+      const {
+        validation,
+        updateGiftCardFunction,
+        setAddValueGiftCard,
+        isGiftCardFieldInvalid,
+      } = React.useContext(ContextStore)
 
       return (
         <>
@@ -105,6 +116,9 @@ describe('Provider', () => {
           >
             add
           </button>
+          <div data-testid="fieldInvalid">
+            {isGiftCardFieldInvalid.toString()}
+          </div>
           <div data-testid="validateText">{validation}</div>
           <button data-testid="buttonUpdate" onClick={updateGiftCardFunction}>
             update
@@ -128,14 +142,20 @@ describe('Provider', () => {
     })
 
     const validateText = getByTestId('validateText').textContent
+    const invalidField = getByTestId('fieldInvalid').textContent
 
     expect(validateText).not.toBeNull()
+    expect(invalidField).toBe('true')
   })
 
   it('should test function validateIfAllFieldsIsComplete failed if I send a addValueGiftCard > credit', async () => {
     const TestComponent = () => {
-      const { validation, updateGiftCardFunction, setAddValueGiftCard } =
-        React.useContext(ContextStore)
+      const {
+        validation,
+        updateGiftCardFunction,
+        setAddValueGiftCard,
+        isGiftCardFieldInvalid,
+      } = React.useContext(ContextStore)
 
       return (
         <>
@@ -145,6 +165,9 @@ describe('Provider', () => {
           >
             add
           </button>
+          <div data-testid="fieldInvalid">
+            {isGiftCardFieldInvalid.toString()}
+          </div>
           <div data-testid="validateText">{validation}</div>
           <button data-testid="buttonUpdate" onClick={updateGiftCardFunction}>
             update
@@ -168,14 +191,20 @@ describe('Provider', () => {
     })
 
     const validateText = getByTestId('validateText').textContent
+    const invalidField = getByTestId('fieldInvalid').textContent
 
     expect(validateText).not.toBeNull()
+    expect(invalidField).toBe('true')
   })
 
   it('should test function validateIfAllFieldsIsComplete sucess if I send a addValueGiftCard valid', async () => {
     const TestComponent = () => {
-      const { updateGiftCardFunction, setAddValueGiftCard, validation } =
-        React.useContext(ContextStore)
+      const {
+        updateGiftCardFunction,
+        setAddValueGiftCard,
+        validation,
+        isGiftCardFieldInvalid,
+      } = React.useContext(ContextStore)
 
       return (
         <>
@@ -185,6 +214,9 @@ describe('Provider', () => {
           >
             add
           </button>
+          <div data-testid="fieldInvalid">
+            {isGiftCardFieldInvalid.toString()}
+          </div>
           <div data-testid="validation">{validation}</div>
           <button data-testid="buttonUpdate" onClick={updateGiftCardFunction}>
             update
@@ -208,18 +240,25 @@ describe('Provider', () => {
     })
 
     const validationValue = getByTestId('validation').textContent
+    const invalidField = getByTestId('fieldInvalid').textContent
 
     await act(async () => {
       await wait(0)
     })
 
     expect(validationValue).toStrictEqual('')
+    expect(invalidField).toBe('false')
   })
 
   it('should test function update if I send a addValueGiftCard valid and the return of mutation is a sucess', async () => {
     const TestComponent = () => {
-      const { showAlert, updateGiftCardFunction, setAddValueGiftCard } =
-        React.useContext(ContextStore)
+      const {
+        showAlert,
+        updateGiftCardFunction,
+        setAddValueGiftCard,
+        rescue,
+        addValueGiftCard,
+      } = React.useContext(ContextStore)
 
       return (
         <>
@@ -230,6 +269,8 @@ describe('Provider', () => {
             add
           </button>
           <div data-testid="alert">{showAlert}</div>
+          <div data-testid="rescue">{rescue}</div>
+          <div data-testid="valueGiftCard">{addValueGiftCard}</div>
           <button data-testid="buttonUpdate" onClick={updateGiftCardFunction}>
             update
           </button>
@@ -252,11 +293,15 @@ describe('Provider', () => {
     })
 
     const alertValue = getByTestId('alert')
+    const rescueValue = getByTestId('rescue')
+    const valueGiftCardValue = getByTestId('valueGiftCard')
 
     waitFor(() => {
       expect(alertValue).toHaveTextContent(
         ShowAlertOptions.alertSave.toString()
       )
+      expect(rescueValue).toBe('5')
+      expect(valueGiftCardValue).toBe('0')
     })
   })
 
