@@ -77,19 +77,24 @@ const InputButtonArea: FC = () => {
                   }`}
                 >
                   <IntlCurrencyInput
-                    defaultValue={addValueGiftCard}
+                    defaultValue={parseFloat(addValueGiftCard as string)}
                     currency="BRL"
                     config={currencyConfig}
                     onFocus={handleFocus}
                     onBlur={handleBlur}
-                    class="vtex-styleguide-9-x-input ma0 border-box vtex-styleguide-9-x-hideDecorators vtex-styleguide-9-x-noAppearance br2 bl-0 br--right   w-100 bn outline-0 bg-base c-on-base b--muted-4 hover-b--muted-3 t-body pr5 "
+                    className="vtex-styleguide-9-x-input ma0 border-box vtex-styleguide-9-x-hideDecorators vtex-styleguide-9-x-noAppearance br2 bl-0 br--right   w-100 bn outline-0 bg-base c-on-base b--muted-4 hover-b--muted-3 t-body pr5 "
                     disabled={loading}
+                    data-testid="intl-currency-input"
                   />
                 </div>
               </label>
             </div>
             <div className="ml2 mt2">
-              <Button onClick={submitFunctionValueButton} isLoading={loading}>
+              <Button
+                onClick={submitFunctionValueButton}
+                isLoading={loading}
+                testId="button-input-currency"
+              >
                 {intl.formatMessage(input.valueButton)}
               </Button>
             </div>
@@ -114,12 +119,14 @@ const InputButtonArea: FC = () => {
                 placeholder={intl.formatMessage(input.codePlaceholder)}
                 readOnly={true}
                 size="large"
+                testId="input-test-id"
               />
             </div>
             <div className="ml2 mt2">
               <Button
                 onClick={submitFunctionCodeButton}
                 isLoading={loadingCode}
+                testId="button-input"
               >
                 {intl.formatMessage(input.codeButton)}
               </Button>
