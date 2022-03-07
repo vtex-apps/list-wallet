@@ -39,3 +39,8 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 - Update tests
+
+
+### Changed
+- Add error when the user try to copy an undefined code
+- Add test for this modification
