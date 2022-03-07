@@ -1,19 +1,20 @@
+import { wait } from '@apollo/react-testing'
 import { render } from '@vtex/test-tools/react'
 import React from 'react'
 
-import AlertArea from '../Components/alertArea'
+import ToastArea from '../Components/toastArea'
 import { ContextStore } from '../hooks/useStore'
 import { ShowAlertOptions } from '../utils/showAlertOptions'
 // eslint-disable-next-line jest/no-mocks-import
 import { values } from '../__mocks__/values'
 
-describe('Alert Area', () => {
+describe('Toast Area', () => {
   it('should render success Alert if showAlert = 0', async () => {
     const showAlert = { showAlert: ShowAlertOptions.notShow }
 
     const { container } = render(
       <ContextStore.Provider value={{ ...values, ...showAlert }}>
-        <AlertArea />
+        <ToastArea />
       </ContextStore.Provider>
     )
 
@@ -25,11 +26,11 @@ describe('Alert Area', () => {
 
     const { container } = render(
       <ContextStore.Provider value={{ ...values, ...showAlert }}>
-        <AlertArea />
+        <ToastArea />
       </ContextStore.Provider>
     )
 
-    expect(container?.firstChild).toHaveClass('bg-success--faded')
+    expect(container?.firstChild?.firstChild).toHaveClass('bg-color-sucess')
   })
 
   it('should render error Alert if showAlert = 2', async () => {
@@ -37,11 +38,11 @@ describe('Alert Area', () => {
 
     const { container } = render(
       <ContextStore.Provider value={{ ...values, ...showAlert }}>
-        <AlertArea />
+        <ToastArea />
       </ContextStore.Provider>
     )
 
-    expect(container?.firstChild).toHaveClass('bg-danger--faded')
+    expect(container?.firstChild?.firstChild).toHaveClass('bg-color-error')
   })
 
   it('should render success Alert if showAlert = 3', async () => {
@@ -49,11 +50,11 @@ describe('Alert Area', () => {
 
     const { container } = render(
       <ContextStore.Provider value={{ ...values, ...showAlert }}>
-        <AlertArea />
+        <ToastArea />
       </ContextStore.Provider>
     )
 
-    expect(container?.firstChild).toHaveClass('bg-success--faded')
+    expect(container?.firstChild?.firstChild).toHaveClass('bg-color-sucess')
   })
 
   it('should render error Alert if showAlert = 4', async () => {
@@ -61,10 +62,31 @@ describe('Alert Area', () => {
 
     const { container } = render(
       <ContextStore.Provider value={{ ...values, ...showAlert }}>
-        <AlertArea />
+        <ToastArea />
       </ContextStore.Provider>
     )
 
-    expect(container?.firstChild).toHaveClass('bg-danger--faded')
+    expect(container?.firstChild?.firstChild).toHaveClass('bg-color-error')
+  })
+
+  it('should set ShowAlertOptions to notShow when finalize the timer', async () => {
+    setTimeout(async () => {
+      jest.useFakeTimers()
+
+      const showAlert = { showAlert: ShowAlertOptions.alertCopyError }
+
+      const { container } = render(
+        <ContextStore.Provider value={{ ...values, ...showAlert }}>
+          <ToastArea />
+        </ContextStore.Provider>
+      )
+
+      expect(container?.firstChild?.firstChild).toHaveClass('bg-color-error')
+
+      jest.advanceTimersByTime(1)
+
+      await wait(0)
+      expect(container.firstChild).toBeNull()
+    }, 5000)
   })
 })
