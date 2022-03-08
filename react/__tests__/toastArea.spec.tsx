@@ -14,7 +14,7 @@ describe('Toast Area', () => {
 
     const { container } = render(
       <ContextStore.Provider value={{ ...values, ...showAlert }}>
-        <ToastArea />
+        <ToastArea DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS={3000} />
       </ContextStore.Provider>
     )
 
@@ -26,7 +26,7 @@ describe('Toast Area', () => {
 
     const { container } = render(
       <ContextStore.Provider value={{ ...values, ...showAlert }}>
-        <ToastArea />
+        <ToastArea DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS={3000} />
       </ContextStore.Provider>
     )
 
@@ -38,7 +38,7 @@ describe('Toast Area', () => {
 
     const { container } = render(
       <ContextStore.Provider value={{ ...values, ...showAlert }}>
-        <ToastArea />
+        <ToastArea DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS={3000} />
       </ContextStore.Provider>
     )
 
@@ -50,7 +50,7 @@ describe('Toast Area', () => {
 
     const { container } = render(
       <ContextStore.Provider value={{ ...values, ...showAlert }}>
-        <ToastArea />
+        <ToastArea DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS={3000} />
       </ContextStore.Provider>
     )
 
@@ -62,7 +62,7 @@ describe('Toast Area', () => {
 
     const { container } = render(
       <ContextStore.Provider value={{ ...values, ...showAlert }}>
-        <ToastArea />
+        <ToastArea DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS={3000} />
       </ContextStore.Provider>
     )
 
@@ -70,23 +70,17 @@ describe('Toast Area', () => {
   })
 
   it('should set ShowAlertOptions to notShow when finalize the timer', async () => {
-    setTimeout(async () => {
-      jest.useFakeTimers()
+    const showAlert = { showAlert: ShowAlertOptions.alertCopyError }
 
-      const showAlert = { showAlert: ShowAlertOptions.alertCopyError }
+    const { container } = render(
+      <ContextStore.Provider value={{ ...values, ...showAlert }}>
+        <ToastArea DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS={1} />
+      </ContextStore.Provider>
+    )
 
-      const { container } = render(
-        <ContextStore.Provider value={{ ...values, ...showAlert }}>
-          <ToastArea />
-        </ContextStore.Provider>
-      )
+    expect(container?.firstChild?.firstChild).toHaveClass('bg-color-error')
 
-      expect(container?.firstChild?.firstChild).toHaveClass('bg-color-error')
-
-      jest.advanceTimersByTime(1)
-
-      await wait(0)
-      expect(container.firstChild).toBeNull()
-    }, 5000)
+    await wait(1)
+    expect(values.setShowAlert).toHaveBeenCalled()
   })
 })

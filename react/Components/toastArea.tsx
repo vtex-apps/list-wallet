@@ -9,9 +9,13 @@ import '../styles.global.css'
 import { ShowAlertOptions } from '../utils/showAlertOptions'
 import { toast } from '../utils/definedMessages'
 
-const ToastArea: FC = () => {
-  const DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS = 1
+interface Props {
+  DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS: number
+}
 
+const ToastArea: FC<Props> = ({
+  DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS = 3000,
+}) => {
   const intl = useIntl()
 
   const { showAlert, setShowAlert, rescue, code } = useStore()
