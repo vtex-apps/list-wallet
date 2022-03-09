@@ -14,7 +14,7 @@ describe('Toast Area', () => {
 
     const { container } = render(
       <ContextStore.Provider value={{ ...values, ...showAlert }}>
-        <ToastArea DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS={3000} />
+        <ToastArea />
       </ContextStore.Provider>
     )
 
@@ -26,7 +26,7 @@ describe('Toast Area', () => {
 
     const { container } = render(
       <ContextStore.Provider value={{ ...values, ...showAlert }}>
-        <ToastArea DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS={3000} />
+        <ToastArea />
       </ContextStore.Provider>
     )
 
@@ -38,7 +38,7 @@ describe('Toast Area', () => {
 
     const { container } = render(
       <ContextStore.Provider value={{ ...values, ...showAlert }}>
-        <ToastArea DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS={3000} />
+        <ToastArea />
       </ContextStore.Provider>
     )
 
@@ -50,7 +50,7 @@ describe('Toast Area', () => {
 
     const { container } = render(
       <ContextStore.Provider value={{ ...values, ...showAlert }}>
-        <ToastArea DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS={3000} />
+        <ToastArea />
       </ContextStore.Provider>
     )
 
@@ -62,7 +62,7 @@ describe('Toast Area', () => {
 
     const { container } = render(
       <ContextStore.Provider value={{ ...values, ...showAlert }}>
-        <ToastArea DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS={3000} />
+        <ToastArea />
       </ContextStore.Provider>
     )
 
@@ -74,7 +74,7 @@ describe('Toast Area', () => {
 
     const { container } = render(
       <ContextStore.Provider value={{ ...values, ...showAlert }}>
-        <ToastArea DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS={1} />
+        <ToastArea duration={1} />
       </ContextStore.Provider>
     )
 

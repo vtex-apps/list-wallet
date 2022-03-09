@@ -10,12 +10,10 @@ import { ShowAlertOptions } from '../utils/showAlertOptions'
 import { toast } from '../utils/definedMessages'
 
 interface Props {
-  DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS: number
+  duration?: number
 }
 
-const ToastArea: FC<Props> = ({
-  DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS = 3000,
-}) => {
+const ToastArea: FC<Props> = ({ duration = 3000 }) => {
   const intl = useIntl()
 
   const { showAlert, setShowAlert, rescue, code } = useStore()
@@ -85,10 +83,7 @@ const ToastArea: FC<Props> = ({
   }
 
   useEffect(() => {
-    const interval = setInterval(
-      changeValueShowAlert,
-      DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS
-    )
+    const interval = setInterval(changeValueShowAlert, duration)
 
     return () => {
       clearInterval(interval)

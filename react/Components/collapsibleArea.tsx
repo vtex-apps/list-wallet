@@ -32,7 +32,7 @@ const CollapsibleArea: FC = () => {
           <TitlesArea />
           <InputButtonArea />
         </Collapsible>
-        <ToastArea DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS={3000} />
+        <ToastArea />
       </div>
     </div>
   )
