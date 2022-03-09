@@ -6,12 +6,6 @@ import InputButtonArea from '../Components/inputButtonArea'
 import { ContextStore } from '../hooks/useStore'
 import { values } from '../__mocks__/values'
 
-Object.defineProperty(navigator, 'clipboard', {
-  value: {
-    writeText: () => {},
-  },
-})
-
 describe('Input Button Area', () => {
   it('should render the first InputButtonArea', async () => {
     const { getByTestId } = render(
@@ -20,7 +14,7 @@ describe('Input Button Area', () => {
       </ContextStore.Provider>
     )
 
-    const input = getByTestId('input-button-test')
+    const input = getByTestId('intl-currency-input')
 
     expect(input).toContainHTML('input')
   })
@@ -31,68 +25,65 @@ describe('Input Button Area', () => {
       </ContextStore.Provider>
     )
 
-    const input = getByTestId('input-button-test-readOnly')
+    const input = getByTestId('input-test-id')
 
     expect(input).toContainHTML('input')
   })
 
-  it('should change value', async () => {
+  it('should call onBlur value', async () => {
     const { getByTestId } = render(
       <ContextStore.Provider value={values}>
         <InputButtonArea />
       </ContextStore.Provider>
     )
 
-    const changeValue = { target: { value: '12.2' } }
+    const inputCurrency = getByTestId('intl-currency-input') as HTMLInputElement
 
-    const input = getByTestId('input-button-test').querySelector('input')
+    fireEvent.blur(inputCurrency as HTMLInputElement)
 
-    fireEvent.change(input as HTMLInputElement, changeValue)
-
-    expect(values.setAddValueGiftCard).toHaveBeenCalledWith('12.2')
+    expect(values.setAddValueGiftCard).toHaveBeenCalled()
   })
 
-  it('should change value if name = name', async () => {
+  it('should call onFocus', async () => {
     const { getByTestId } = render(
       <ContextStore.Provider value={values}>
         <InputButtonArea />
       </ContextStore.Provider>
     )
 
-    const changeValue = { target: { value: '12.2' } }
+    const inputCurrency = getByTestId('intl-currency-input') as HTMLInputElement
 
-    const input = getByTestId('input-button-test').querySelector('input')
+    fireEvent.focus(inputCurrency as HTMLInputElement)
 
-    fireEvent.change(input as HTMLInputElement, changeValue)
-
-    expect(values.setAddValueGiftCard).toHaveBeenCalledWith('12.2')
+    expect(values.setValidation).toHaveBeenCalled()
+    expect(values.setIsGiftCardFieldInvalid).toHaveBeenCalled()
   })
 
-  it('should click on first submit', async () => {
-    const { container } = render(
+  it('should click on first button', async () => {
+    const { getByTestId } = render(
       <ContextStore.Provider value={values}>
         <InputButtonArea />
       </ContextStore.Provider>
     )
 
-    const buttonPointer = container.getElementsByClassName('pointer')
+    const buttonPointer = getByTestId('button-input-currency')
 
-    fireEvent.click(buttonPointer[0] as HTMLButtonElement)
+    fireEvent.click(buttonPointer as HTMLButtonElement)
 
     expect(values.updateGiftCardFunction).toHaveBeenCalled()
   })
 
-  it('should click on second submit', async () => {
-    const { container } = render(
+  it('should click on second button', async () => {
+    const { getByTestId } = render(
       <ContextStore.Provider value={values}>
         <InputButtonArea />
       </ContextStore.Provider>
     )
 
-    const buttonPointer = container.getElementsByClassName('pointer')
+    const buttonPointer = getByTestId('button-input')
 
-    fireEvent.click(buttonPointer[2])
+    fireEvent.click(buttonPointer)
 
-    expect(values.updateGiftCardFunction).toHaveBeenCalled()
+    expect(values.copyCode).toHaveBeenCalled()
   })
 })

@@ -1,3 +1,4 @@
+import type { FC } from 'react'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
@@ -8,9 +9,11 @@ import '../styles.global.css'
 import { ShowAlertOptions } from '../utils/showAlertOptions'
 import { toast } from '../utils/definedMessages'
 
-const ToastArea = () => {
-  const DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS = 3000
+interface Props {
+  duration?: number
+}
 
+const ToastArea: FC<Props> = ({ duration = 3000 }) => {
   const intl = useIntl()
 
   const { showAlert, setShowAlert, rescue, code } = useStore()
@@ -80,10 +83,7 @@ const ToastArea = () => {
   }
 
   useEffect(() => {
-    const interval = setInterval(
-      changeValueShowAlert,
-      DEFAULT_ALERT_AUTOCLOSE_TIMEOUT_MS
-    )
+    const interval = setInterval(changeValueShowAlert, duration)
 
     return () => {
       clearInterval(interval)
