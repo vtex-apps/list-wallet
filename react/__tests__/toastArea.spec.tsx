@@ -86,13 +86,13 @@ describe('Toast Area', () => {
 
     const { container } = render(
       <ContextStore.Provider value={{ ...values, ...showAlert }}>
-        <ToastArea />
+        <ToastArea duration={1} />
       </ContextStore.Provider>
     )
 
     expect(container?.firstChild?.firstChild).toHaveClass('bg-color-error')
 
-    await wait(3000)
+    await wait(1)
 
     expect(values.setShowAlert).toHaveBeenCalled()
   })
