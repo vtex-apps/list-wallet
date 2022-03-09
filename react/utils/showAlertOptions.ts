@@ -4,4 +4,5 @@ export const enum ShowAlertOptions {
   alertError = 2,
   alertCopySuccess = 3,
   alertCopyError = 4,
+  alertWithoutCode = 5,
 }

@@ -72,6 +72,15 @@ const ToastArea: FC<Props> = ({ duration = 3000 }) => {
         </p>
       ),
     },
+    5: {
+      className: 'notification bg-color-error toast bottom-left',
+      imageSrc: error,
+      message: (
+        <p className="notification-middle">
+          {intl.formatMessage(toast.withoutCode)}
+        </p>
+      ),
+    },
   }
 
   const alertInfo = dictionary[showAlert]

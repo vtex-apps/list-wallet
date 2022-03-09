@@ -50,7 +50,7 @@ const ProviderStore: FC = (props) => {
   useEffect(() => {
     const redemptionCode = dataRedemptionCode?.getRouteRedemptionCode
 
-    if (redemptionCode !== 'failed') {
+    if (redemptionCode !== 'failed' && redemptionCode !== undefined) {
       setCode(redemptionCode)
     }
   }, [dataRedemptionCode])
@@ -128,6 +128,13 @@ const ProviderStore: FC = (props) => {
   function copyCode() {
     setLoadingCode(true)
     setShowAlert(ShowAlertOptions.notShow)
+
+    if (code === intl.formatMessage(provider.withoutCode)) {
+      setShowAlert(ShowAlertOptions.alertWithoutCode)
+      setLoadingCode(false)
+
+      return
+    }
 
     if (!navigator.clipboard) {
       setShowAlert(ShowAlertOptions.alertCopyError)

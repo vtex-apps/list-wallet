@@ -198,3 +198,59 @@ export const mocksUpdateReturnError = [
     },
   },
 ]
+
+export const mocksErrorCode = [
+  {
+    request: {
+      query: getRouteRedemptionCode,
+    },
+    result: {
+      data: {
+        getRouteRedemptionCode: 'failed',
+      },
+    },
+  },
+  {
+    request: {
+      query: getValueGiftCard,
+    },
+    result: {
+      data: {
+        getValueGiftCard: 10,
+      },
+    },
+  },
+  {
+    request: {
+      query: getValueAlreadyInGiftCard,
+    },
+    result: {
+      data: {
+        getValueAlreadyInGiftCard: 5,
+      },
+    },
+  },
+  {
+    request: {
+      query: updateGiftCard,
+      variables: {
+        value: 5,
+      },
+    },
+    result: {
+      data: {
+        updateGiftCard: 'success',
+      },
+    },
+  },
+  {
+    request: {
+      query: getValueTotalList,
+    },
+    result: {
+      data: {
+        getValueTotalList: 1000,
+      },
+    },
+  },
+]

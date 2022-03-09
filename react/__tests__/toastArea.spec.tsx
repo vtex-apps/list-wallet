@@ -69,6 +69,18 @@ describe('Toast Area', () => {
     expect(container?.firstChild?.firstChild).toHaveClass('bg-color-error')
   })
 
+  it('should render error Alert if showAlert = 5', async () => {
+    const showAlert = { showAlert: ShowAlertOptions.alertWithoutCode }
+
+    const { container } = render(
+      <ContextStore.Provider value={{ ...values, ...showAlert }}>
+        <ToastArea />
+      </ContextStore.Provider>
+    )
+
+    expect(container?.firstChild?.firstChild).toHaveClass('bg-color-error')
+  })
+
   it('should set ShowAlertOptions to notShow when finalize the timer', async () => {
     const showAlert = { showAlert: ShowAlertOptions.alertCopyError }
 
@@ -81,6 +93,7 @@ describe('Toast Area', () => {
     expect(container?.firstChild?.firstChild).toHaveClass('bg-color-error')
 
     await wait(1)
+
     expect(values.setShowAlert).toHaveBeenCalled()
   })
 })
