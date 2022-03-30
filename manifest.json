@@ -1,7 +1,7 @@
 {
-  "vendor": "vtexbr",
+  "vendor": "vtex",
   "name": "list-wallet",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "title": "List Wallet",
   "description": "App to manage portfolio values from the list app",
   "builders": {
@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "vtex.styleguide": "9.x",
-    "vtexbr.gift-card-list": "0.x"
+    "vtex.gift-card-list": "1.x"
   },
   "policies": [],
   "$schema": "https://raw.githubusercontent.com/vtex/node-vtex-api/master/gen/manifest.schema"
