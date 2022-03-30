@@ -12,7 +12,7 @@ The Wallet List app is a store-front application that allows a list owner to add
 To install the application on the store and thus be able to manage your wallet, you need to run the following command in your terminal
 
 ```json
-  vtex install vtex.list-wallet@0.x
+  vtex install vtex.list-wallet@1.x
 ```
 Once the app is installed, you can add the app to your store theme using the line
 
@@ -30,8 +30,3 @@ In the store, the list owner can check the available credit which can be added t
 
 In addition, it will be possible to make redemptions in the "Generate Redemption" field, as long as the input value is within the range of credit at hand for the redemption. Finally, the gift card code will also be available and can be copied by clicking on the "Copy Code" button.
 
-
-
-**Upcoming documentation:**
-
- - [Feature/testes corrections acct](https://github.com/vtex-apps/list-wallet/pull/9)
