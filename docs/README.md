@@ -12,7 +12,7 @@ The Wallet List app is a store-front application that allows a list owner to add
 To install the application on the store and thus be able to manage your wallet, you need to run the following command in your terminal
 
 ```json
-  vtex install vtexbr.list-wallet@0.x
+  vtex install vtex.list-wallet@0.x
 ```
 Once the app is installed, you can add the app to your store theme using the line
 
