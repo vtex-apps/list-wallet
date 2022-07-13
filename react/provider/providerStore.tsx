@@ -25,17 +25,42 @@ const ProviderStore: FC = (props) => {
   const [loading, setLoading] = useState(false)
   const [loadingCode, setLoadingCode] = useState(false)
   const [isGiftCardFieldInvalid, setIsGiftCardFieldInvalid] = useState(false)
+  const [loadingGiftCard, setLoadingGiftCard] = useState(false)
+  const [loadingRedemptionCode, setLoadingRedemptionCode] = useState(false)
+  const [loadingCredit, setLoadingCredit] = useState(false)
 
   const [updateGiftCardMutation] = useMutation(updateGiftCard)
   const { data: dataValueTotalList } = useQuery(getValueTotalList)
-  const { data: dataRedemptionCode } = useQuery(getRouteRedemptionCode)
-  const { data: dataGetValueGiftCard, refetch: refetchGetValueGiftCard } =
-    useQuery(getValueGiftCard)
+
+  const {
+    data: dataRedemptionCode,
+    refetch: refetchGetRedemptionCode,
+    loading: loadingRedemptionCodeRoute,
+  } = useQuery(getRouteRedemptionCode)
+
+  const {
+    data: dataGetValueGiftCard,
+    refetch: refetchGetValueGiftCard,
+    loading: loadingValueGiftCard,
+  } = useQuery(getValueGiftCard)
 
   const {
     data: dataGetValueAlreadyInGiftCard,
     refetch: refetchValueAlreadyInGiftCard,
+    loading: loadingValueAlreadyInGiftCard,
   } = useQuery(getValueAlreadyInGiftCard)
+
+  useEffect(() => {
+    setLoadingGiftCard(loadingValueGiftCard)
+  }, [loadingValueGiftCard])
+
+  useEffect(() => {
+    setLoadingCredit(loadingValueAlreadyInGiftCard)
+  }, [loadingValueAlreadyInGiftCard])
+
+  useEffect(() => {
+    setLoadingRedemptionCode(loadingRedemptionCodeRoute)
+  }, [loadingRedemptionCodeRoute])
 
   useEffect(() => {
     const giftCard = dataGetValueAlreadyInGiftCard?.getValueAlreadyInGiftCard
@@ -114,6 +139,10 @@ const ProviderStore: FC = (props) => {
         setShowAlert(ShowAlertOptions.alertSave)
         refetchGetValueGiftCard()
         refetchValueAlreadyInGiftCard()
+        if (code === intl.formatMessage(provider.withoutCode)) {
+          refetchGetRedemptionCode()
+        }
+
         setAddValueGiftCard('0')
       } else {
         setShowAlert(ShowAlertOptions.alertError)
@@ -170,6 +199,9 @@ const ProviderStore: FC = (props) => {
         rescue,
         isGiftCardFieldInvalid,
         setIsGiftCardFieldInvalid,
+        loadingGiftCard,
+        loadingCredit,
+        loadingRedemptionCode,
       }}
     >
       {props.children}
