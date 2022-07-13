@@ -1,7 +1,7 @@
 {
   "vendor": "vtex",
   "name": "list-wallet",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "title": "List Wallet",
   "description": "App to manage portfolio values from the list app",
   "builders": {
