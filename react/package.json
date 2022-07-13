@@ -24,6 +24,10 @@
     "apollo-cache-inmemory": "^1.6.5",
     "graphql": "^14.6.0",
     "react-intl-currency-input": "^0.2.6",
-    "typescript": "3.9.7"
+    "typescript": "3.9.7",
+    "vtex.gift-card-list": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.gift-card-list@1.14.0/public/@types/vtex.gift-card-list",
+    "vtex.list-wallet": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.list-wallet@1.0.1/public/@types/vtex.list-wallet",
+    "vtex.render-runtime": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.132.4/public/@types/vtex.render-runtime",
+    "vtex.styleguide": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.146.1/public/@types/vtex.styleguide"
   }
 }

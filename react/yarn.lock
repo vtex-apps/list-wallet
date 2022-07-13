@@ -5977,6 +5977,22 @@ vtex-tachyons@^3.2.0:
   resolved "https://registry.yarnpkg.com/vtex-tachyons/-/vtex-tachyons-3.2.2.tgz#e9e39d939778ef7d80a92c476cecf7417f79a6e8"
   integrity sha512-4M53uuvV+2XEjplVYiPgpBuaI5dtGksVgz/20NNjbZkXklJM7Lwgod/hOoh3PtIn36+95zZVVgXYfs3e6EU8YA==
 
+"vtex.gift-card-list@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.gift-card-list@1.14.0/public/@types/vtex.gift-card-list":
+  version "1.14.0"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.gift-card-list@1.14.0/public/@types/vtex.gift-card-list#7a2c6f7ddd94be082ecb3ae1f7a1af6998181111"
+
+"vtex.list-wallet@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.list-wallet@1.0.1/public/@types/vtex.list-wallet":
+  version "1.0.1"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.list-wallet@1.0.1/public/@types/vtex.list-wallet#12b208d2cd152dbfafd515f050a13e319f523f53"
+
+"vtex.render-runtime@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.132.4/public/@types/vtex.render-runtime":
+  version "8.132.4"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.132.4/public/@types/vtex.render-runtime#66bb41bd4d342e37c9d85172aad5f7eefebfb6dc"
+
+"vtex.styleguide@http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.146.1/public/@types/vtex.styleguide":
+  version "9.146.1"
+  resolved "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.styleguide@9.146.1/public/@types/vtex.styleguide#66db40ca1b78ad77ce4beedabecee320e1ef2ead"
+
 w3c-hr-time@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/w3c-hr-time/-/w3c-hr-time-1.0.2.tgz#0a89cdf5cc15822df9c360543676963e0cc308cd"
