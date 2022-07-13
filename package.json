@@ -1,5 +1,4 @@
 {
-  "version": "0.0.0",
   "name": "CHANGE_ME",
   "private": true,
   "license": "UNLICENSED",
@@ -9,10 +8,6 @@
     "lint:locales": "intl-equalizer",
     "test": "vtex-test-tools test"
   },
-  "intl-equalizer": {
-    "referenceLocale": "en",
-    "localeDirectory": "messages"
-  },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
@@ -21,6 +16,9 @@
   "lint-staged": {
     "*.{ts,js,tsx,jsx}": [
       "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,graphql,gql}": [
       "prettier --write"
     ],
     "*.json": [
@@ -43,5 +41,10 @@
     "@vtex/danger": "^0.2.7",
     "graphql": "^14.6.0",
     "@vtex/test-tools": "^3.4.3"
+  },
+  "version": "0.0.0",
+  "intl-equalizer": {
+    "referenceLocale": "en",
+    "localeDirectory": "messages"
   }
 }
