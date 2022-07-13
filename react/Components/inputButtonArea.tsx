@@ -23,6 +23,7 @@ const InputButtonArea: FC = () => {
     addValueGiftCard,
     isGiftCardFieldInvalid,
     setIsGiftCardFieldInvalid,
+    loadingRedemptionCode,
   } = useStore()
 
   function submitFunctionValueButton(e: React.MouseEvent<HTMLButtonElement>) {
@@ -115,7 +116,11 @@ const InputButtonArea: FC = () => {
           <div className="desktop-or-mobile rescue">
             <div className="lh-copy w-100">
               <Input
-                value={code}
+                value={
+                  loadingRedemptionCode
+                    ? intl.formatMessage(input.loading)
+                    : code
+                }
                 placeholder={intl.formatMessage(input.codePlaceholder)}
                 readOnly={true}
                 size="large"
