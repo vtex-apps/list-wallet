@@ -135,20 +135,43 @@ const ProviderStore: FC = (props) => {
       })
 
       if (data.updateGiftCard === 'success') {
-        setRescue(parseFloat(addValueGiftCard as string))
-        setShowAlert(ShowAlertOptions.alertSave)
-        refetchGetValueGiftCard()
-        refetchValueAlreadyInGiftCard()
         if (code === intl.formatMessage(provider.withoutCode)) {
-          refetchGetRedemptionCode()
+          const interval = setInterval(async () => {
+            const updateGetRedemptionCode = await refetchGetRedemptionCode()
+            const updateGetValueGiftCard = await refetchGetValueGiftCard()
+            const updateValueAlreadyInGiftCard =
+              await refetchValueAlreadyInGiftCard()
+
+            if (
+              updateGetRedemptionCode?.data?.getRouteRedemptionCode !==
+                'failed' &&
+              updateGetValueGiftCard?.data?.getValueGiftCard > 0 &&
+              updateValueAlreadyInGiftCard?.data?.getValueAlreadyInGiftCard > 0
+            ) {
+              clearInterval(interval)
+
+              setRescue(parseFloat(addValueGiftCard as string))
+              setShowAlert(ShowAlertOptions.alertSave)
+              setAddValueGiftCard('0')
+              setLoading(false)
+            }
+          }, 2000)
+
+          return
         }
 
+        refetchGetValueGiftCard()
+        refetchValueAlreadyInGiftCard()
+        setRescue(parseFloat(addValueGiftCard as string))
+        setShowAlert(ShowAlertOptions.alertSave)
         setAddValueGiftCard('0')
       } else {
         setShowAlert(ShowAlertOptions.alertError)
       }
 
       setLoading(false)
+
+      return
     }
 
     setLoading(false)
