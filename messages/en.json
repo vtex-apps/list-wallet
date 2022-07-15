@@ -10,6 +10,7 @@
   "input.code.label": "Código do vale presente",
   "input.code.placeholder": "Código",
   "input.code.button": "COPIAR CÓDIGO",
+  "input.code.loading": "Carregando...",
   "collapsible.title": "Minha carteira",
   "provider.without.code": "Código inexistente",
   "provider.missing.value": "Insira um valor para resgatar",

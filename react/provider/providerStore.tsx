@@ -25,17 +25,42 @@ const ProviderStore: FC = (props) => {
   const [loading, setLoading] = useState(false)
   const [loadingCode, setLoadingCode] = useState(false)
   const [isGiftCardFieldInvalid, setIsGiftCardFieldInvalid] = useState(false)
+  const [loadingGiftCard, setLoadingGiftCard] = useState(false)
+  const [loadingRedemptionCode, setLoadingRedemptionCode] = useState(false)
+  const [loadingCredit, setLoadingCredit] = useState(false)
 
   const [updateGiftCardMutation] = useMutation(updateGiftCard)
   const { data: dataValueTotalList } = useQuery(getValueTotalList)
-  const { data: dataRedemptionCode } = useQuery(getRouteRedemptionCode)
-  const { data: dataGetValueGiftCard, refetch: refetchGetValueGiftCard } =
-    useQuery(getValueGiftCard)
+
+  const {
+    data: dataRedemptionCode,
+    refetch: refetchGetRedemptionCode,
+    loading: loadingRedemptionCodeRoute,
+  } = useQuery(getRouteRedemptionCode)
+
+  const {
+    data: dataGetValueGiftCard,
+    refetch: refetchGetValueGiftCard,
+    loading: loadingValueGiftCard,
+  } = useQuery(getValueGiftCard)
 
   const {
     data: dataGetValueAlreadyInGiftCard,
     refetch: refetchValueAlreadyInGiftCard,
+    loading: loadingValueAlreadyInGiftCard,
   } = useQuery(getValueAlreadyInGiftCard)
+
+  useEffect(() => {
+    setLoadingGiftCard(loadingValueGiftCard)
+  }, [loadingValueGiftCard])
+
+  useEffect(() => {
+    setLoadingCredit(loadingValueAlreadyInGiftCard)
+  }, [loadingValueAlreadyInGiftCard])
+
+  useEffect(() => {
+    setLoadingRedemptionCode(loadingRedemptionCodeRoute)
+  }, [loadingRedemptionCodeRoute])
 
   useEffect(() => {
     const giftCard = dataGetValueAlreadyInGiftCard?.getValueAlreadyInGiftCard
@@ -110,16 +135,43 @@ const ProviderStore: FC = (props) => {
       })
 
       if (data.updateGiftCard === 'success') {
-        setRescue(parseFloat(addValueGiftCard as string))
-        setShowAlert(ShowAlertOptions.alertSave)
+        if (code === intl.formatMessage(provider.withoutCode)) {
+          const interval = setInterval(async () => {
+            const updateGetRedemptionCode = await refetchGetRedemptionCode()
+            const updateGetValueGiftCard = await refetchGetValueGiftCard()
+            const updateValueAlreadyInGiftCard =
+              await refetchValueAlreadyInGiftCard()
+
+            if (
+              updateGetRedemptionCode?.data?.getRouteRedemptionCode !==
+                'failed' &&
+              updateGetValueGiftCard?.data?.getValueGiftCard > 0 &&
+              updateValueAlreadyInGiftCard?.data?.getValueAlreadyInGiftCard > 0
+            ) {
+              clearInterval(interval)
+
+              setRescue(parseFloat(addValueGiftCard as string))
+              setShowAlert(ShowAlertOptions.alertSave)
+              setAddValueGiftCard('0')
+              setLoading(false)
+            }
+          }, 2000)
+
+          return
+        }
+
         refetchGetValueGiftCard()
         refetchValueAlreadyInGiftCard()
+        setRescue(parseFloat(addValueGiftCard as string))
+        setShowAlert(ShowAlertOptions.alertSave)
         setAddValueGiftCard('0')
       } else {
         setShowAlert(ShowAlertOptions.alertError)
       }
 
       setLoading(false)
+
+      return
     }
 
     setLoading(false)
@@ -170,6 +222,9 @@ const ProviderStore: FC = (props) => {
         rescue,
         isGiftCardFieldInvalid,
         setIsGiftCardFieldInvalid,
+        loadingGiftCard,
+        loadingCredit,
+        loadingRedemptionCode,
       }}
     >
       {props.children}

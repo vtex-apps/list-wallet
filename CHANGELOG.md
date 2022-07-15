@@ -4,24 +4,34 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- Loading logic of the first rescue
+
 ## [1.0.2] - 2022-07-13
 
 ### Added
+
 - Initial store draft
 
 ### Added
+
 - Initial store setup
 
 ### Added
+
 - Functions to screen
 
 ### Changed
+
 - Change the style of store app
 
 ### Added
+
 - Tests
 
-### Changed 
+### Changed
+
 - Correction of reported bugs by ACCT
   - Change style of wallet to mobile
   - Change the input "Enter the value" to only accept numbers
@@ -30,7 +40,7 @@ All notable changes to this project will be documented in this file.
   - Change the width of divider
   - Add success or error mensages when click to button "Copy Code"
   - Change message of tooltip
-  - Add line break for mobiles in the balance data area 
+  - Add line break for mobiles in the balance data area
   - Change InputButton to InputCurrency and Button
   - Cleaning field after success in generating redemption value
   - Change Alert to Toast
@@ -38,11 +48,11 @@ All notable changes to this project will be documented in this file.
   - Change InputCurrency to IntlCurrencyInput
   - Add red border to sinalize a error
 
-
 ### Added
+
 - Update tests
 
-
 ### Changed
+
 - Add error when the user try to copy an undefined code
 - Add test for this modification

@@ -8,6 +8,7 @@ export const input = defineMessages({
   codeLabel: { id: 'input.code.label' },
   codeButton: { id: 'input.code.button' },
   tooltip: { id: 'input.tooltip' },
+  loading: { id: 'input.code.loading' },
 })
 
 export const titles = defineMessages({
