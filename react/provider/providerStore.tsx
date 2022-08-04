@@ -9,6 +9,7 @@ import getValueTotalList from '../queries/getValueTotalList.gql'
 import getRouteRedemptionCode from '../queries/getRouteRedemptionCode.gql'
 import getValueGiftCard from '../queries/getValueGiftCard.gql'
 import getValueAlreadyInGiftCard from '../queries/getValueAlreadyInGiftCard.gql'
+import getRouteHistory from '../queries/getRouteHistory.gql'
 import { ShowAlertOptions } from '../utils/showAlertOptions'
 import { ContextStore } from '../hooks/useStore'
 
@@ -22,12 +23,14 @@ const ProviderStore: FC = (props) => {
   const [code, setCode] = useState(intl.formatMessage(provider.withoutCode))
   const [showAlert, setShowAlert] = useState(ShowAlertOptions.notShow)
   const [credit, setCredit] = useState(0)
+  const [history, setHistory] = useState([])
   const [loading, setLoading] = useState(false)
   const [loadingCode, setLoadingCode] = useState(false)
   const [isGiftCardFieldInvalid, setIsGiftCardFieldInvalid] = useState(false)
   const [loadingGiftCard, setLoadingGiftCard] = useState(false)
   const [loadingRedemptionCode, setLoadingRedemptionCode] = useState(false)
   const [loadingCredit, setLoadingCredit] = useState(false)
+  const [loadingHistory, setLoadingHistory] = useState(false)
 
   const [updateGiftCardMutation] = useMutation(updateGiftCard)
   const { data: dataValueTotalList } = useQuery(getValueTotalList)
@@ -50,6 +53,12 @@ const ProviderStore: FC = (props) => {
     loading: loadingValueAlreadyInGiftCard,
   } = useQuery(getValueAlreadyInGiftCard)
 
+  const {
+    data: dataGetRouteHistory,
+    refetch: refetchGetRouteHistory,
+    loading: loadinGetRouteHistory,
+  } = useQuery(getRouteHistory)
+
   useEffect(() => {
     setLoadingGiftCard(loadingValueGiftCard)
   }, [loadingValueGiftCard])
@@ -61,6 +70,10 @@ const ProviderStore: FC = (props) => {
   useEffect(() => {
     setLoadingRedemptionCode(loadingRedemptionCodeRoute)
   }, [loadingRedemptionCodeRoute])
+
+  useEffect(() => {
+    setLoadingHistory(loadingHistory)
+  }, [loadingHistory])
 
   useEffect(() => {
     const giftCard = dataGetValueAlreadyInGiftCard?.getValueAlreadyInGiftCard
@@ -88,6 +101,14 @@ const ProviderStore: FC = (props) => {
     }
   }, [dataGetValueGiftCard])
 
+  useEffect(() => {
+    const history = dataGetRouteHistory?.getRouteHistory
+
+    if (history !== undefined) {
+      setHistory(history)
+    }
+  }, [dataGetRouteHistory])
+
   const handleCloseAlert = () => {
     setShowAlert(ShowAlertOptions.notShow)
   }
@@ -110,7 +131,7 @@ const ProviderStore: FC = (props) => {
     if (parseFloat(addValueGiftCard) > credit) {
       setValidation(
         intl.formatMessage(provider.biggerThanCouldBe) +
-          credit.toLocaleString('pt-br', { minimumFractionDigits: 2 })
+        credit.toLocaleString('pt-br', { minimumFractionDigits: 2 })
       )
       setIsGiftCardFieldInvalid(true)
 
@@ -144,7 +165,7 @@ const ProviderStore: FC = (props) => {
 
             if (
               updateGetRedemptionCode?.data?.getRouteRedemptionCode !==
-                'failed' &&
+              'failed' &&
               updateGetValueGiftCard?.data?.getValueGiftCard > 0 &&
               updateValueAlreadyInGiftCard?.data?.getValueAlreadyInGiftCard > 0
             ) {
@@ -216,6 +237,7 @@ const ProviderStore: FC = (props) => {
         setShowAlert,
         handleCloseAlert,
         credit,
+        history,
         copyCode,
         loading,
         loadingCode,
@@ -225,6 +247,7 @@ const ProviderStore: FC = (props) => {
         loadingGiftCard,
         loadingCredit,
         loadingRedemptionCode,
+        loadingHistory
       }}
     >
       {props.children}

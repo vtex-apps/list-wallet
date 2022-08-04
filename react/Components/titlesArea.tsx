@@ -6,6 +6,7 @@ import { Divider, Spinner } from 'vtex.styleguide'
 import { useStore } from '../hooks/useStore'
 import '../styles.global.css'
 import { titles } from '../utils/definedMessages'
+import History from './history'
 
 const TitlesArea: FC = () => {
   const intl = useIntl()
@@ -25,6 +26,7 @@ const TitlesArea: FC = () => {
               credit.toLocaleString('pt-br', { minimumFractionDigits: 2 })
             )}
           </b>
+          <History />
         </div>
         <div className="mb5 t-heading-4">
           {intl.formatMessage(titles.valueGiftCard)}
