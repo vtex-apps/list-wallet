@@ -11,6 +11,12 @@ export const input = defineMessages({
   loading: { id: 'input.code.loading' },
 })
 
+export const historyMessages = defineMessages({
+  openHistory: { id: 'history.open.button' },
+  emptyHistoryTitle: { id: 'history.empty.title' },
+  emptyHistoryMessage: { id: 'history.empty.message' }
+})
+
 export const titles = defineMessages({
   valueGiftCard: { id: 'titles.value.gift.card' },
   money: { id: 'titles.money' },
