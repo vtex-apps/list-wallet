@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 import React, { useEffect } from 'react'
 import { useIntl } from 'react-intl'
+import { useRuntime } from 'vtex.render-runtime'
 
 import success from '../assets/toast-success.svg'
 import error from '../assets/toast-error.svg'
@@ -15,6 +16,8 @@ interface Props {
 
 const ToastArea: FC<Props> = ({ duration = 3000 }) => {
   const intl = useIntl()
+
+  const { culture } = useRuntime()
 
   const { showAlert, setShowAlert, rescue, code } = useStore()
 
@@ -31,8 +34,12 @@ const ToastArea: FC<Props> = ({ duration = 3000 }) => {
       message: (
         <>
           <p className="notification-title">
-            {intl.formatMessage(toast.rescueValue) +
-              rescue.toLocaleString('pt-br', { minimumFractionDigits: 2 })}
+            {`${
+              intl.formatMessage(toast.rescueValue) +
+              (culture.customCurrencySymbol as string)
+            } ${rescue.toLocaleString(culture.locale, {
+              minimumFractionDigits: 2,
+            })}`}
           </p>
           <p className="notification-message">
             {intl.formatMessage(toast.rescueSucess)}

@@ -3,6 +3,7 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import IntlCurrencyInput from 'react-intl-currency-input'
 import { Tooltip, IconInfo, Button, Input } from 'vtex.styleguide'
+import { useRuntime } from 'vtex.render-runtime'
 
 import { useStore } from '../hooks/useStore'
 import '../styles.global.css'
@@ -12,6 +13,7 @@ import ValidationArea from './validationsArea'
 const InputButtonArea: FC = () => {
   const intl = useIntl()
 
+  const { culture } = useRuntime()
   const {
     code,
     updateGiftCardFunction,
@@ -37,12 +39,12 @@ const InputButtonArea: FC = () => {
   }
 
   const currencyConfig = {
-    locale: 'pt-BR',
+    locale: culture.locale,
     formats: {
       number: {
-        BRL: {
+        currency: {
           style: 'currency',
-          currency: 'BRL',
+          currency: culture.currency,
           minimumFractionDigits: 2,
           maximumFractionDigits: 2,
         },
@@ -79,7 +81,7 @@ const InputButtonArea: FC = () => {
                 >
                   <IntlCurrencyInput
                     defaultValue={parseFloat(addValueGiftCard as string)}
-                    currency="BRL"
+                    currency="currency"
                     config={currencyConfig}
                     onFocus={handleFocus}
                     onBlur={handleBlur}
