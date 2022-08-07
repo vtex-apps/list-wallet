@@ -53,11 +53,12 @@ const HistoryTable: FC = () => {
             dateAndTime: {
                 title: intl.formatMessage(historyMessages.dateTitle),
                 minWidth: 80,
-                width: 200
+                width: 180
             },
             description: {
                 title: intl.formatMessage(historyMessages.descriptionTitle),
-                minWidth: 80,
+                width: 300,
+                minWidth: 280,
             },
             value: {
                 title: intl.formatMessage(historyMessages.valueTitle),
@@ -66,7 +67,7 @@ const HistoryTable: FC = () => {
             status: {
                 title: intl.formatMessage(historyMessages.statusTitle),
                 minWidth: 80,
-                width: 150,
+                width: 170,
                 cellRenderer: ({ cellData }: { cellData: boolean }) => {
                     return (
                         <Tag type={cellData ? "success" : "error"}><span className="nowrap">{cellData ? intl.formatMessage(historyMessages.creditStatus) : intl.formatMessage(historyMessages.debitStatus)}</span></Tag>

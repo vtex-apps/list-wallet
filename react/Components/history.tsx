@@ -27,7 +27,8 @@ const History: FC = () => {
       <Modal
         centered
         isOpen={modalOpen}
-        onClose={handleToggle}>
+        onClose={handleToggle}
+        showCloseIcon={false}>
         <HistoryTable />
       </Modal>
     </span>
