@@ -14,7 +14,9 @@ export const input = defineMessages({
 export const historyMessages = defineMessages({
   openHistory: { id: 'history.open.button' },
   emptyHistoryTitle: { id: 'history.empty.title' },
-  emptyHistoryMessage: { id: 'history.empty.message' }
+  emptyHistoryMessage: { id: 'history.empty.message' },
+  creditMessage: { id: 'history.credit.message' },
+  debitMessage: { id: 'history.debit.message' },
 })
 
 export const titles = defineMessages({

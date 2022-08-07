@@ -14,6 +14,8 @@
   "history.open.button": "Extrato",
   "history.empty.title": "Nenhuma movimentação",
   "history.empty.message": "Sua carteira ainda não teve movimentações de valores.",
+  "history.credit.message": "Crédito recebido",
+  "history.debit.message": "Crédito convertido",
   "collapsible.title": "Minha carteira",
   "provider.without.code": "Código inexistente",
   "provider.missing.value": "Insira um valor para resgatar",

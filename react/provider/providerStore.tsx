@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useMutation, useQuery } from 'react-apollo'
 import { useIntl } from 'react-intl'
 
-import { provider } from '../utils/definedMessages'
+import { provider, titles, historyMessages } from '../utils/definedMessages'
 import updateGiftCard from '../queries/updateGiftCard.gql'
 import getValueTotalList from '../queries/getValueTotalList.gql'
 import getRouteRedemptionCode from '../queries/getRouteRedemptionCode.gql'
@@ -23,7 +23,7 @@ const ProviderStore: FC = (props) => {
   const [code, setCode] = useState(intl.formatMessage(provider.withoutCode))
   const [showAlert, setShowAlert] = useState(ShowAlertOptions.notShow)
   const [credit, setCredit] = useState(0)
-  const [history, setHistory] = useState([])
+  const [history, setHistory] = useState<TableHistory[]>([])
   const [loading, setLoading] = useState(false)
   const [loadingCode, setLoadingCode] = useState(false)
   const [isGiftCardFieldInvalid, setIsGiftCardFieldInvalid] = useState(false)
@@ -102,10 +102,25 @@ const ProviderStore: FC = (props) => {
   }, [dataGetValueGiftCard])
 
   useEffect(() => {
-    const history = dataGetRouteHistory?.getRouteHistory
+    const getHistory = dataGetRouteHistory?.getRouteHistory
 
-    if (history !== undefined) {
-      setHistory(history)
+    if (getHistory !== undefined) {
+      let tableHistory: TableHistory[] = []
+      let options = {
+        timeZone: "UTC",
+        year: 'numeric' as "numeric",
+        month: 'short' as "short",
+        day: 'numeric' as "numeric"
+      }
+      tableHistory = getHistory.map((item: { value: number; dateAndTime: string }) => {
+        return {
+          value: intl.formatMessage(titles.money) + Math.abs(item.value).toLocaleString('pt-br', { minimumFractionDigits: 2 }),
+          description: item.value > 0 ? intl.formatMessage(historyMessages.creditMessage) : intl.formatMessage(historyMessages.debitMessage),
+          dateAndTime: new Date(item.dateAndTime).toLocaleString("pt-BR", options),
+          status: item.value > 0 ? true : false
+        }
+      })
+      setHistory(tableHistory)
     }
   }, [dataGetRouteHistory])
 
