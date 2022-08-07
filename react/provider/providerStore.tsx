@@ -114,13 +114,13 @@ const ProviderStore: FC = (props) => {
       }
       tableHistory = getHistory.map((item: { value: number; dateAndTime: string }) => {
         return {
-          value: intl.formatMessage(titles.money) + Math.abs(item.value).toLocaleString('pt-br', { minimumFractionDigits: 2 }),
-          description: item.value > 0 ? intl.formatMessage(historyMessages.creditMessage) : intl.formatMessage(historyMessages.debitMessage),
+          value: intl.formatMessage(titles.money) + Math.abs(item.value / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 }),
+          description: item.value > 0 ? intl.formatMessage(historyMessages.creditDescription) : intl.formatMessage(historyMessages.debitDescription),
           dateAndTime: new Date(item.dateAndTime).toLocaleString("pt-BR", options),
           status: item.value > 0 ? true : false
         }
       })
-      setHistory(tableHistory)
+      setHistory(tableHistory.reverse())
     }
   }, [dataGetRouteHistory])
 

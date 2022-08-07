@@ -15,8 +15,15 @@ export const historyMessages = defineMessages({
   openHistory: { id: 'history.open.button' },
   emptyHistoryTitle: { id: 'history.empty.title' },
   emptyHistoryMessage: { id: 'history.empty.message' },
-  creditMessage: { id: 'history.credit.message' },
-  debitMessage: { id: 'history.debit.message' },
+  creditDescription: { id: 'history.credit.description' },
+  debitDescription: { id: 'history.debit.description' },
+  dateTitle: { id: 'history.date.title' },
+  descriptionTitle: { id: 'history.description.title' },
+  valueTitle: { id: 'history.value.title' },
+  statusTitle: { id: 'history.status.title' },
+  creditStatus: { id: 'history.credit.status' },
+  debitStatus: { id: 'history.debit.status' },
+  paginationOf: { id: 'history.pagination.of' }
 })
 
 export const titles = defineMessages({
