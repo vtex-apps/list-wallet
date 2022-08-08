@@ -2,6 +2,7 @@ import type { FC } from 'react'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
 import { Spinner, Button, Modal } from 'vtex.styleguide'
+
 import { useStore } from '../hooks/useStore'
 import HistoryTable from './historyTable'
 import { historyMessages } from '../utils/definedMessages'
@@ -20,7 +21,11 @@ const History: FC = () => {
       {loadingHistory ? (
         <Spinner color="currentColor" size={20} />
       ) : (
-        <Button variation="tertiary" size="small" onClick={() => handleToggle()}>
+        <Button
+          variation="tertiary"
+          size="small"
+          onClick={() => handleToggle()}
+        >
           {intl.formatMessage(historyMessages.openHistory)}
         </Button>
       )}
@@ -28,7 +33,8 @@ const History: FC = () => {
         centered
         isOpen={modalOpen}
         onClose={handleToggle}
-        showCloseIcon={false}>
+        title={intl.formatMessage(historyMessages.openHistory)}
+      >
         <HistoryTable />
       </Modal>
     </span>
