@@ -161,7 +161,7 @@ const ProviderStore: FC = (props) => {
     if (parseFloat(addValueGiftCard) > credit) {
       setValidation(
         intl.formatMessage(provider.biggerThanCouldBe) +
-          credit.toLocaleString(culture.locale, { minimumFractionDigits: 2 })
+        credit.toLocaleString(culture.locale, { minimumFractionDigits: 2 })
       )
       setIsGiftCardFieldInvalid(true)
 
@@ -195,7 +195,7 @@ const ProviderStore: FC = (props) => {
 
             if (
               updateGetRedemptionCode?.data?.getRouteRedemptionCode !==
-                'failed' &&
+              'failed' &&
               updateGetValueGiftCard?.data?.getValueGiftCard > 0 &&
               updateValueAlreadyInGiftCard?.data?.getValueAlreadyInGiftCard > 0
             ) {
@@ -216,6 +216,7 @@ const ProviderStore: FC = (props) => {
         setRescue(parseFloat(addValueGiftCard as string))
         setShowAlert(ShowAlertOptions.alertSave)
         setAddValueGiftCard('0')
+        refetchGetRouteHistory()
       } else {
         setShowAlert(ShowAlertOptions.alertError)
       }
