@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed
+
+- Remove the definition of which currency was updated. Before it was defined as real and now it is taken by the context
+
 ## [1.1.0] - 2022-07-15
 
 ### Added

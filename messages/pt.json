@@ -1,9 +1,7 @@
 {
   "titles.value.gift.card": "Saldo Vale Presente: ",
   "titles.credit": "Crédito: ",
-  "titles.money": "R$ ",
   "titles.redemption": "Gerar Resgate:",
-  "input.value.placeholder": "R$ 0,00",
   "input.value.label": "Digite o valor",
   "input.value.button": "RESGATAR",
   "input.tooltip": "Código para resgatar o vale-presente. Este código é único. Utilize em todas as suas compras na loja",
@@ -28,7 +26,7 @@
   "provider.missing.value": "Insira um valor para resgatar",
   "provider.value.negative": "Adicione um valor maior que 0",
   "provider.value.bigger.than.could.be": "Insira um valor menor ou igual a ",
-  "toast.rescue.value": "Valor de R$",
+  "toast.rescue.value": "Valor de ",
   "toast.rescue.sucess": "Resgatado com sucesso!",
   "toast.rescue.error": "Erro ao adicionar valor ao vale presente",
   "toast.code": "Código ",

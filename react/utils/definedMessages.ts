@@ -1,7 +1,6 @@
 import { defineMessages } from 'react-intl'
 
 export const input = defineMessages({
-  valuePlaceholder: { id: 'input.value.placeholder' },
   valueLabel: { id: 'input.value.label' },
   valueButton: { id: 'input.value.button' },
   codePlaceholder: { id: 'input.code.placeholder' },
@@ -28,7 +27,6 @@ export const historyMessages = defineMessages({
 
 export const titles = defineMessages({
   valueGiftCard: { id: 'titles.value.gift.card' },
-  money: { id: 'titles.money' },
   redemption: { id: 'titles.redemption' },
   credit: { id: 'titles.credit' },
 })
