@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { History } from 'vtex.gift-card-list'
 import { Table, Tag } from 'vtex.styleguide'
@@ -11,20 +11,52 @@ const HistoryTable: FC = () => {
     const intl = useIntl()
     const { history } = useStore()
 
+    const [tableOrder, setTableOrder] = useState({
+        orderedItems: history,
+        dataSort: {
+            sortedBy: 'dateAndTime',
+            sortOrder: 'DESC',
+        }
+    })
+
     const [tablePage, setTablePage] = useState({
         tableLenght: 5,
         currentPage: 1,
-        slicedData: history.slice(0, 5),
+        slicedData: tableOrder.orderedItems.slice(0, 5),
         currentItemFrom: 1,
         currentItemTo: 5,
-        itemsLength: history.length,
+        itemsLength: tableOrder.orderedItems.length,
     })
+
+    useEffect(() => {
+        setTablePage({
+            tableLenght: 5,
+            currentPage: 1,
+            slicedData: tableOrder.orderedItems.slice(0, 5),
+            currentItemFrom: 1,
+            currentItemTo: 5,
+            itemsLength: tableOrder.orderedItems.length,
+        })
+    }, [tableOrder])
+
+    const handleSort = ({ sortOrder, sortedBy }: { sortOrder: string, sortedBy: string }) => {
+        if (sortedBy === 'dateAndTime') {
+            const orderedItems = tableOrder.orderedItems.reverse()
+            setTableOrder({
+                orderedItems,
+                dataSort: {
+                    sortedBy,
+                    sortOrder,
+                },
+            })
+        }
+    }
 
     const handleNextClick = () => {
         const newPage = tablePage.currentPage + 1
         const itemFrom = tablePage.currentItemTo + 1
         const itemTo = tablePage.tableLenght * newPage
-        const data = history.slice(itemFrom - 1, itemTo)
+        const data = tableOrder.orderedItems.slice(itemFrom - 1, itemTo)
         goToPage(newPage, itemFrom, itemTo, data)
     }
 
@@ -33,7 +65,7 @@ const HistoryTable: FC = () => {
         const newPage = tablePage.currentPage - 1
         const itemFrom = tablePage.currentItemFrom - tablePage.tableLenght
         const itemTo = tablePage.currentItemFrom - 1
-        const data = history.slice(itemFrom - 1, itemTo)
+        const data = tableOrder.orderedItems.slice(itemFrom - 1, itemTo)
         goToPage(newPage, itemFrom, itemTo, data)
     }
 
@@ -53,7 +85,8 @@ const HistoryTable: FC = () => {
             dateAndTime: {
                 title: intl.formatMessage(historyMessages.dateTitle),
                 minWidth: 80,
-                width: 180
+                width: 180,
+                sortable: true
             },
             description: {
                 title: intl.formatMessage(historyMessages.descriptionTitle),
@@ -92,6 +125,11 @@ const HistoryTable: FC = () => {
                         </p>
                     </>
                 }
+                onSort={handleSort}
+                sort={{
+                    sortedBy: tableOrder.dataSort.sortedBy,
+                    sortOrder: tableOrder.dataSort.sortOrder,
+                }}
                 pagination={{
                     onNextClick: handleNextClick,
                     onPrevClick: handlePrevClick,
