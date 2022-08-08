@@ -2,6 +2,7 @@ import type { FC } from 'react'
 import React, { useEffect, useState } from 'react'
 import { useMutation, useQuery } from 'react-apollo'
 import { useIntl } from 'react-intl'
+import { useRuntime } from 'vtex.render-runtime'
 
 import { provider, titles, historyMessages } from '../utils/definedMessages'
 import updateGiftCard from '../queries/updateGiftCard.gql'
@@ -15,6 +16,7 @@ import { ContextStore } from '../hooks/useStore'
 
 const ProviderStore: FC = (props) => {
   const intl = useIntl()
+  const { culture } = useRuntime()
   const [rescue, setRescue] = useState(0)
   const [button, setButton] = useState(false)
   const [addValueGiftCard, setAddValueGiftCard] = useState<string>()
@@ -104,24 +106,37 @@ const ProviderStore: FC = (props) => {
   useEffect(() => {
     const getHistory = dataGetRouteHistory?.getRouteHistory
 
-    if (getHistory !== undefined) {
-      let tableHistory: TableHistory[] = []
-      let options = {
-        timeZone: "UTC",
-        year: 'numeric' as "numeric",
-        month: 'short' as "short",
-        day: 'numeric' as "numeric"
-      }
-      tableHistory = getHistory.map((item: { value: number; dateAndTime: string }) => {
-        return {
-          value: intl.formatMessage(titles.money) + Math.abs(item.value / 100).toLocaleString('pt-br', { minimumFractionDigits: 2 }),
-          description: item.value > 0 ? intl.formatMessage(historyMessages.creditDescription) : intl.formatMessage(historyMessages.debitDescription),
-          dateAndTime: new Date(item.dateAndTime).toLocaleString("pt-BR", options),
-          status: item.value > 0 ? true : false
-        }
-      })
-      setHistory(tableHistory.reverse())
+    if (getHistory === undefined) return
+
+    let tableHistory: TableHistory[] = []
+    const options = {
+      timeZone: 'UTC',
+      year: 'numeric' as const,
+      month: 'short' as const,
+      day: 'numeric' as const,
     }
+
+    tableHistory = getHistory.map(
+      (item: { value: number; dateAndTime: string }) => {
+        return {
+          value:
+            (culture.customCurrencySymbol as string) +
+            Math.abs(item.value / 100).toLocaleString(culture.locale, {
+              minimumFractionDigits: 2,
+            }),
+          description:
+            item.value > 0
+              ? intl.formatMessage(historyMessages.creditDescription)
+              : intl.formatMessage(historyMessages.debitDescription),
+          dateAndTime: new Date(item.dateAndTime).toLocaleString(
+            culture.locale,
+            options
+          ),
+          status: item.value > 0,
+        }
+      }
+    )
+    setHistory(tableHistory.reverse())
   }, [dataGetRouteHistory])
 
   const handleCloseAlert = () => {
@@ -146,7 +161,7 @@ const ProviderStore: FC = (props) => {
     if (parseFloat(addValueGiftCard) > credit) {
       setValidation(
         intl.formatMessage(provider.biggerThanCouldBe) +
-        credit.toLocaleString('pt-br', { minimumFractionDigits: 2 })
+          credit.toLocaleString(culture.locale, { minimumFractionDigits: 2 })
       )
       setIsGiftCardFieldInvalid(true)
 
@@ -180,7 +195,7 @@ const ProviderStore: FC = (props) => {
 
             if (
               updateGetRedemptionCode?.data?.getRouteRedemptionCode !==
-              'failed' &&
+                'failed' &&
               updateGetValueGiftCard?.data?.getValueGiftCard > 0 &&
               updateValueAlreadyInGiftCard?.data?.getValueAlreadyInGiftCard > 0
             ) {
@@ -262,7 +277,7 @@ const ProviderStore: FC = (props) => {
         loadingGiftCard,
         loadingCredit,
         loadingRedemptionCode,
-        loadingHistory
+        loadingHistory,
       }}
     >
       {props.children}
