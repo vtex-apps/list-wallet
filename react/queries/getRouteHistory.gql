@@ -1,5 +1,10 @@
-query getRouteHistory {
-  getRouteHistory {
+query getRouteHistory(
+    $page: Int
+    $pageSize: Int
+    $filters: HistoryFiltersInput
+    $sorting: HistorySortingInput
+  ) {
+  getRouteHistory(page: $page, pageSize: $pageSize, filters: $filters, sorting: $sorting) {
     value
     dateAndTime
   }
