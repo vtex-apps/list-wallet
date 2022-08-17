@@ -17,7 +17,7 @@ interface ContextStoreType {
   setShowAlert: (showAlert: ShowAlertOptions) => void
   handleCloseAlert: () => void
   credit: number
-  history: History[]
+  history: TableHistory[]
   copyCode: () => void
   loading: boolean
   loadingCode: boolean
@@ -28,6 +28,7 @@ interface ContextStoreType {
   loadingCredit: boolean
   loadingRedemptionCode: boolean
   loadingHistory: boolean
+  setFilterHistory: (filterHistory: FilterHistory) => void
 }
 
 export const ContextStore = React.createContext<ContextStoreType>({
@@ -54,7 +55,8 @@ export const ContextStore = React.createContext<ContextStoreType>({
   loadingGiftCard: false,
   loadingCredit: false,
   loadingRedemptionCode: false,
-  loadingHistory: false
+  loadingHistory: false,
+  setFilterHistory: () => { }
 })
 
 export function useStore() {

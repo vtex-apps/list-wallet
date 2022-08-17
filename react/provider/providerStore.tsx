@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import React, { useEffect, useState } from 'react'
-import { useMutation, useQuery } from 'react-apollo'
+import { useLazyQuery, useMutation, useQuery } from 'react-apollo'
 import { useIntl } from 'react-intl'
 import { useRuntime } from 'vtex.render-runtime'
 
@@ -33,6 +33,7 @@ const ProviderStore: FC = (props) => {
   const [loadingRedemptionCode, setLoadingRedemptionCode] = useState(false)
   const [loadingCredit, setLoadingCredit] = useState(false)
   const [loadingHistory, setLoadingHistory] = useState(false)
+  const [filterHistory, setFilterHistory] = useState<FilterHistory>()
 
   const [updateGiftCardMutation] = useMutation(updateGiftCard)
   const { data: dataValueTotalList } = useQuery(getValueTotalList)
@@ -55,11 +56,11 @@ const ProviderStore: FC = (props) => {
     loading: loadingValueAlreadyInGiftCard,
   } = useQuery(getValueAlreadyInGiftCard)
 
-  const {
+  const [searchHistory, {
     data: dataGetRouteHistory,
     refetch: refetchGetRouteHistory,
     loading: loadinGetRouteHistory,
-  } = useQuery(getRouteHistory)
+  }] = useLazyQuery(getRouteHistory)
 
   useEffect(() => {
     setLoadingGiftCard(loadingValueGiftCard)
@@ -76,6 +77,10 @@ const ProviderStore: FC = (props) => {
   useEffect(() => {
     setLoadingHistory(loadingHistory)
   }, [loadingHistory])
+
+  useEffect(() => {
+    searchHistory({ variables: { filters: filterHistory } })
+  }, [filterHistory])
 
   useEffect(() => {
     const giftCard = dataGetValueAlreadyInGiftCard?.getValueAlreadyInGiftCard
@@ -279,6 +284,7 @@ const ProviderStore: FC = (props) => {
         loadingCredit,
         loadingRedemptionCode,
         loadingHistory,
+        setFilterHistory
       }}
     >
       {props.children}

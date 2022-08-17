@@ -4,3 +4,8 @@ interface TableHistory {
     dateAndTime: string,
     status: boolean
 }
+
+interface FilterHistory {
+    dateAndTime: string,
+    status: boolean
+}
