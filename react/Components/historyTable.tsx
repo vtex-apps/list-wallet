@@ -2,7 +2,7 @@ import type { FC } from 'react'
 import React, { useState, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { History } from 'vtex.gift-card-list'
-import { Table, Tag, DatePicker, Checkbox } from 'vtex.styleguide'
+import { Table, Tag, DatePicker, Checkbox, Dropdown } from 'vtex.styleguide'
 
 import { useStore } from '../hooks/useStore'
 import { historyMessages } from '../utils/definedMessages'
@@ -10,6 +10,7 @@ import { historyMessages } from '../utils/definedMessages'
 const HistoryTable: FC = () => {
     const intl = useIntl()
     const { history, setFilterHistory } = useStore()
+    let { filterHistory } = useStore()
 
     const [tableOrder, setTableOrder] = useState({
         orderedItems: history,
@@ -99,18 +100,18 @@ const HistoryTable: FC = () => {
     }
 
     const DatePickerRangeObject = ({ value, onChange }: { value: any, onChange: any }) => {
-        console.log("Value", value)
-        console.log("onChange:", onChange)
+        console.log("Value date picker", value)
         return (
             <div className="flex flex-column w-100">
                 <DatePicker
-                    value={(value?.from) || new Date()}
+                    value={(value?.from) || new Date(Date.now() - 86400000)}
                     onChange={(dateFrom: any) => {
                         const dataFrom = { from: dateFrom, to: value?.to }
                         console.log("Date from", dataFrom)
                         onChange(dataFrom)
                     }}
-                    locale="pt-BR" />
+                    locale="pt-BR"
+                    maxDate={(value?.to) || new Date()} />
                 <br />
                 <DatePicker
                     value={(value?.to) || new Date()}
@@ -119,50 +120,65 @@ const HistoryTable: FC = () => {
                         console.log("Date to", dataTo)
                         onChange(dataTo)
                     }}
-                    locale="pt-BR" />
+                    locale="pt-BR"
+                    minDate={(value?.from) || new Date(Date.now() - 86400000)}
+                    maxDate={new Date()} />
                 <br />
             </div>
         )
     }
 
     const StatusSelectorObject = ({ value, onChange }: { value: any, onChange: any }) => {
-        const initialValue = {
-            'Entrada': true,
-            'Saída': true,
-            ...(value || {}),
-        }
+        console.log("Value status selector", value)
+        const options = [
+            { value: 'all', label: 'Tudo' },
+            { value: 'deposits', label: 'Entradas' },
+            { value: 'withdrawals', label: 'Saídas' },
+        ]
 
-        const toggleValueByKey = (key: string) => {
-            return {
-                ...(value || initialValue),
-                [key]: value ? !value[key] : false,
-            }
-        }
         return (
             <div>
-                {Object.keys(initialValue).map((opt, index) => {
-                    return (
-                        <div className="mb3" key={`class-statment-object-${opt}-${index}`}>
-                            <Checkbox
-                                checked={value ? value[opt] : initialValue[opt]}
-                                id={`status-${opt}`}
-                                label={opt}
-                                name="status-checkbox-group"
-                                onChange={() => {
-                                    const newValue = toggleValueByKey(`${opt}`)
-                                    onChange(newValue)
-                                }}
-                                value={opt}
-                            />
-                        </div>
-                    )
-                })}
+                <Dropdown
+                    label="Status"
+                    size="small"
+                    options={options}
+                    value={value}
+                    onChange={(_: any, v: any) => {
+                        console.log(v)
+                        onChange(v)
+                    }}
+                />
             </div>
         )
     }
 
-    const handleFiltersChange = (statements = []) => {
+    const handleFiltersChange = (statements: any) => {
         console.log("Statement:", statements)
+
+        if (statements[0].subject === 'status') {
+            if (statements[0].object === 'deposits') {
+                setFilterHistory({ ...filterHistory as FilterHistory, ...{ status: true } })
+            }
+            else if (statements[0].object === 'withdrawals') {
+                setFilterHistory({ ...filterHistory as FilterHistory, ...{ status: false } })
+            }
+            else {
+                setFilterHistory({ ...filterHistory as FilterHistory, ...{ status: undefined } })
+            }
+        }
+        else if (statements[0].subject === 'data' && statements[0].verb === '=') {
+            const start = new Date(((new Date(statements[0].object)).setHours(0, 0, 0, 0))).toISOString()
+            const end = new Date((new Date(statements[0].object)).setHours(23, 59, 59, 9)).toISOString()
+            console.log("datas:", start, end)
+            setFilterHistory({ ...filterHistory as FilterHistory, ...{ dateAndTime: { startDate: start, endDate: end } } })
+        }
+        else if (statements[0].subject === 'data' && statements[0].verb === 'between') {
+            const start = new Date(((new Date(statements[0].object?.dateFrom ?? Date.now() - 86400000)).setHours(0, 0, 0, 0))).toISOString()
+            const end = new Date((new Date(statements[0].object?.dateTo ?? Date.now())).setHours(23, 59, 59, 9)).toISOString()
+            console.log("datas between:", start, end)
+            setFilterHistory({ ...filterHistory as FilterHistory, ...{ dateAndTime: { startDate: start, endDate: end } } })
+        }
+
 
         setTablePage({
             tableLength: 5,
@@ -235,7 +251,7 @@ const HistoryTable: FC = () => {
                 }}
                 filters={{
                     alwaysVisibleFilters: ['data', 'status'],
-                    statements: [],
+                    statements: tablePage.filterStatements,
                     onChangeStatements: handleFiltersChange,
                     clearAllFiltersButtonLabel: 'Limpar Filtros',
                     collapseLeft: true,
@@ -269,7 +285,6 @@ const HistoryTable: FC = () => {
                             },
                             verbs: [
                                 {
-                                    label: 'includes',
                                     value: 'includes',
                                     object: (props: any) => <StatusSelectorObject {...props} />
                                 },

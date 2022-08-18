@@ -110,6 +110,7 @@ const ProviderStore: FC = (props) => {
 
   useEffect(() => {
     const getHistory = dataGetRouteHistory?.getRouteHistory
+    console.log(getHistory, dataGetRouteHistory)
 
     if (getHistory === undefined) return
 
@@ -142,7 +143,7 @@ const ProviderStore: FC = (props) => {
       }
     )
     setHistory(tableHistory.reverse())
-  }, [dataGetRouteHistory])
+  }, [dataGetRouteHistory, loadinGetRouteHistory])
 
   const handleCloseAlert = () => {
     setShowAlert(ShowAlertOptions.notShow)
@@ -284,6 +285,7 @@ const ProviderStore: FC = (props) => {
         loadingCredit,
         loadingRedemptionCode,
         loadingHistory,
+        filterHistory,
         setFilterHistory
       }}
     >

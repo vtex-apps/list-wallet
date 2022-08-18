@@ -6,6 +6,11 @@ interface TableHistory {
 }
 
 interface FilterHistory {
-    dateAndTime: string,
-    status: boolean
+    dateAndTime?: DateRange,
+    status?: boolean
+}
+
+interface DateRange {
+    startDate: String
+    endDate: String
 }

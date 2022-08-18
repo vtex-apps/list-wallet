@@ -28,6 +28,7 @@ interface ContextStoreType {
   loadingCredit: boolean
   loadingRedemptionCode: boolean
   loadingHistory: boolean
+  filterHistory: FilterHistory | undefined
   setFilterHistory: (filterHistory: FilterHistory) => void
 }
 
@@ -56,6 +57,7 @@ export const ContextStore = React.createContext<ContextStoreType>({
   loadingCredit: false,
   loadingRedemptionCode: false,
   loadingHistory: false,
+  filterHistory: undefined,
   setFilterHistory: () => { }
 })
 
