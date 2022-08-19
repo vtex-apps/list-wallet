@@ -56,11 +56,14 @@ const ProviderStore: FC = (props) => {
     loading: loadingValueAlreadyInGiftCard,
   } = useQuery(getValueAlreadyInGiftCard)
 
-  const [searchHistory, {
-    data: dataGetRouteHistory,
-    refetch: refetchGetRouteHistory,
-    loading: loadinGetRouteHistory,
-  }] = useLazyQuery(getRouteHistory)
+  const [
+    searchHistory,
+    {
+      data: dataGetRouteHistory,
+      refetch: refetchGetRouteHistory,
+      loading: loadinGetRouteHistory,
+    },
+  ] = useLazyQuery(getRouteHistory)
 
   useEffect(() => {
     setLoadingGiftCard(loadingValueGiftCard)
@@ -110,7 +113,6 @@ const ProviderStore: FC = (props) => {
 
   useEffect(() => {
     const getHistory = dataGetRouteHistory?.getRouteHistory
-    console.log(getHistory, dataGetRouteHistory)
 
     if (getHistory === undefined) return
 
@@ -167,7 +169,7 @@ const ProviderStore: FC = (props) => {
     if (parseFloat(addValueGiftCard) > credit) {
       setValidation(
         intl.formatMessage(provider.biggerThanCouldBe) +
-        credit.toLocaleString(culture.locale, { minimumFractionDigits: 2 })
+          credit.toLocaleString(culture.locale, { minimumFractionDigits: 2 })
       )
       setIsGiftCardFieldInvalid(true)
 
@@ -201,7 +203,7 @@ const ProviderStore: FC = (props) => {
 
             if (
               updateGetRedemptionCode?.data?.getRouteRedemptionCode !==
-              'failed' &&
+                'failed' &&
               updateGetValueGiftCard?.data?.getValueGiftCard > 0 &&
               updateValueAlreadyInGiftCard?.data?.getValueAlreadyInGiftCard > 0
             ) {
@@ -285,8 +287,7 @@ const ProviderStore: FC = (props) => {
         loadingCredit,
         loadingRedemptionCode,
         loadingHistory,
-        filterHistory,
-        setFilterHistory
+        setFilterHistory,
       }}
     >
       {props.children}

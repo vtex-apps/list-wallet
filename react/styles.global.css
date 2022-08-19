@@ -146,6 +146,12 @@ input:read-only {
   display: flex;
 }
 
+.vtex-modal__modal,
+.vtex-styleguide-9-x-mh100 {
+  height: calc(100% / (var(--aspect-ratio)));
+  aspect-ratio: 4/3;
+}
+
 @keyframes toast-in-left {
 	from {
 		transform: translateX(-100%);

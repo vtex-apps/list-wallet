@@ -28,37 +28,35 @@ interface ContextStoreType {
   loadingCredit: boolean
   loadingRedemptionCode: boolean
   loadingHistory: boolean
-  filterHistory: FilterHistory | undefined
-  setFilterHistory: (filterHistory: FilterHistory) => void
+  setFilterHistory: (filterHistory: FilterHistory | undefined) => void
 }
 
 export const ContextStore = React.createContext<ContextStoreType>({
   button: false,
-  setButton: () => { },
+  setButton: () => {},
   valueGiftCard: 0,
   code: '',
   addValueGiftCard: '',
-  setAddValueGiftCard: () => { },
-  updateGiftCardFunction: () => { },
+  setAddValueGiftCard: () => {},
+  updateGiftCardFunction: () => {},
   validation: '',
-  setValidation: () => { },
+  setValidation: () => {},
   showAlert: ShowAlertOptions.notShow,
-  setShowAlert: () => { },
-  handleCloseAlert: () => { },
+  setShowAlert: () => {},
+  handleCloseAlert: () => {},
   credit: 0,
   history: [],
-  copyCode: () => { },
+  copyCode: () => {},
   loading: false,
   loadingCode: false,
   rescue: 0,
   isGiftCardFieldInvalid: false,
-  setIsGiftCardFieldInvalid: () => { },
+  setIsGiftCardFieldInvalid: () => {},
   loadingGiftCard: false,
   loadingCredit: false,
   loadingRedemptionCode: false,
   loadingHistory: false,
-  filterHistory: undefined,
-  setFilterHistory: () => { }
+  setFilterHistory: () => {},
 })
 
 export function useStore() {

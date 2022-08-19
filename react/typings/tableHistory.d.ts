@@ -1,16 +1,16 @@
 interface TableHistory {
-    value: number,
-    description: string,
-    dateAndTime: string,
-    status: boolean
+  value: number
+  description: string
+  dateAndTime: string
+  status: boolean
 }
 
 interface FilterHistory {
-    dateAndTime?: DateRange,
-    status?: boolean
+  dateAndTime?: DateRange
+  status?: boolean
 }
 
 interface DateRange {
-    startDate: String
-    endDate: String
+  startDate: string
+  endDate: string
 }
