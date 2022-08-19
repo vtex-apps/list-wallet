@@ -319,12 +319,23 @@ const HistoryTable: FC = () => {
           options: {
             data: {
               label: 'Data',
-              renderFilterLabel: (st: { object: any }) => {
+              renderFilterLabel: (st: {
+                object: { from: any; to: any } | any
+                verb: string
+              }) => {
                 if (!st || !st.object) {
                   return 'Tudo'
                 }
 
-                return st.object
+                return `${
+                  st.verb === 'between'
+                    ? `entre ${new Date(
+                        st.object.from
+                      ).toLocaleDateString()} e ${new Date(
+                        st.object.to
+                      ).toLocaleDateString()}`
+                    : `é ${new Date(st.object).toLocaleDateString()}`
+                }`
               },
               verbs: [
                 {
@@ -342,12 +353,15 @@ const HistoryTable: FC = () => {
             status: {
               label: 'Status',
               renderFilterLabel: (st: any) => {
-                // console.log('st', st, st?.objetct, options)
-                if (!st || !st.object || st.object === 'all') {
-                  return 'Todos'
+                if (!st || !st.object) {
+                  return 'Tudo'
                 }
 
-                return st.object
+                const retorno = options.find(
+                  (filter) => filter.value === st.object
+                )
+
+                return retorno?.label
               },
               verbs: [
                 {
