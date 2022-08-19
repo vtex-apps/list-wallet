@@ -119,7 +119,7 @@ const HistoryTable: FC = () => {
                 density="low"
                 emptyStateLabel={intl.formatMessage(historyMessages.emptyHistoryTitle)}
                 emptyStateChildren={
-                    <>
+                  
                         <p>
                             {intl.formatMessage(historyMessages.emptyHistoryMessage)}
                         </p>
