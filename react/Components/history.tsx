@@ -10,14 +10,15 @@ import { historyMessages } from '../utils/definedMessages'
 const History: FC = () => {
   const intl = useIntl()
   const [modalOpen, setModalOpen] = useState(false)
-  const { loadingHistory } = useStore()
+  const { loadingHistory, setFilterHistory } = useStore()
 
   const handleToggle = () => {
+    setFilterHistory(undefined)
     setModalOpen(!modalOpen)
   }
 
   return (
-    <span className="ml3" style={{ position: 'absolute' }}>
+    <span className="ml3 history">
       {loadingHistory ? (
         <Spinner color="currentColor" size={20} />
       ) : (

@@ -17,7 +17,7 @@ interface ContextStoreType {
   setShowAlert: (showAlert: ShowAlertOptions) => void
   handleCloseAlert: () => void
   credit: number
-  history: History[]
+  history: TableHistory[]
   copyCode: () => void
   loading: boolean
   loadingCode: boolean
@@ -28,33 +28,37 @@ interface ContextStoreType {
   loadingCredit: boolean
   loadingRedemptionCode: boolean
   loadingHistory: boolean
+  loadingGetRouteHistory: boolean
+  setFilterHistory: (filterHistory: FilterHistory | undefined) => void
 }
 
 export const ContextStore = React.createContext<ContextStoreType>({
   button: false,
-  setButton: () => { },
+  setButton: () => {},
   valueGiftCard: 0,
   code: '',
   addValueGiftCard: '',
-  setAddValueGiftCard: () => { },
-  updateGiftCardFunction: () => { },
+  setAddValueGiftCard: () => {},
+  updateGiftCardFunction: () => {},
   validation: '',
-  setValidation: () => { },
+  setValidation: () => {},
   showAlert: ShowAlertOptions.notShow,
-  setShowAlert: () => { },
-  handleCloseAlert: () => { },
+  setShowAlert: () => {},
+  handleCloseAlert: () => {},
   credit: 0,
   history: [],
-  copyCode: () => { },
+  copyCode: () => {},
   loading: false,
   loadingCode: false,
   rescue: 0,
   isGiftCardFieldInvalid: false,
-  setIsGiftCardFieldInvalid: () => { },
+  setIsGiftCardFieldInvalid: () => {},
   loadingGiftCard: false,
   loadingCredit: false,
   loadingRedemptionCode: false,
-  loadingHistory: false
+  loadingHistory: false,
+  loadingGetRouteHistory: false,
+  setFilterHistory: () => {},
 })
 
 export function useStore() {

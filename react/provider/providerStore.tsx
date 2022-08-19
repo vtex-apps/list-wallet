@@ -1,10 +1,10 @@
 import type { FC } from 'react'
 import React, { useEffect, useState } from 'react'
-import { useMutation, useQuery } from 'react-apollo'
+import { useLazyQuery, useMutation, useQuery } from 'react-apollo'
 import { useIntl } from 'react-intl'
 import { useRuntime } from 'vtex.render-runtime'
 
-import { provider, titles, historyMessages } from '../utils/definedMessages'
+import { provider, historyMessages } from '../utils/definedMessages'
 import updateGiftCard from '../queries/updateGiftCard.gql'
 import getValueTotalList from '../queries/getValueTotalList.gql'
 import getRouteRedemptionCode from '../queries/getRouteRedemptionCode.gql'
@@ -33,6 +33,7 @@ const ProviderStore: FC = (props) => {
   const [loadingRedemptionCode, setLoadingRedemptionCode] = useState(false)
   const [loadingCredit, setLoadingCredit] = useState(false)
   const [loadingHistory, setLoadingHistory] = useState(false)
+  const [filterHistory, setFilterHistory] = useState<FilterHistory>()
 
   const [updateGiftCardMutation] = useMutation(updateGiftCard)
   const { data: dataValueTotalList } = useQuery(getValueTotalList)
@@ -55,11 +56,14 @@ const ProviderStore: FC = (props) => {
     loading: loadingValueAlreadyInGiftCard,
   } = useQuery(getValueAlreadyInGiftCard)
 
-  const {
-    data: dataGetRouteHistory,
-    refetch: refetchGetRouteHistory,
-    loading: loadinGetRouteHistory,
-  } = useQuery(getRouteHistory)
+  const [
+    searchHistory,
+    {
+      data: dataGetRouteHistory,
+      refetch: refetchGetRouteHistory,
+      loading: loadingGetRouteHistory,
+    },
+  ] = useLazyQuery(getRouteHistory)
 
   useEffect(() => {
     setLoadingGiftCard(loadingValueGiftCard)
@@ -76,6 +80,10 @@ const ProviderStore: FC = (props) => {
   useEffect(() => {
     setLoadingHistory(loadingHistory)
   }, [loadingHistory])
+
+  useEffect(() => {
+    searchHistory({ variables: { filters: filterHistory } })
+  }, [filterHistory])
 
   useEffect(() => {
     const giftCard = dataGetValueAlreadyInGiftCard?.getValueAlreadyInGiftCard
@@ -137,7 +145,7 @@ const ProviderStore: FC = (props) => {
       }
     )
     setHistory(tableHistory.reverse())
-  }, [dataGetRouteHistory])
+  }, [dataGetRouteHistory, loadingGetRouteHistory])
 
   const handleCloseAlert = () => {
     setShowAlert(ShowAlertOptions.notShow)
@@ -161,7 +169,7 @@ const ProviderStore: FC = (props) => {
     if (parseFloat(addValueGiftCard) > credit) {
       setValidation(
         intl.formatMessage(provider.biggerThanCouldBe) +
-        credit.toLocaleString(culture.locale, { minimumFractionDigits: 2 })
+          credit.toLocaleString(culture.locale, { minimumFractionDigits: 2 })
       )
       setIsGiftCardFieldInvalid(true)
 
@@ -195,7 +203,7 @@ const ProviderStore: FC = (props) => {
 
             if (
               updateGetRedemptionCode?.data?.getRouteRedemptionCode !==
-              'failed' &&
+                'failed' &&
               updateGetValueGiftCard?.data?.getValueGiftCard > 0 &&
               updateValueAlreadyInGiftCard?.data?.getValueAlreadyInGiftCard > 0
             ) {
@@ -279,6 +287,8 @@ const ProviderStore: FC = (props) => {
         loadingCredit,
         loadingRedemptionCode,
         loadingHistory,
+        loadingGetRouteHistory,
+        setFilterHistory,
       }}
     >
       {props.children}
