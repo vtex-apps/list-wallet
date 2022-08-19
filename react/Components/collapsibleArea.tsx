@@ -29,8 +29,10 @@ const CollapsibleArea: FC = () => {
           align="right"
           arrowAlign="center"
         >
-          <TitlesArea />
-          <InputButtonArea />
+          <div style={{ position: 'relative' }}>
+            <TitlesArea />
+            <InputButtonArea />
+          </div>
         </Collapsible>
         <ToastArea />
       </div>

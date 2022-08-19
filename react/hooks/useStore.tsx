@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { History } from 'vtex.gift-card-list'
 
 import { ShowAlertOptions } from '../utils/showAlertOptions'
 
@@ -16,6 +17,7 @@ interface ContextStoreType {
   setShowAlert: (showAlert: ShowAlertOptions) => void
   handleCloseAlert: () => void
   credit: number
+  history: History[]
   copyCode: () => void
   loading: boolean
   loadingCode: boolean
@@ -25,31 +27,34 @@ interface ContextStoreType {
   loadingGiftCard: boolean
   loadingCredit: boolean
   loadingRedemptionCode: boolean
+  loadingHistory: boolean
 }
 
 export const ContextStore = React.createContext<ContextStoreType>({
   button: false,
-  setButton: () => {},
+  setButton: () => { },
   valueGiftCard: 0,
   code: '',
   addValueGiftCard: '',
-  setAddValueGiftCard: () => {},
-  updateGiftCardFunction: () => {},
+  setAddValueGiftCard: () => { },
+  updateGiftCardFunction: () => { },
   validation: '',
-  setValidation: () => {},
+  setValidation: () => { },
   showAlert: ShowAlertOptions.notShow,
-  setShowAlert: () => {},
-  handleCloseAlert: () => {},
+  setShowAlert: () => { },
+  handleCloseAlert: () => { },
   credit: 0,
-  copyCode: () => {},
+  history: [],
+  copyCode: () => { },
   loading: false,
   loadingCode: false,
   rescue: 0,
   isGiftCardFieldInvalid: false,
-  setIsGiftCardFieldInvalid: () => {},
+  setIsGiftCardFieldInvalid: () => { },
   loadingGiftCard: false,
   loadingCredit: false,
   loadingRedemptionCode: false,
+  loadingHistory: false
 })
 
 export function useStore() {

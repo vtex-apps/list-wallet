@@ -1,7 +1,6 @@
 import { defineMessages } from 'react-intl'
 
 export const input = defineMessages({
-  valuePlaceholder: { id: 'input.value.placeholder' },
   valueLabel: { id: 'input.value.label' },
   valueButton: { id: 'input.value.button' },
   codePlaceholder: { id: 'input.code.placeholder' },
@@ -11,9 +10,23 @@ export const input = defineMessages({
   loading: { id: 'input.code.loading' },
 })
 
+export const historyMessages = defineMessages({
+  openHistory: { id: 'history.open.button' },
+  emptyHistoryTitle: { id: 'history.empty.title' },
+  emptyHistoryMessage: { id: 'history.empty.message' },
+  creditDescription: { id: 'history.credit.description' },
+  debitDescription: { id: 'history.debit.description' },
+  dateTitle: { id: 'history.date.title' },
+  descriptionTitle: { id: 'history.description.title' },
+  valueTitle: { id: 'history.value.title' },
+  statusTitle: { id: 'history.status.title' },
+  creditStatus: { id: 'history.credit.status' },
+  debitStatus: { id: 'history.debit.status' },
+  paginationOf: { id: 'history.pagination.of' }
+})
+
 export const titles = defineMessages({
   valueGiftCard: { id: 'titles.value.gift.card' },
-  money: { id: 'titles.money' },
   redemption: { id: 'titles.redemption' },
   credit: { id: 'titles.credit' },
 })

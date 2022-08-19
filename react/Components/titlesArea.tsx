@@ -1,13 +1,17 @@
 import type { FC } from 'react'
 import React from 'react'
 import { useIntl } from 'react-intl'
+import { useRuntime } from 'vtex.render-runtime/react/components/RenderContext'
 import { Divider, Spinner } from 'vtex.styleguide'
 
 import { useStore } from '../hooks/useStore'
 import '../styles.global.css'
 import { titles } from '../utils/definedMessages'
+import History from './history'
 
 const TitlesArea: FC = () => {
+  const { culture } = useRuntime()
+
   const intl = useIntl()
 
   const { valueGiftCard, credit, loadingGiftCard, loadingCredit } = useStore()
@@ -18,22 +22,25 @@ const TitlesArea: FC = () => {
         <div className="mb5 t-heading-4">
           {intl.formatMessage(titles.credit)}
           <b className="money">
-            {intl.formatMessage(titles.money)}
+            {`${culture.customCurrencySymbol} `}
             {loadingCredit ? (
               <Spinner color="currentColor" size={20} />
             ) : (
-              credit.toLocaleString('pt-br', { minimumFractionDigits: 2 })
+              credit.toLocaleString(culture.locale, {
+                minimumFractionDigits: 2,
+              })
             )}
           </b>
+          <History />
         </div>
         <div className="mb5 t-heading-4">
           {intl.formatMessage(titles.valueGiftCard)}
           <b className="money">
-            {intl.formatMessage(titles.money)}
+            {`${culture.customCurrencySymbol} `}
             {loadingGiftCard ? (
               <Spinner color="currentColor" size={20} />
             ) : (
-              valueGiftCard.toLocaleString('pt-br', {
+              valueGiftCard.toLocaleString(culture.locale, {
                 minimumFractionDigits: 2,
               })
             )}

@@ -1,0 +1,6 @@
+query getRouteHistory {
+  getRouteHistory {
+    value
+    dateAndTime
+  }
+}
