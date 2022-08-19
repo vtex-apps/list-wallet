@@ -311,9 +311,7 @@ const HistoryTable: FC = () => {
         loading={loadingGetRouteHistory}
         emptyStateLabel={intl.formatMessage(historyMessages.emptyHistoryTitle)}
         emptyStateChildren={
-          <>
-            <p>{intl.formatMessage(historyMessages.emptyHistoryMessage)}</p>
-          </>
+          <p>{intl.formatMessage(historyMessages.emptyHistoryMessage)}</p>
         }
         onSort={handleSort}
         sort={{
