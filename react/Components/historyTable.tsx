@@ -141,6 +141,7 @@ const HistoryTable: FC = () => {
             onChange(date)
           }}
           locale={culture.locale}
+          positionFixed
         />
       </div>
     )
@@ -164,6 +165,7 @@ const HistoryTable: FC = () => {
           }}
           locale={culture.locale}
           maxDate={value?.to || new Date()}
+          positionFixed
         />
         <br />
         <DatePicker
@@ -176,6 +178,7 @@ const HistoryTable: FC = () => {
           locale={culture.locale}
           minDate={value?.from || new Date(Date.now() - 86400000)}
           maxDate={new Date()}
+          positionFixed
         />
         <br />
       </div>
