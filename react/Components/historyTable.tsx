@@ -183,7 +183,7 @@ const HistoryTable: FC = () => {
     return (
       <div>
         <Dropdown
-          label="Status"
+          label={intl.formatMessage(historyMessages.filterStatus)}
           size="small"
           options={options}
           value={value}
