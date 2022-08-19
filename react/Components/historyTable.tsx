@@ -123,7 +123,7 @@ const HistoryTable: FC = () => {
                         <p>
                             {intl.formatMessage(historyMessages.emptyHistoryMessage)}
                         </p>
-                    </>
+                    
                 }
                 onSort={handleSort}
                 sort={{
