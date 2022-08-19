@@ -22,7 +22,16 @@ export const historyMessages = defineMessages({
   statusTitle: { id: 'history.status.title' },
   creditStatus: { id: 'history.credit.status' },
   debitStatus: { id: 'history.debit.status' },
-  paginationOf: { id: 'history.pagination.of' }
+  paginationOf: { id: 'history.pagination.of' },
+  filterClear: { id: 'history.filter.clear' },
+  filterAll: { id: 'history.filter.all' },
+  filterIs: { id: 'history.filter.is' },
+  filterBetween: { id: 'history.filter.between' },
+  filterAnd: { id: 'history.filter.and' },
+  filterDate: { id: 'history.filter.date' },
+  filterStatus: { id: 'history.filter.status' },
+  filterStatusCredit: { id: 'history.filter.status.credit' },
+  filterStatusDebit: { id: 'history.filter.status.debit' }
 })
 
 export const titles = defineMessages({

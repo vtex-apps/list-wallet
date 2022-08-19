@@ -6,9 +6,14 @@ import { Table, Tag, DatePicker, Dropdown } from 'vtex.styleguide'
 import { useStore } from '../hooks/useStore'
 import { historyMessages } from '../utils/definedMessages'
 
+const TABLE_LENGTH = 5
+const INITIAL_PAGE = 1
+const ITEM_FROM = 1
+const ITEM_TO = 5
+
 const HistoryTable: FC = () => {
   const intl = useIntl()
-  const { history, setFilterHistory } = useStore()
+  const { history, setFilterHistory, loadingGetRouteHistory } = useStore()
 
   const [tableOrder, setTableOrder] = useState({
     orderedItems: history,
@@ -19,28 +24,28 @@ const HistoryTable: FC = () => {
   })
 
   const options = [
-    { value: 'all', label: 'Tudo' },
-    { value: 'deposits', label: 'Entradas' },
-    { value: 'withdrawals', label: 'Saídas' },
+    { value: 'all', label: intl.formatMessage(historyMessages.filterAll) },
+    { value: 'deposits', label: intl.formatMessage(historyMessages.filterStatusCredit) },
+    { value: 'withdrawals', label: intl.formatMessage(historyMessages.filterStatusDebit) },
   ]
 
   const [tablePage, setTablePage] = useState({
-    tableLength: 5,
-    currentPage: 1,
+    tableLength: TABLE_LENGTH,
+    currentPage: INITIAL_PAGE,
     slicedData: tableOrder.orderedItems.slice(0, 5),
-    currentItemFrom: 1,
-    currentItemTo: 5,
+    currentItemFrom: ITEM_FROM,
+    currentItemTo: ITEM_TO,
     itemsLength: tableOrder.orderedItems.length,
     filterStatements: [],
   })
 
   useEffect(() => {
     setTablePage({
-      tableLength: 5,
-      currentPage: 1,
+      tableLength: TABLE_LENGTH,
+      currentPage: INITIAL_PAGE,
       slicedData: tableOrder.orderedItems.slice(0, 5),
-      currentItemFrom: 1,
-      currentItemTo: 5,
+      currentItemFrom: ITEM_FROM,
+      currentItemTo: ITEM_TO,
       itemsLength: tableOrder.orderedItems.length,
       filterStatements: tablePage.filterStatements,
     })
@@ -143,10 +148,10 @@ const HistoryTable: FC = () => {
       <div className="flex flex-column w-100">
         <DatePicker
           value={value?.from || new Date(Date.now() - 86400000)}
-          onChange={(dateFrom: any) => {
-            const dataFrom = { from: dateFrom, to: value?.to }
+          onChange={(date: any) => {
+            const dateFrom = { from: date, to: value?.to }
 
-            onChange(dataFrom)
+            onChange(dateFrom)
           }}
           locale="pt-BR"
           maxDate={value?.to || new Date()}
@@ -154,10 +159,10 @@ const HistoryTable: FC = () => {
         <br />
         <DatePicker
           value={value?.to || new Date()}
-          onChange={(dateTo: any) => {
-            const dataTo = { from: value?.from, to: dateTo }
+          onChange={(date: any) => {
+            const dateTo = { from: value?.from, to: date }
 
-            onChange(dataTo)
+            onChange(dateTo)
           }}
           locale="pt-BR"
           minDate={value?.from || new Date(Date.now() - 86400000)}
@@ -206,7 +211,7 @@ const HistoryTable: FC = () => {
           }
         }
 
-        if (filters.subject === 'data' && filters.verb === '=') {
+        if (filters.subject === 'date' && filters.verb === '=') {
           const start = new Date(
             new Date(filters.object).setHours(0, 0, 0, 0)
           ).toISOString()
@@ -216,7 +221,7 @@ const HistoryTable: FC = () => {
           ).toISOString()
 
           dateAndTime = { startDate: start, endDate: end }
-        } else if (filters.subject === 'data' && filters.verb === 'between') {
+        } else if (filters.subject === 'date' && filters.verb === 'between') {
           const start = new Date(
             new Date(filters.object?.from ?? Date.now() - 86400000).setHours(
               0,
@@ -238,11 +243,11 @@ const HistoryTable: FC = () => {
     }
 
     setTablePage({
-      tableLength: 5,
-      currentPage: 1,
+      tableLength: TABLE_LENGTH,
+      currentPage: INITIAL_PAGE,
       slicedData: tableOrder.orderedItems.slice(0, 5),
-      currentItemFrom: 1,
-      currentItemTo: 5,
+      currentItemFrom: ITEM_FROM,
+      currentItemTo: ITEM_TO,
       itemsLength: tableOrder.orderedItems.length,
       filterStatements: statements,
     })
@@ -291,6 +296,7 @@ const HistoryTable: FC = () => {
         schema={defaultSchema}
         items={tablePage.slicedData}
         density="low"
+        loading={loadingGetRouteHistory}
         emptyStateLabel={intl.formatMessage(historyMessages.emptyHistoryTitle)}
         emptyStateChildren={
           <>
@@ -311,50 +317,49 @@ const HistoryTable: FC = () => {
           totalItems: tablePage.itemsLength,
         }}
         filters={{
-          alwaysVisibleFilters: ['data', 'status'],
+          alwaysVisibleFilters: ['date', 'status'],
           statements: tablePage.filterStatements,
           onChangeStatements: handleFiltersChange,
-          clearAllFiltersButtonLabel: 'Limpar Filtros',
+          clearAllFiltersButtonLabel: intl.formatMessage(historyMessages.filterClear),
           collapseLeft: true,
           options: {
-            data: {
-              label: 'Data',
+            date: {
+              label: intl.formatMessage(historyMessages.filterDate),
               renderFilterLabel: (st: {
                 object: { from: any; to: any } | any
                 verb: string
               }) => {
                 if (!st || !st.object) {
-                  return 'Tudo'
+                  return intl.formatMessage(historyMessages.filterAll)
                 }
 
-                return `${
-                  st.verb === 'between'
-                    ? `entre ${new Date(
-                        st.object.from
-                      ).toLocaleDateString()} e ${new Date(
-                        st.object.to
-                      ).toLocaleDateString()}`
-                    : `é ${new Date(st.object).toLocaleDateString()}`
-                }`
+                return `${st.verb === 'between'
+                  ? `${intl.formatMessage(historyMessages.filterBetween)} ${new Date(
+                    st.object.from
+                  ).toLocaleDateString()} ${intl.formatMessage(historyMessages.filterAnd)} ${new Date(
+                    st.object.to
+                  ).toLocaleDateString()}`
+                  : `${intl.formatMessage(historyMessages.filterIs)} ${new Date(st.object).toLocaleDateString()}`
+                  }`
               },
               verbs: [
                 {
-                  label: 'é',
+                  label: intl.formatMessage(historyMessages.filterIs),
                   value: '=',
                   object: (props: any) => <DatePickerObject {...props} />,
                 },
                 {
-                  label: 'entre',
+                  label: intl.formatMessage(historyMessages.filterBetween),
                   value: 'between',
                   object: (props: any) => <DatePickerRangeObject {...props} />,
                 },
               ],
             },
             status: {
-              label: 'Status',
+              label: intl.formatMessage(historyMessages.filterStatus),
               renderFilterLabel: (st: any) => {
                 if (!st || !st.object) {
-                  return 'Tudo'
+                  return intl.formatMessage(historyMessages.filterAll)
                 }
 
                 const retorno = options.find(
