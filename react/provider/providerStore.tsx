@@ -4,7 +4,7 @@ import { useLazyQuery, useMutation, useQuery } from 'react-apollo'
 import { useIntl } from 'react-intl'
 import { useRuntime } from 'vtex.render-runtime'
 
-import { provider, titles, historyMessages } from '../utils/definedMessages'
+import { provider, historyMessages } from '../utils/definedMessages'
 import updateGiftCard from '../queries/updateGiftCard.gql'
 import getValueTotalList from '../queries/getValueTotalList.gql'
 import getRouteRedemptionCode from '../queries/getRouteRedemptionCode.gql'
@@ -169,7 +169,7 @@ const ProviderStore: FC = (props) => {
     if (parseFloat(addValueGiftCard) > credit) {
       setValidation(
         intl.formatMessage(provider.biggerThanCouldBe) +
-        credit.toLocaleString(culture.locale, { minimumFractionDigits: 2 })
+          credit.toLocaleString(culture.locale, { minimumFractionDigits: 2 })
       )
       setIsGiftCardFieldInvalid(true)
 
@@ -203,7 +203,7 @@ const ProviderStore: FC = (props) => {
 
             if (
               updateGetRedemptionCode?.data?.getRouteRedemptionCode !==
-              'failed' &&
+                'failed' &&
               updateGetValueGiftCard?.data?.getValueGiftCard > 0 &&
               updateValueAlreadyInGiftCard?.data?.getValueAlreadyInGiftCard > 0
             ) {

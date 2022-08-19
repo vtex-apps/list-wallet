@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 import React, { useState, useEffect } from 'react'
 import { useIntl } from 'react-intl'
+import { useRuntime } from 'vtex.render-runtime'
 import { Table, Tag, DatePicker, Dropdown } from 'vtex.styleguide'
 
 import { useStore } from '../hooks/useStore'
@@ -12,6 +13,8 @@ const ITEM_FROM = 1
 const ITEM_TO = 5
 
 const HistoryTable: FC = () => {
+  const { culture } = useRuntime()
+
   const intl = useIntl()
   const { history, setFilterHistory, loadingGetRouteHistory } = useStore()
 
@@ -25,8 +28,14 @@ const HistoryTable: FC = () => {
 
   const options = [
     { value: 'all', label: intl.formatMessage(historyMessages.filterAll) },
-    { value: 'deposits', label: intl.formatMessage(historyMessages.filterStatusCredit) },
-    { value: 'withdrawals', label: intl.formatMessage(historyMessages.filterStatusDebit) },
+    {
+      value: 'deposits',
+      label: intl.formatMessage(historyMessages.filterStatusCredit),
+    },
+    {
+      value: 'withdrawals',
+      label: intl.formatMessage(historyMessages.filterStatusDebit),
+    },
   ]
 
   const [tablePage, setTablePage] = useState({
@@ -131,7 +140,7 @@ const HistoryTable: FC = () => {
           onChange={(date: any) => {
             onChange(date)
           }}
-          locale="pt-BR"
+          locale={culture.locale}
         />
       </div>
     )
@@ -153,7 +162,7 @@ const HistoryTable: FC = () => {
 
             onChange(dateFrom)
           }}
-          locale="pt-BR"
+          locale={culture.locale}
           maxDate={value?.to || new Date()}
         />
         <br />
@@ -164,7 +173,7 @@ const HistoryTable: FC = () => {
 
             onChange(dateTo)
           }}
-          locale="pt-BR"
+          locale={culture.locale}
           minDate={value?.from || new Date(Date.now() - 86400000)}
           maxDate={new Date()}
         />
@@ -320,7 +329,9 @@ const HistoryTable: FC = () => {
           alwaysVisibleFilters: ['date', 'status'],
           statements: tablePage.filterStatements,
           onChangeStatements: handleFiltersChange,
-          clearAllFiltersButtonLabel: intl.formatMessage(historyMessages.filterClear),
+          clearAllFiltersButtonLabel: intl.formatMessage(
+            historyMessages.filterClear
+          ),
           collapseLeft: true,
           options: {
             date: {
@@ -333,14 +344,19 @@ const HistoryTable: FC = () => {
                   return intl.formatMessage(historyMessages.filterAll)
                 }
 
-                return `${st.verb === 'between'
-                  ? `${intl.formatMessage(historyMessages.filterBetween)} ${new Date(
-                    st.object.from
-                  ).toLocaleDateString()} ${intl.formatMessage(historyMessages.filterAnd)} ${new Date(
-                    st.object.to
-                  ).toLocaleDateString()}`
-                  : `${intl.formatMessage(historyMessages.filterIs)} ${new Date(st.object).toLocaleDateString()}`
-                  }`
+                return `${
+                  st.verb === 'between'
+                    ? `${intl.formatMessage(
+                        historyMessages.filterBetween
+                      )} ${new Date(
+                        st.object.from
+                      ).toLocaleDateString()} ${intl.formatMessage(
+                        historyMessages.filterAnd
+                      )} ${new Date(st.object.to).toLocaleDateString()}`
+                    : `${intl.formatMessage(
+                        historyMessages.filterIs
+                      )} ${new Date(st.object).toLocaleDateString()}`
+                }`
               },
               verbs: [
                 {
