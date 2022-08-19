@@ -31,7 +31,7 @@ export const historyMessages = defineMessages({
   filterDate: { id: 'history.filter.date' },
   filterStatus: { id: 'history.filter.status' },
   filterStatusCredit: { id: 'history.filter.status.credit' },
-  filterStatusDebit: { id: 'history.filter.status.debit' }
+  filterStatusDebit: { id: 'history.filter.status.debit' },
 })
 
 export const titles = defineMessages({
