@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.4.1] - 2022-09-08
+
 ### Fixed
 - Issue with empty history
 
