@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- Add en messages
+
 ## [1.4.1] - 2022-09-08
 
 ### Fixed
