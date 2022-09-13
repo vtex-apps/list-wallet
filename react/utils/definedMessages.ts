@@ -1,6 +1,7 @@
 import { defineMessages } from 'react-intl'
 
 export const input = defineMessages({
+  valueTooltip: { id: 'input.value.tooltip' },
   valueLabel: { id: 'input.value.label' },
   valueButton: { id: 'input.value.button' },
   codePlaceholder: { id: 'input.code.placeholder' },
