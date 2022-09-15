@@ -5,6 +5,7 @@
   "input.value.label": "Enter the value",
   "input.value.button": "REDEEM",
   "input.tooltip": "Code to redeem the gift card. This code is unique. Use it for all your purchases in the store",
+  "input.value.tooltip": "Transforma seus créditos em saldo para o vale presente.",
   "input.code.label": "Gift card code",
   "input.code.placeholder": "Code",
   "input.code.button": "COPY CODE",
