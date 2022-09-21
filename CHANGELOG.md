@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- Arabic, Catalan, Czech, Danish, Dutch, German, Greek, Finnish, French, Italian, Korean, Norwegian, Polish, Romanian, Russian, Slovak, Swedish and Thai translations.
+
+### Fixed
+
+- English, Portuguese and Spanish translations.
+
 ## [1.5.0] - 2022-09-15
 
 ## [1.4.2] - 2022-09-12
