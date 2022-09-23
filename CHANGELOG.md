@@ -12,6 +12,14 @@ All notable changes to this project will be documented in this file.
 
 - Tests in history part
 
+## [1.5.0] - 2022-09-15
+
+## [1.4.2] - 2022-09-12
+
+### Added
+
+- Add en messages
+
 ## [1.4.1] - 2022-09-08
 
 ### Fixed

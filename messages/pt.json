@@ -5,6 +5,7 @@
   "input.value.label": "Digite o valor",
   "input.value.button": "RESGATAR",
   "input.tooltip": "Código para resgatar o vale-presente. Este código é único. Utilize em todas as suas compras na loja",
+  "input.value.tooltip": "Transforma seus créditos em saldo para o vale presente.",
   "input.code.label": "Código do vale presente",
   "input.code.placeholder": "Código",
   "input.code.button": "COPIAR CÓDIGO",
