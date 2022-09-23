@@ -1,5 +1,5 @@
 interface TableHistory {
-  value: number
+  value: string
   description: string
   dateAndTime: string
   status: boolean

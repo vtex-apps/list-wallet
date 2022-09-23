@@ -4,9 +4,18 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed
+
+- Correction in tests
+
+### Added
+
+- Tests in history part
+
 ## [1.4.1] - 2022-09-08
 
 ### Fixed
+
 - Issue with empty history
 
 ## [1.4.0] - 2022-08-19

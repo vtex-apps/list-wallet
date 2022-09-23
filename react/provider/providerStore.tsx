@@ -114,7 +114,12 @@ const ProviderStore: FC = (props) => {
   useEffect(() => {
     const getHistory = dataGetRouteHistory?.getRouteHistory
 
-    if (getHistory === undefined || (getHistory.length === 1 && getHistory[0].value === null)) return
+    if (
+      getHistory === undefined ||
+      (getHistory.length === 1 && getHistory[0].value === null)
+    ) {
+      return
+    }
 
     let tableHistory: TableHistory[] = []
     const options = {
@@ -169,7 +174,7 @@ const ProviderStore: FC = (props) => {
     if (parseFloat(addValueGiftCard) > credit) {
       setValidation(
         intl.formatMessage(provider.biggerThanCouldBe) +
-        credit.toLocaleString(culture.locale, { minimumFractionDigits: 2 })
+          credit.toLocaleString(culture.locale, { minimumFractionDigits: 2 })
       )
       setIsGiftCardFieldInvalid(true)
 
@@ -203,7 +208,7 @@ const ProviderStore: FC = (props) => {
 
             if (
               updateGetRedemptionCode?.data?.getRouteRedemptionCode !==
-              'failed' &&
+                'failed' &&
               updateGetValueGiftCard?.data?.getValueGiftCard > 0 &&
               updateValueAlreadyInGiftCard?.data?.getValueAlreadyInGiftCard > 0
             ) {

@@ -2,6 +2,7 @@ import { render } from '@vtex/test-tools/react'
 import React from 'react'
 
 import TitlesArea from '../Components/titlesArea'
+import History from '../Components/history'
 import { ContextStore } from '../hooks/useStore'
 // eslint-disable-next-line jest/no-mocks-import
 import { values } from '../__mocks__/values'
