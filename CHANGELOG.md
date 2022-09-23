@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.6.0] - 2022-09-23
+
 ### Fixed
 
 - Correction in tests
