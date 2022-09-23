@@ -6,6 +6,7 @@ import getValueAlreadyInGiftCard from '../queries/getValueAlreadyInGiftCard.gql'
 
 let queryCalled = false
 let queryCalledGiftCard = false
+let queryCodeCalled = false
 
 export const mocks = [
   {
@@ -228,6 +229,98 @@ export const mocksErrorCode = [
       data: {
         getValueAlreadyInGiftCard: 5,
       },
+    },
+  },
+  {
+    request: {
+      query: updateGiftCard,
+      variables: {
+        value: 5,
+      },
+    },
+    result: {
+      data: {
+        updateGiftCard: 'success',
+      },
+    },
+  },
+  {
+    request: {
+      query: getValueTotalList,
+    },
+    result: {
+      data: {
+        getValueTotalList: 1000,
+      },
+    },
+  },
+]
+
+export const mocksUpdateWithoutCode = [
+  {
+    request: {
+      query: getRouteRedemptionCode,
+    },
+    newData: () => {
+      if (queryCodeCalled) {
+        return {
+          data: {
+            getRouteRedemptionCode: 'code',
+          },
+        }
+      }
+
+      queryCodeCalled = true
+
+      return {
+        data: {
+          getRouteRedemptionCode: undefined,
+        },
+      }
+    },
+  },
+  {
+    request: {
+      query: getValueGiftCard,
+    },
+    newData: () => {
+      if (queryCalled) {
+        return {
+          data: {
+            getValueGiftCard: 10,
+          },
+        }
+      }
+
+      queryCalled = true
+
+      return {
+        data: {
+          getValueGiftCard: 15,
+        },
+      }
+    },
+  },
+  {
+    request: {
+      query: getValueAlreadyInGiftCard,
+    },
+    newData: () => {
+      if (queryCalledGiftCard) {
+        return {
+          data: {
+            getValueAlreadyInGiftCard: 5,
+          },
+        }
+      }
+
+      queryCalledGiftCard = true
+
+      return {
+        data: {
+          getValueAlreadyInGiftCard: 10,
+        },
+      }
     },
   },
   {

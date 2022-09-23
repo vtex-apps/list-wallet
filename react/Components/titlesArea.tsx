@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import React from 'react'
 import { useIntl } from 'react-intl'
-import { useRuntime } from 'vtex.render-runtime/react/components/RenderContext'
+import { useRuntime } from 'vtex.render-runtime'
 import { Divider, Spinner } from 'vtex.styleguide'
 
 import { useStore } from '../hooks/useStore'
