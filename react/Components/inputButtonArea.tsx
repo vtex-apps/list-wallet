@@ -69,7 +69,14 @@ const InputButtonArea: FC = () => {
   return (
     <>
       <div className="mb3 width-input mt5 inputs t-body mw9 rescue">
-        {intl.formatMessage(input.valueLabel)}
+        <div>
+          {intl.formatMessage(input.valueLabel)}
+          <Tooltip label={intl.formatMessage(input.valueTooltip)}>
+            <span className="c-on-base pointer ml2 mt2">
+              <IconInfo />
+            </span>
+          </Tooltip>
+        </div>
         <div className="w-100">
           <div className="desktop-or-mobile rescue">
             <div className="lh-copy w-100">
