@@ -1,13 +1,15 @@
+/* eslint-disable jest/no-mocks-import */
+/* eslint-disable import/order */
 import { act, fireEvent, render, waitFor } from '@vtex/test-tools/react'
 import React from 'react'
 import { MockedProvider, wait } from '@apollo/react-testing'
-
-// eslint-disable-next-line jest/no-mocks-import
+import * as reactapollo from 'react-apollo'
 import {
   mocks,
   mocksUpdateReturnError,
   mocksUpdate,
   mocksErrorCode,
+  mocksUpdateWithoutCode,
 } from '../__mocks__/mockUseQuery'
 import ProviderStore from '../provider/providerStore'
 import { ContextStore } from '../hooks/useStore'
@@ -199,11 +201,30 @@ describe('Provider', () => {
   })
 
   it('should test function validateIfAllFieldsIsComplete sucess if I send a addValueGiftCard valid', async () => {
-    const TestComponent = () => {
+    jest.mock('react-apollo')
+    jest
+      .spyOn(reactapollo, 'useLazyQuery')
+      .mockImplementation()
+      .mockReturnValue([
+        jest.fn(),
+        {
+          data: {
+            getRouteHistory: [
+              {
+                value: 10,
+                dateAndTime: '2022-09-08T00:00:00Z',
+              },
+            ],
+          },
+          refetch: jest.fn(),
+        },
+      ] as any)
+
+    const TestComponents = () => {
       const {
+        validation,
         updateGiftCardFunction,
         setAddValueGiftCard,
-        validation,
         isGiftCardFieldInvalid,
       } = React.useContext(ContextStore)
 
@@ -218,7 +239,7 @@ describe('Provider', () => {
           <div data-testid="fieldInvalid">
             {isGiftCardFieldInvalid.toString()}
           </div>
-          <div data-testid="validation">{validation}</div>
+          <div data-testid="validateText">{validation}</div>
           <button data-testid="buttonUpdate" onClick={updateGiftCardFunction}>
             update
           </button>
@@ -229,7 +250,7 @@ describe('Provider', () => {
     const { getByTestId } = render(
       <MockedProvider mocks={mocksUpdate} addTypename={false}>
         <ProviderStore>
-          <TestComponent />
+          <TestComponents />
         </ProviderStore>
       </MockedProvider>
     )
@@ -240,7 +261,7 @@ describe('Provider', () => {
       fireEvent.click(getByTestId('buttonUpdate'))
     })
 
-    const validationValue = getByTestId('validation').textContent
+    const validationValue = getByTestId('validateText').textContent
     const invalidField = getByTestId('fieldInvalid').textContent
 
     await act(async () => {
@@ -301,8 +322,8 @@ describe('Provider', () => {
       expect(alertValue).toHaveTextContent(
         ShowAlertOptions.alertSave.toString()
       )
-      expect(rescueValue).toBe('5')
-      expect(valueGiftCardValue).toBe('0')
+      expect(rescueValue).toHaveTextContent('5')
+      expect(valueGiftCardValue).toHaveTextContent('0')
     })
   })
 
@@ -459,6 +480,62 @@ describe('Provider', () => {
       expect(alertValue).toHaveTextContent(
         ShowAlertOptions.alertCopySuccess.toString()
       )
+    })
+  })
+
+  it('should test function update if I send a addValueGiftCard valid but the code is invalid', async () => {
+    const TestComponent = () => {
+      const {
+        showAlert,
+        updateGiftCardFunction,
+        setAddValueGiftCard,
+        rescue,
+        addValueGiftCard,
+      } = React.useContext(ContextStore)
+
+      return (
+        <>
+          <button
+            data-testid="addValue"
+            onClick={() => setAddValueGiftCard('5')}
+          >
+            add
+          </button>
+          <div data-testid="alert">{showAlert}</div>
+          <div data-testid="rescue">{rescue}</div>
+          <div data-testid="valueGiftCard">{addValueGiftCard}</div>
+          <button data-testid="buttonUpdate" onClick={updateGiftCardFunction}>
+            update
+          </button>
+        </>
+      )
+    }
+
+    const { getByTestId } = render(
+      <MockedProvider mocks={mocksUpdateWithoutCode} addTypename={false}>
+        <ProviderStore>
+          <TestComponent />
+        </ProviderStore>
+      </MockedProvider>
+    )
+
+    await act(async () => {
+      await wait(0)
+      fireEvent.click(getByTestId('addValue'))
+      fireEvent.click(getByTestId('buttonUpdate'))
+      await wait(3000)
+    })
+
+    const alertValue = getByTestId('alert')
+    const rescueValue = getByTestId('rescue')
+    const valueGiftCardValue = getByTestId('valueGiftCard')
+
+    waitFor(() => {
+      expect(alertValue).toHaveTextContent(
+        ShowAlertOptions.alertSave.toString()
+      )
+      expect(rescueValue).toHaveTextContent('5')
+      expect(valueGiftCardValue).toHaveTextContent('0')
     })
   })
 })

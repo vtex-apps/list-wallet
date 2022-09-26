@@ -12,6 +12,16 @@ All notable changes to this project will be documented in this file.
 
 - English, Portuguese and Spanish translations.
 
+## [1.6.0] - 2022-09-23
+
+### Fixed
+
+- Correction in tests
+
+### Added
+
+- Tests in history part
+
 ## [1.5.0] - 2022-09-15
 
 ## [1.4.2] - 2022-09-12
@@ -23,6 +33,7 @@ All notable changes to this project will be documented in this file.
 ## [1.4.1] - 2022-09-08
 
 ### Fixed
+
 - Issue with empty history
 
 ## [1.4.0] - 2022-08-19
