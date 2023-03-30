@@ -42,19 +42,25 @@ const ProviderStore: FC = (props) => {
     data: dataRedemptionCode,
     refetch: refetchGetRedemptionCode,
     loading: loadingRedemptionCodeRoute,
-  } = useQuery(getRouteRedemptionCode)
+  } = useQuery(getRouteRedemptionCode, {
+    fetchPolicy: 'cache-and-network',
+  })
 
   const {
     data: dataGetValueGiftCard,
     refetch: refetchGetValueGiftCard,
     loading: loadingValueGiftCard,
-  } = useQuery(getValueGiftCard)
+  } = useQuery(getValueGiftCard, {
+    fetchPolicy: 'cache-and-network',
+  })
 
   const {
     data: dataGetValueAlreadyInGiftCard,
     refetch: refetchValueAlreadyInGiftCard,
     loading: loadingValueAlreadyInGiftCard,
-  } = useQuery(getValueAlreadyInGiftCard)
+  } = useQuery(getValueAlreadyInGiftCard, {
+    fetchPolicy: 'cache-and-network',
+  })
 
   const [
     searchHistory,
@@ -63,7 +69,9 @@ const ProviderStore: FC = (props) => {
       refetch: refetchGetRouteHistory,
       loading: loadingGetRouteHistory,
     },
-  ] = useLazyQuery(getRouteHistory)
+  ] = useLazyQuery(getRouteHistory, {
+    fetchPolicy: 'cache-and-network',
+  })
 
   useEffect(() => {
     setLoadingGiftCard(loadingValueGiftCard)
