@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [1.8.0] - 2023-03-30
+
 ### Added
 
 - FetchPolicy in useQuery
