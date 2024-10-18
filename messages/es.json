@@ -10,7 +10,7 @@
   "input.code.placeholder": "Código",
   "input.code.button": "COPIAR CÓDIGO",
   "input.code.loading": "Cargando...",
-  "history.open.button": "Extracto",
+  "history.open.button": "Estado de cuenta",
   "history.empty.title": "Ningún movimiento",
   "history.empty.message": "Tu cartera aún no ha tenido ningún cambio de valores.",
   "history.credit.description": "Crédito recibido",

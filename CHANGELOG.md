@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed
+
+- Spanish translation
+
 ## [1.8.0] - 2023-03-30
 
 ### Added
